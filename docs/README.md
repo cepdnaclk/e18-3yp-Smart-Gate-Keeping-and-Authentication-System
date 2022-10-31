@@ -20,20 +20,17 @@ title: Smart Gatekeeping System & Authentication
 
 <!-- Image (photo/drawing of the final hardware) should be here -->
 
-<!-- This is a sample image, to show how to add images to your page. To learn more options, please refer [this](https://projects.ce.pdn.ac.lk/docs/faq/how-to-add-an-image/) -->
-
-<!-- ![Sample Image](./images/sample.png) -->
-
 #### Table of Contents
 1. [Introduction](#introduction)
 2. [Solution Architecture](#solution-architecture )
 3. [Hardware & Software Designs](#hardware-and-software-designs)
-4. [Testing](#testing)
+4. [Testing](#testing)"
 5. [Detailed budget](#detailed-budget)
 6. [Conclusion](#conclusion)
 7. [Links](#links)
 
 ## Introduction
+---
 
 #### Motivation & Background
 
@@ -58,7 +55,7 @@ So, the system will provide a solution for the above problem by reducing the tim
 
 
 ## Solution Architecture
-
+---
 <!-- ![Sample Image](./images/Solution_Architecture.PNG) -->
 
 ## Hardware and Software Designs
