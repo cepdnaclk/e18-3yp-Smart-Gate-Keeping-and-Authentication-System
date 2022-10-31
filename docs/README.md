@@ -18,6 +18,11 @@ title: Smart Gatekeeping System & Authentication
 -  E/18/330, Sewwandi H.R., [e18330@eng.pdn.ac.lk](mailto:e18330@eng.pdn.ac.lk)
 -  E/18/368, Uduwange H.U., [e18368@eng.pdn.ac.lk](mailto:e18368@eng.pdn.ac.lk)
 
+##Supervisors
+
+- Dr. Isuru Nawinna , [isurunawinne@eng.pdn.ac.lk](mailto:isurunawinne@eng.pdn.ac.lk)
+- Dr. Mahanama Wickramasighe, [mahanamaw@eng.pdn.ac.lk](mailto:mahanamaw@eng.pdn.ac.lk)
+
 <!-- Image (photo/drawing of the final hardware) should be here -->
 
 #### Table of Contents
@@ -51,12 +56,12 @@ We propose to design a gatekeeping system that gets the attendance of the person
 The registered users can use the fingerprint scanner. In a situation where the fingerprint scanner cannot detect the fingerprint correctly, the user can use the keypad for entering permissions. The registration number will be the key to marking attendance. After scanning the fingerprint or giving the key, the display screen will display the relevant details of the user. Then, the gate will open for some time range and the user can pass through the gate. Before and after passing the gate, the laser sensors will detect whether the user passed the gate or not. So, with this process, the administration of the institution can see the record of the entrance of the user from the website. 
 So, the system will provide a solution for the above problem by reducing the time spent on the process and by reducing the labor cost if it was needed there.
 
-<!-- ![Sample Image](./images/Capture.PNG) -->
+<!-- ![Sample Image](./images/Capture.png) -->
 
 
 ## Solution Architecture
 ---
-<!-- ![Sample Image](./images/Solution_Architecture.PNG) -->
+<!-- ![Sample Image](./images/Solution_Architecture.png) -->
 
 ## Hardware and Software Designs
 
@@ -80,8 +85,8 @@ What was achieved, future developments, commercialization plans
 
 ## Links
 
-- [Project Repository](https://github.com/cepdnaclk/{{ page.repository-name }}){:target="_blank"}
-- [Project Page](https://cepdnaclk.github.io/{{ page.repository-name}}){:target="_blank"}
+- [Project Repository](https://github.com/cepdnaclk/e18-3yp-Smart-Gate-Keeping-and-Authentication-System
+- [Project Page](https://cepdnaclk.github.io/e18-3yp-Smart-Gate-Keeping-and-Authentication-System
 - [Department of Computer Engineering](http://www.ce.pdn.ac.lk/)
 - [University of Peradeniya](https://eng.pdn.ac.lk/)
 
