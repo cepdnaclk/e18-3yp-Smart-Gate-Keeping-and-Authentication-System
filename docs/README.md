@@ -61,7 +61,7 @@ So, the system will provide a solution for the above problem by reducing the tim
 
 ## Solution Architecture
 ---
-![Solution_Architecture](./images/Solution_Architecture.PNG)
+![Architecture](./images/Architecture.PNG)
 
 ## Hardware and Software Designs
 
