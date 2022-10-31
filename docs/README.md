@@ -56,12 +56,12 @@ We propose to design a gatekeeping system that gets the attendance of the person
 The registered users can use the fingerprint scanner. In a situation where the fingerprint scanner cannot detect the fingerprint correctly, the user can use the keypad for entering permissions. The registration number will be the key to marking attendance. After scanning the fingerprint or giving the key, the display screen will display the relevant details of the user. Then, the gate will open for some time range and the user can pass through the gate. Before and after passing the gate, the laser sensors will detect whether the user passed the gate or not. So, with this process, the administration of the institution can see the record of the entrance of the user from the website. 
 So, the system will provide a solution for the above problem by reducing the time spent on the process and by reducing the labor cost if it was needed there.
 
-<!-- ![Sample Image](./images/Capture.png) -->
+<!-- ![Capture Image](./images/Capture.PNG) -->
 
 
 ## Solution Architecture
 ---
-<!-- ![Sample Image](./images/Solution_Architecture.png) -->
+<!-- ![Solution_Architecture Image](./images/Solution_Architecture.PNG) -->
 
 ## Hardware and Software Designs
 
