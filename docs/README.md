@@ -22,7 +22,7 @@ title: Smart Gatekeeping System & Authentication
 
 <!-- This is a sample image, to show how to add images to your page. To learn more options, please refer [this](https://projects.ce.pdn.ac.lk/docs/faq/how-to-add-an-image/) -->
 
-#<!-- ![Sample Image](./images/sample.png) -->
+<!-- ![Sample Image](./images/sample.png) -->
 
 #### Table of Contents
 1. [Introduction](#introduction)
@@ -35,7 +35,7 @@ title: Smart Gatekeeping System & Authentication
 
 ## Introduction
 
-###Motivation & Background
+#### Motivation & Background
 
 Based on the proper management and security purposes, authorities of various institutions use different methods like verifying the identity of a person and keeping records. The system they are using to achieve this may be different. As an example, in schools, after a student is getting registered at the school, they are assigned to a class and the teacher in charge of that class will get daily attendance by marking the register. An institution that is conducting tuition will register a student for a class by filling out a form and then, their attendance will mark by a person manually using a system at the entrance of the class. In private or government offices, they may have IDs to verify them as an employee of the office and they will sign a book or will use their IDs for marking their presence. These are the most common methods which are used for.
 
@@ -48,7 +48,7 @@ Some systems have been introduced to give solutions for the above problems. Some
 
 So, the motivation of our project is to design a system that can verify the identity of a person/user who registered for the institution, keeping a record of their presence/attendance and confirm whether they entered after keeping the attendance record and also providing administration of relevant institution with manageable records. The system could be used for schools, tuition institutions, and offices. Students in schools, tuition, and employees in offices could use the system to enter the premises by keeping their attendance records.
 
-###Solution and the Impact
+#### Solution and the Impact
 
 We propose to design a gatekeeping system that gets the attendance of the person using a fingerprint scanner(including a keypad and a display screen) and a drop arm gate that opens for a permitted fingerprint. The system is connected to a management system of the institution. The administration of the institution can view and handle data there.
 The registered users can use the fingerprint scanner. In a situation where the fingerprint scanner cannot detect the fingerprint correctly, the user can use the keypad for entering permissions. The registration number will be the key to marking attendance. After scanning the fingerprint or giving the key, the display screen will display the relevant details of the user. Then, the gate will open for some time range and the user can pass through the gate. Before and after passing the gate, the laser sensors will detect whether the user passed the gate or not. So, with this process, the administration of the institution can see the record of the entrance of the user from the website. 
