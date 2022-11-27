@@ -1,158 +1,713 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body {text-align: center;}
-        #enterDetails {float: left; width: 50%;  background-color: darkslategray; color: floralwhite;}
-        #findDetails {float: left; width: 50%; background-color: floralwhite; color: darkslategray;}
-        input {width: 120px;}
-    </style>
-</head>
-<body>
-    <div id="enterDetails">
-        <h1>Enter details</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
 
-        <h4>ID</h4> 
-        <input id="enterID" type="text"> 
+    <title>Smart Gate Keeping System</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
-        <h4>Name</h4> 
-        <input id="enterName" type="text"> 
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
-        <h4>Age</h4> 
-        <input id="enterAge" type="number"> <br><br>
-
-        <button id="insert">INSERT</button>
-        <button id="update">UPDATE</button>
-        <button id="remove">REMOVE</button> <br><br>
-    </div>
-
-    <div id="findDetails">
-        <h1>Find by ID</h1>
-        <h4>ID</h4>
-        <input id="findID" type="text"> <br><br>
-        <button id="find">FIND</button>
-        <h3 id="findName" type="text"></h3>
-        <h3 id="findAge" type="number"></h3> <br><br>
-    </div>
-    
-    <!-- <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
-    <script src="main.js"  type="module"></script>
-     -->
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-analytics.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
-
-        // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-        const firebaseConfig = {
-            apiKey: "AIzaSyAg72CAX2SWsYzmN0B9NxYAHnE_oFgijVU",
-            authDomain: "co300project.firebaseapp.com",
-            databaseURL: "https://co300project-default-rtdb.firebaseio.com",
-            projectId: "co300project",
-            storageBucket: "co300project.appspot.com",
-            messagingSenderId: "687930390947",
-            appId: "1:687930390947:web:ccebf1c99141c989ac4216",
-            measurementId: "G-H8MSVVV3GN"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        //THIS IS WHERE YOU PASTE THE CODE TO CONNECT TO YOUR OWN DATABASE
-        //Copy and paste the CDN bit of code from your app that you created on Firebase.
-        //The script tag above is already there, so careful not to have duplicate script tags.
-        //After you've copied and pasted, just delete the unnecessary script tags. 
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css" />
+    <link rel="stylesheet" href="assets/css/templatemo-seo-dream.css" />
+    <link rel="stylesheet" href="assets/css/animated.css" />
+    <link rel="stylesheet" href="assets/css/owl.css" />
    
+  </head>
 
-        import {getDatabase, ref, get, set, child, update, remove}
-        from "https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js"
-        //Copy and Paste the URL from near the top of the CDN you pasted in from firebase
-        // (the one where you imported "initializeApp" from),
-        //but change "firebase-app" to "firebase-database"
-        
+  <body>
+    <!-- ***** Preloader Start ***** -->
+    <div id="js-preloader" class="js-preloader">
+      <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+    <!-- ***** Preloader End ***** -->
 
-        const db = getDatabase();
+    <!-- ***** Header Area Start ***** -->
+    <header
+      class="header-area header-sticky wow slideInDown"
+      data-wow-duration="0.75s"
+      data-wow-delay="0s"
+    >
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <nav class="main-nav">
+              <!-- ***** Logo Start ***** -->
+              <a href="index.html" class="logo">
+                <h4>
+                  Smart Gate Keeping System <img src="assets/images/logo-icon.png" alt="" />
+                </h4>
+              </a>
+              <!-- ***** Logo End ***** -->
+              <!-- ***** Menu Start ***** -->
+              <ul class="nav">
+                <li class="scroll-to-section">
+                  <a href="#top" class="active">Home</a>
+                </li>
+                <li class="scroll-to-section">
+                  <a href="#features">Features</a>
+                </li>
+                <!-- <li class="scroll-to-section">
+                  <a href="#services">Services</a>
+                </li> -->
+                <li class="scroll-to-section"><a href="#about">About</a></li>
+                <li class="scroll-to-section">
+                  <a href="#contact">Contact Us</a>
+                </li>
+                <li class="scroll-to-section">
+                  <div class="main-blue-button">
+                    <a href="databaseConnect.html">Login</a>
+                  </div>
+                </li>
+              </ul>
+              <a class="menu-trigger">
+                <span>Menu</span>
+              </a>
+              <!-- ***** Menu End ***** -->
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
 
-        var enterID = document.querySelector("#enterID");
-        var enterName = document.querySelector("#enterName");
-        var enterAge = document.querySelector("#enterAge");
-        var findID = document.querySelector("#findID");
-        var findName = document.querySelector("#findName");
-        var findAge = document.querySelector("#findAge");
-      
+    <div class="main-banner wow fadeIn"
+      id="top"
+      data-wow-duration="1s"
+      data-wow-delay="0.5s"
+    >
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row">
+              <div class="col-lg-6 align-self-center">
+                <div
+                  class="left-content header-text wow fadeInLeft"
+                  data-wow-duration="1s"
+                  data-wow-delay="1s"
+                >
+                  <div class="row">
+                    <div class="col-lg-4 col-sm-4">
+                      <!-- <div class="info-stat">
+                        <h6>Project Status:</h6>
+                        <h4>On-going</h4>
+                      </div> -->
+                    </div>
+                    <div class="col-lg-4 col-sm-4">
+                      <!-- <div class="info-stat">
+                        <h6>Price:</h6>
+                        <h4>$720/Month</h4>
+                      </div> -->
+                    </div>
+                    <div class="col-lg-4 col-sm-4">
+                      <!-- <div class="info-stat">
+                        <h6>Schedules</h6>
+                        <h4>$450/Meeting</h4>
+                      </div> -->
+                    </div>
+                    <div class="col-lg-12">
+                      <h2>Smart Gate Keeping System</h2>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="main-green-button scroll-to-section">
+                        <a href="#contact">Buy the Product</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div
+                  class="right-image wow fadeInRight"
+                  data-wow-duration="1s"
+                  data-wow-delay="0.5s"
+                >
+                  <img src="assets/images/banner-right-image2.jpg" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-        var insertBtn = document.querySelector("#insert");
-        var updateBtn = document.querySelector("#update");
-        var removeBtn = document.querySelector("#remove");
-        var findBtn = document.querySelector("#find");
+    <div id="features" class="features section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="features-content">
+              <div class="row">
+                <div class="col-lg-3">
+                  <div
+                    class="features-item first-feature wow fadeInUp"
+                    data-wow-duration="1s"
+                    data-wow-delay="0s"
+                  >
+                    <div class="first-number number">
+                      <h6>01</h6>
+                    </div>
+                    <div class="icon"></div>
+                    <h4>Authentication</h4>
+                    <div class="line-dec"></div>
+                    <p>
+                      Authenticate Your Employees, Visitors and Customers with the FingerPrint 
+                    </p>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div
+                    class="features-item second-feature wow fadeInUp"
+                    data-wow-duration="1s"
+                    data-wow-delay="0.2s"
+                  >
+                    <div class="second-number number">
+                      <h6>02</h6>
+                    </div>
+                    <div class="icon"></div>
+                    <h4>Analyze Check-In and Check-Out Data</h4>
+                    <div class="line-dec"></div>
+                    <p>
+                      Gather and Analyze Data of Personals Check-In and Check-Out Time with provided Extensive Tools and UI
+                    </p>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div
+                    class="features-item first-feature wow fadeInUp"
+                    data-wow-duration="1s"
+                    data-wow-delay="0.4s"
+                  >
+                    <div class="third-number number">
+                      <h6>03</h6>
+                    </div>
+                    <div class="icon"></div>
+                    <h4>Add Your Users into the System</h4>
+                    <div class="line-dec"></div>
+                    <p>
+                     Register your Employees, Visitors and Customers into the System with their FingerPrint Data
+                    </p>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div
+                    class="features-item second-feature last-features-item wow fadeInUp"
+                    data-wow-duration="1s"
+                    data-wow-delay="0.6s"
+                  >
+                    <div class="fourth-number number">
+                      <h6>04</h6>
+                    </div>
+                    <div class="icon"></div>
+                    <h4>Data Protection and Secure Privacy</h4>
+                    <div class="line-dec"></div>
+                    <p>
+                      Provide Protection to Your and Your Users Data and Privacy with the Provided Security Techniques and Tools
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="col-lg-12">
+            <div class="skills-content">
+              <div class="row">
+                <div class="col-lg-3">
+                  <div
+                    class="skill-item wow fadeIn"
+                    data-wow-duration="1s"
+                    data-wow-delay="0s"
+                  >
+                    <div class="progress" data-percentage="80">
+                      <span class="progress-left">
+                        <span class="progress-bar"></span>
+                      </span>
+                      <span class="progress-right">
+                        <span class="progress-bar"></span>
+                      </span>
+                      <div class="progress-value">
+                        <div>
+                          80%<br />
+                          <span>HTML/CSS/JS</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div
+                    class="skill-item wow fadeIn"
+                    data-wow-duration="1s"
+                    data-wow-delay="0.2s"
+                  >
+                    <div class="progress" data-percentage="60">
+                      <span class="progress-left">
+                        <span class="progress-bar"></span>
+                      </span>
+                      <span class="progress-right">
+                        <span class="progress-bar"></span>
+                      </span>
+                      <div class="progress-value">
+                        <div>
+                          60%<br />
+                          <span>Wordpress</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div
+                    class="skill-item wow fadeIn"
+                    data-wow-duration="1s"
+                    data-wow-delay="0.4s"
+                  >
+                    <div class="progress" data-percentage="90">
+                      <span class="progress-left">
+                        <span class="progress-bar"></span>
+                      </span>
+                      <span class="progress-right">
+                        <span class="progress-bar"></span>
+                      </span>
+                      <div class="progress-value">
+                        <div>
+                          90%<br />
+                          <span>Marketing</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div
+                    class="skill-item last-skill-item wow fadeIn"
+                    data-wow-duration="1s"
+                    data-wow-delay="0.6s"
+                  >
+                    <div class="progress" data-percentage="70">
+                      <span class="progress-left">
+                        <span class="progress-bar"></span>
+                      </span>
+                      <span class="progress-right">
+                        <span class="progress-bar"></span>
+                      </span>
+                      <div class="progress-value">
+                        <div>
+                          70%<br />
+                          <span>Photoshop</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
 
-        function InsertData() {
-            set(ref(db, "People/"+ enterID.value),{
-                Name: enterName.value,
-                ID: enterID.value,
-                Age: enterAge.value
-            })
-            .then(()=>{
-                alert("Data added successfully");
-            })
-            .catch((error)=>{
-                alert(error);
-            });
-        }
+    <!-- <div id="services" class="our-services section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 offset-lg-3">
+            <div
+              class="section-heading wow bounceIn"
+              data-wow-duration="1s"
+              data-wow-delay="0.2s"
+            >
+              <h6>Our Services</h6>
+              <h2>
+                Discover What We Do &amp; <span>Offer</span> To Our
+                <em>Clients</em>
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-4">
+            <div
+              class="service-item wow bounceInUp"
+              data-wow-duration="1s"
+              data-wow-delay="0.3s"
+            >
+              <div class="row">
+                <div class="col-lg-4">
+                  <div class="icon">
+                    <img src="assets/images/service-icon-01.png" alt="" />
+                  </div>
+                </div>
+                <div class="col-lg-8">
+                  <div class="right-content">
+                    <h4>Similar Websites</h4>
+                    <p>
+                      Sed ut perspiciatis unde omnis iste natus error sit
+                      voluptatem accusantium dormque laudantium.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div
+              class="service-item wow bounceInUp"
+              data-wow-duration="1s"
+              data-wow-delay="0.4s"
+            >
+              <div class="row">
+                <div class="col-lg-4">
+                  <div class="icon">
+                    <img src="assets/images/service-icon-02.png" alt="" />
+                  </div>
+                </div>
+                <div class="col-lg-8">
+                  <div class="right-content">
+                    <h4>Website Trends</h4>
+                    <p>
+                      Sed ut perspiciatis unde omnis iste natus error sit
+                      voluptatem accusantium dormque laudantium.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div
+              class="service-item wow bounceInUp"
+              data-wow-duration="1s"
+              data-wow-delay="0.5s"
+            >
+              <div class="row">
+                <div class="col-lg-4">
+                  <div class="icon">
+                    <img src="assets/images/service-icon-03.png" alt="" />
+                  </div>
+                </div>
+                <div class="col-lg-8">
+                  <div class="right-content">
+                    <h4>Traffic Analysis</h4>
+                    <p>
+                      Sed ut perspiciatis unde omnis iste natus error sit
+                      voluptatem accusantium dormque laudantium.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div
+              class="service-item wow bounceInUp"
+              data-wow-duration="1s"
+              data-wow-delay="0.6s"
+            >
+              <div class="row">
+                <div class="col-lg-4">
+                  <div class="icon">
+                    <img src="assets/images/service-icon-03.png" alt="" />
+                  </div>
+                </div>
+                <div class="col-lg-8">
+                  <div class="right-content">
+                    <h4>Optimizing Keywords</h4>
+                    <p>
+                      Sed ut perspiciatis unde omnis iste natus error sit
+                      voluptatem accusantium dormque laudantium.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div
+              class="service-item wow bounceInUp"
+              data-wow-duration="1s"
+              data-wow-delay="0.7s"
+            >
+              <div class="row">
+                <div class="col-lg-4">
+                  <div class="icon">
+                    <img src="assets/images/service-icon-01.png" alt="" />
+                  </div>
+                </div>
+                <div class="col-lg-8">
+                  <div class="right-content">
+                    <h4>Page Optimizations</h4>
+                    <p>
+                      Sed ut perspiciatis unde omnis iste natus error sit
+                      voluptatem accusantium dormque laudantium.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div
+              class="service-item wow bounceInUp"
+              data-wow-duration="1s"
+              data-wow-delay="0.8s"
+            >
+              <div class="row">
+                <div class="col-lg-4">
+                  <div class="icon">
+                    <img src="assets/images/service-icon-02.png" alt="" />
+                  </div>
+                </div>
+                <div class="col-lg-8">
+                  <div class="right-content">
+                    <h4>Deep URL Analysis</h4>
+                    <p>
+                      Sed ut perspiciatis unde omnis iste natus error sit
+                      voluptatem accusantium dormque laudantium.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
 
-        function FindData() {
-            const dbref = ref(db);
+    <div id="about" class="about-us section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div
+              class="left-image wow fadeInLeft"
+              data-wow-duration="1s"
+              data-wow-delay="0.5s"
+            >
+              <img src="assets/images/about-left-image2.jpg" alt="" />
+            </div>
+          </div>
+          <div
+            class="col-lg-6 align-self-center wow fadeInRight"
+            data-wow-duration="1s"
+            data-wow-delay="0.5s"
+          >
+            <div class="section-heading">
+              <h1> About the Product</h1>
+              <h2>
+                Next-Level <em>Authentication</em> for Your Company &amp; Users
+                <span>with us</span>
+              </h2>
+            </div>
+            <div class="row">
+              <div class="col-lg-4 col-sm-4">
+                <div class="about-item">
+                  <h4>750+</h4>
+                  <h6>Units Sold</h6>
+                </div>
+              </div>
+              <div class="col-lg-4 col-sm-4">
+                <div class="about-item">
+                  <h4>340+</h4>
+                  <h6>happy clients</h6>
+                </div>
+              </div>
+              <div class="col-lg-4 col-sm-4">
+                <div class="about-item">
+                  <h4>20+</h4>
+                  <h6>Exclusive Features</h6>
+                </div>
+              </div>
+            </div>
+            <p>
+              
+            </p>
+            <div class="main-green-button">
+              <a href="#">Learn More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-            get(child(dbref, "People/" + findID.value))
-            .then((snapshot)=>{
-                if(snapshot.exists()){
-                    findName.innerHTML = "Name: " + snapshot.val().Name;
-                    findAge.innerHTML = "Age: " + snapshot.val().Age;
-                } else {
-                    alert("No data found");
-                }
-            })
-            .catch((error)=>{
-                alert(error)
-            })
-            
-        }
+    <div id="contact" class="contact-us section">
+      <div class="container">
+        <div class="row">
+          <div
+            class="col-lg-12 wow fadeInUp"
+            data-wow-duration="0.5s"
+            data-wow-delay="0.25s"
+          >
+            <form id="contact" action="" method="post">
+              <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                  <div class="section-heading">
+                    <h6>Contact Us</h6>
+                    <h2>
+                      Fill Out The Form Below To <span>Get</span> In
+                      <em>Touch</em> With Us
+                    </h2>
+                  </div>
+                </div>
+                <div class="col-lg-9">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <fieldset>
+                        <input
+                          type="name"
+                          name="name"
+                          id="name"
+                          placeholder="Name"
+                          autocomplete="on"
+                          required
+                        />
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-6">
+                      <fieldset>
+                        <input
+                          type="surname"
+                          name="surname"
+                          id="surname"
+                          placeholder="Surname"
+                          autocomplete="on"
+                          required
+                        />
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-6">
+                      <fieldset>
+                        <input
+                          type="text"
+                          name="email"
+                          id="email"
+                          pattern="[^ @]*@[^ @]*"
+                          placeholder="Your Email"
+                          required=""
+                        />
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-6">
+                      <fieldset>
+                        <input
+                          type="subject"
+                          name="subject"
+                          id="subject"
+                          placeholder="Subject"
+                          autocomplete="on"
+                        />
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-12">
+                      <fieldset>
+                        <textarea
+                          name="message"
+                          type="text"
+                          class="form-control"
+                          id="message"
+                          placeholder="Message"
+                          required=""
+                        ></textarea>
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-12">
+                      <fieldset>
+                        <button
+                          type="submit"
+                          id="form-submit"
+                          class="main-button"
+                        >
+                          Send Message Now
+                        </button>
+                      </fieldset>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="contact-info">
+                    <ul>
+                      <li>
+                        <div class="icon">
+                          <img
+                            src="assets/images/contact-icon-01.png"
+                            alt="email icon"
+                          />
+                        </div>
+                        <a href="#">info@company.com</a>
+                      </li>
+                      <li>
+                        <div class="icon">
+                          <img
+                            src="assets/images/contact-icon-02.png"
+                            alt="phone"
+                          />
+                        </div>
+                        <a href="#">+001-002-0034</a>
+                      </li>
+                      <li>
+                        <div class="icon">
+                          <img
+                            src="assets/images/contact-icon-03.png"
+                            alt="location"
+                          />
+                        </div>
+                        <a href="#">26th Street, Digital Villa</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
-        function UpdateData(){
-            update(ref(db, "People/"+ enterID.value),{
-                Name: enterName.value,
-                Age: enterAge.value
-            })
-            .then(()=>{
-                alert("Data updated successfully");
-            })
-            .catch((error)=>{
-                alert(error);
-            });
-        }
+    <!-- <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <p>
+              Copyright © 2021 SEO Dream Co., Ltd. All Rights Reserved.
 
-        function RemoveData(){
-            remove(ref(db, "People/"+ enterID.value))
-            .then(()=>{
-                alert("Data deleted successfully");
-            })
-            .catch((error)=>{
-                alert(error);
-            });
-        }
+              <br />Web Designed by
+              <a
+                rel="nofollow"
+                href="https://templatemo.com"
+                title="free CSS templates"
+                >TemplateMo</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer> -->
 
-        insertBtn.addEventListener('click', InsertData);
-        updateBtn.addEventListener('click', UpdateData);
-        removeBtn.addEventListener('click', RemoveData);
-        findBtn.addEventListener('click', FindData);
-
-      </script>
-</body>
+    <!-- Scripts -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/owl-carousel.js"></script>
+    <script src="assets/js/animation.js"></script>
+    <script src="assets/js/imagesloaded.js"></script>
+    <script src="assets/js/custom.js"></script>
+  </body>
 </html>
