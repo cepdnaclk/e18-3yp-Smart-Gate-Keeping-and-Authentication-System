@@ -1,4 +1,3 @@
-{/* <script type="module"> */}
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-analytics.js";
@@ -39,7 +38,7 @@
         var enterName = document.querySelector("#enterName");
         var birthDay = document.querySelector("#enterbirthday");
         var email = document.querySelector("#email");
-        var Gender = document.querySelector("#Gender");
+        var gender = document.querySelector("#gender");
         var Password = document.querySelector("#Password1");
       
 
@@ -109,4 +108,3 @@
         // removeBtn.addEventListener('click', RemoveData);
         // findBtn.addEventListener('click', FindData);
 
-      {/* </script> */}
