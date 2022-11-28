@@ -24,4 +24,3 @@ The registered users can use the fingerprint scanner. In a situation where the f
 So, the system will provide a solution for the above problem by reducing the time spent on the process and by reducing the labor cost if it was needed there.
 So, the system will provide a solution for the above problem by reducing the time spent on the process and by accurately verifying whether a person is registered or not.
 
-![Capture](./images/Capture.PNG)
