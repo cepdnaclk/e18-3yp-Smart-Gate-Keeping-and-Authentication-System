@@ -36,11 +36,13 @@
 
         var enterID = document.querySelector("#enterID");
         var enterName = document.querySelector("#enterName");
+        var finState = document.querySelector("#gender");
         var birthDay = document.querySelector("#enterbirthday");
         var email = document.querySelector("#email");
         var gender = document.querySelector("#gender");
         var Password = document.querySelector("#Password1");
-      
+
+        
 
         var insertBtn = document.querySelector("#insert");
        
@@ -48,11 +50,13 @@
         function InsertData() {
             set(ref(db, "People/"+ enterID.value),{
                 Name: enterName.value,
+                finPrintState:finState.value,
                 ID: enterID.value,
                 Birthday: birthDay.value,
                 email: email.value,
                 Gender: gender.value,
                 Password: Password.value,
+                
             })
             .then(()=>{
                 alert("Data added successfully");
