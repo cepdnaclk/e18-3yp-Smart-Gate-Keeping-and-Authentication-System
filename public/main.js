@@ -4,7 +4,8 @@
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-analytics.js";
         // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries
-        import {getDatabase, ref, get, set, child, update, remove}
+        //import {getDatabase, ref, get, set, child, update, remove}
+        import {getDatabase, ref, set}
         from "https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js"
          //Copy and Paste the URL from near the top of the CDN you pasted in from firebase
         // (the one where you imported "initializeApp" from),
@@ -51,7 +52,7 @@
                 ID: enterID.value,
                 Birthday: birthDay.value,
                 email: email.value,
-                Gender: Gender.value,
+                Gender: gender.value,
                 Password: Password.value,
             })
             .then(()=>{
