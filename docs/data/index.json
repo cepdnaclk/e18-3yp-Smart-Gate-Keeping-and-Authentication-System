@@ -1,0 +1,30 @@
+{
+    "team": [
+        {
+            "name": "Devinda G.C.",
+            "email": "e18068@eng.pdn.ac.lk",
+            "eNumber": "E/18/068"
+        },
+        {
+            "name": "Sewwandi H.R.",
+            "email": "e18330@eng.pdn.ac.lk",
+            "eNumber": "E/18/330"
+        },
+        {
+            "name": "Uduwanage H.U.",
+            "email": "e18368@eng.pdn.ac.lk",
+            "eNumber": "E/18/368"
+        }
+    ],
+    "supervisors": [
+        {
+            "name": "Dr. Isuru Nawinne",
+            "email": "isurunawinne@eng.pdn.ac.lk"
+        },
+        {
+            "name": "Dr. Mahanama Wickramasinghe",
+            "email": "mahanamaw@eng.pdn.ac.lk"
+        }
+    ],
+    "tags": ["Web", "Embedded Systems"]
+}
