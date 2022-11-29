@@ -10,7 +10,8 @@
         // (the one where you imported "initializeApp" from),
         //but change "firebase-app" to "firebase-database"
 
-
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
         const firebaseConfig = {
             apiKey: "AIzaSyAg72CAX2SWsYzmN0B9NxYAHnE_oFgijVU",
             authDomain: "co300project.firebaseapp.com",
