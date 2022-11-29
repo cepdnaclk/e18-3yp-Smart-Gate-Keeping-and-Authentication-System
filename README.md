@@ -1,3 +1,6 @@
+
+
+=======
 Based on the proper management and security purposes, authorities of various institutions use different methods like verifying the identity of a person and keeping records. The system they are using to achieve this may be different. As an example, in schools, after a student is getting registered at the school, they are assigned to a class and the teacher in charge of that class will get daily attendance by marking the register. An institution that is conducting tuition will register a student for a class by filling out a form and then, their attendance will mark by a person manually using a system at the entrance of the class. In private or government offices, they may have IDs to verify them as an employee of the office and they will sign a book or will use their IDs for marking their presence. These are the most common methods which are used for.
 Based on the proper management and security purposes, authorities of various institutions use different methods like verifying the identity of a person and keeping records. The system they are using to achieve this may be different. But, there are some instances where we wants to verify the identity of a user very accurately. One of the examples is examinations. Examinations are conducting in various educational institutions such as schools, universities etc.
 The basic process of exams is issuing admissions for the registered candidates before the exam. At the exam, candidates can use their admissions to show have permissions to seat in the exam. Most of the times, what the invigilators do is, check admissions and IDs of candidates while conducting the exam and keeping a record.
@@ -25,3 +28,4 @@ So, the system will provide a solution for the above problem by reducing the tim
 So, the system will provide a solution for the above problem by reducing the time spent on the process and by accurately verifying whether a person is registered or not.
 
 ![Capture](./images/Capture.PNG)
+

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create room</title>
+    <style>
+        body {text-align: center;}
+        #enterDetails {float: left; width: 100%;  background-color: rgb(53, 44, 150); color: floralwhite;}
+        /* #findDetails {float: left; width: 50%; background-color: floralwhite; color: darkslategray;} */
+        /* input {width: 120px;} */
+    </style>
+</head>
+<body>
+    <h1>Room registration form</h1>
+    <legend>
+        <h3>room Details</h3>
+      </legend>
+      <fieldset>
+    <div id="enterDetails">
+        <h1>Enter details</h1>
+
+        <label>ID</label> 
+        <input id="enterID" type="text"> <br><br>
+
+        <label>Name</label> 
+        <input id="enterName" type="text"> <br><br>
+
+        
+        
+        <br><br>
+
+        <button id="insert">INSERT</button>
+        <!-- <button id="update">UPDATE</button>
+        <button id="remove">REMOVE</button> <br><br> -->
+        <!-- <a href = "personalRegistrationForm.html"><button>NEXT</a>  -->
+            
+        <!-- <div class="container">
+            <h1 style="text-align:center;"></h1>
+            <a href="personalRegistrationForm.html">
+                <button class="btn btn-primary btn-lg">NEXT</button>
+            </a>
+        </div> -->
+            <br><br>
+    </div>
+</fieldset>
+    <!-- <div id="findDetails">
+        <h1>Find by ID</h1>
+        <h4>ID</h4>
+        <input id="findID" type="text"> <br><br>
+        <button id="find">FIND</button>
+        <h3 id="findName" type="text"></h3>
+        <h3 id="findAge" type="number"></h3> <br><br>
+    </div> -->
+    
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+    <script src="createRoom.js"  type="module"></script>
+</body>
+</html>
