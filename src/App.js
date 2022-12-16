@@ -1,19 +1,20 @@
-// routes
-import Router from './routes';
-// theme
-import ThemeProvider from './theme';
-// components
-import ScrollToTop from './components/scroll-to-top';
-// import { StyledChart } from './components/chart';
+import React from 'react';
+import './App.css';
+import Navbar from './components/Navbar';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './components/pages/Home';
 
-// ----------------------------------------------------------------------
-
-export default function App() {
+function App() {
   return (
-    <ThemeProvider>
-      <ScrollToTop />
-      {/* <StyledChart /> */}
-      <Router />
-    </ThemeProvider>
+  <>
+    <Router>
+      <Navbar/>
+      <Routes>
+        <Route path='/' exact component={Home} />
+      </Routes>
+    </Router>
+  </> 
   );
 }
+
+export default App;
