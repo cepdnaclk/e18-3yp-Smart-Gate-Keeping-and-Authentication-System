@@ -18,14 +18,15 @@ function Cards() {
       <div className='cards__container'>
         <div className='cards__wrapper'>
           <ul className='cards__items'>
-          <CardItem
-              src='../../assets/images/img-5.jpeg'
+            <CardItem
+              src='../src/assets/images/img-5.jpeg'
               text='Register your employees, visitors and customers into the system with their FingerPrint Data'
               label='Add Your Users into the System'
               path='/services'
             />
             <CardItem
-              src='../../assets/images/img-3.jpg'
+              // src='../../assets/images/img-3.jpg'
+              src='../assets/images/img-3.jpg'
               text='Authenticate your employees, visitors and customers with the FingerPrint.'
               label='Authentication'
               path='/services'
