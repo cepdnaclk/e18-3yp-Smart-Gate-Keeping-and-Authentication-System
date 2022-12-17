@@ -6,9 +6,9 @@ import './HeroSection.css';
 function HeroSection(){
     return(
         <div className='hero-container'>
-            <video src='/videos/video-2.mp4' autoPlay loop muted/>
-            {/* <image src="/images/img-1.jpg"/> */}
-            <h1>what are you waiting for?</h1>
+            {/* <video src='./assets/videos/video-2.mp4' autoPlay loop muted/> */}
+            {/* <image src="./assets/images/img-1.jpg"/> */}
+            <h1>Try the best way of Access Control </h1>
             <p>What are you waiting for?</p>
             <div className='hero-btns'>
                 <Button 
