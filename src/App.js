@@ -7,7 +7,7 @@ import Services from './components/pages/Services';
 import Products from './components/pages/Products';
 import SignUp from './components/pages/SignUp';
 
-function App() {
+
 function App() {
   return (
     <>
@@ -41,8 +41,5 @@ function App() {
 //       </div>
 //   );
 // }
-
-export default App;
-
 
 export default App;
