@@ -2,14 +2,14 @@ import React from 'react';
 import './Cards.css';
 import CardItem from './CardItem';
 
-const items = [{
-  src:'images/img-5.jpeg',
-  text:'Register your employees, visitors and customers into the system with their FingerPrint Data',
-  label:'Add Your Users into the System',
-  path:'/services',
-},
+// const items = [{
+//   src:'images/img-5.jpeg',
+//   text:'Register your employees, visitors and customers into the system with their FingerPrint Data',
+//   label:'Add Your Users into the System',
+//   path:'/services',
+// },
 
-]
+// ]
 
 function Cards() {
   return (
