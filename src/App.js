@@ -8,6 +8,7 @@ import Products from './components/pages/Products';
 import SignUp from './components/pages/SignUp';
 
 function App() {
+function App() {
   return (
     <>
       <Router>
@@ -21,5 +22,27 @@ function App() {
     </>
   );
 }
+
+
+// import {
+//   Routes,
+//   Route
+// } from "react-router-dom";
+
+// function App() {
+//   return (
+//       <div className="App">
+//         <>
+//           <Routes>
+//             <Route path='/login' element={<Form title="Login" />} />
+//             <Route path='/register' element={<Form title="Register" />} />
+//           </Routes>
+//         </>
+//       </div>
+//   );
+// }
+
+export default App;
+
 
 export default App;
