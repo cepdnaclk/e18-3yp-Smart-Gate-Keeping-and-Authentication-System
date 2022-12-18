@@ -22,14 +22,14 @@ function Cards() {
               src='../src/assets/images/img-5.jpeg'
               text='Register your employees, visitors and customers into the system with their FingerPrint Data'
               label='Add Your Users into the System'
-              path='/services'
+              path='/service'
             />
             <CardItem
               // src='../../assets/images/img-3.jpg'
               src='../assets/images/img-3.jpg'
               text='Authenticate your employees, visitors and customers with the FingerPrint.'
               label='Authentication'
-              path='/services'
+              path='/service'
             />
             
           </ul>
@@ -38,13 +38,13 @@ function Cards() {
               src='../../assets/images/img-6.jpeg'
               text='Gather and analyze data of personals check-in and check-cut time with provided Extensive Tools and UI'
               label='Analyze Check-In and Check-Out Data'
-              path='/services'
+              path='/service'
             />
             <CardItem
               src='../../assets/images/img-7.jpg'
               text='Provide protection to your and your users data and privacy with the provided security techniques and tools'
               label='Data Protection and Secure Privacy'
-              path='/services'
+              path='/service'
             />
             {/* <CardItem
               src='images/img-8.jpg'

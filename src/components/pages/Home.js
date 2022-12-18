@@ -1,18 +1,20 @@
 import React from 'react';
-  
-const Home = () => {
-  return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'Right',
-        alignItems: 'Right',
-        height: '100vh'
-      }}
-    >
-      <h1>Home</h1>
-    </div>
-  );
-};
-  
+import '../../App.css';
+import HeroSection from '../HeroSection';
+import Cards from '../Cards';
+import Footer from '../Footer';
+import Navbar from '../Navbar';
+
+
+function Home(){
+    return(
+    <>
+        <Navbar />
+        <HeroSection />
+        <Cards />
+        <Footer />
+    </>
+    );
+}
+
 export default Home;
