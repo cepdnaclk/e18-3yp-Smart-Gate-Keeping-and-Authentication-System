@@ -1,11 +1,11 @@
-import React from 'react';
-import './App.css';
-// import Navbar from './components/Navbar';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './components/pages/Home';
-import Services from './components/pages/Services';
-import Products from './components/pages/Products';
-import SignUp from './components/pages/SignUp';
+// import './App.css';
+import Header from './Components/Header/Header'
+import Form from "./Components/Form/Form"
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from "react-router-dom";
 import Signin from './Components/Sign/Auth';
 import Signup from './Components/Sign/Signup';
 import Createuser from './Components/Pages/Createuser';
@@ -16,7 +16,6 @@ import Viewusers from './Components/Pages/Viewusers';
 import Home from './Components/Pages/Home';
 import Service from './Components/Pages/Service';
 import Product from './Components/Pages/Product';
-
 
 function App() {
   return (
