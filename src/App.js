@@ -1,21 +1,21 @@
 // import './App.css';
-import Header from './Components/Header/Header'
-import Form from "./Components/Form/Form"
+import Header from './components/Header/Header'
+import Form from "./components/Form/Form"
 import {
   BrowserRouter as Router,
   Routes,
   Route
 } from "react-router-dom";
-import Signin from './Components/Sign/Auth';
-import Signup from './Components/Sign/Signup';
-import Createuser from './Components/Pages/Createuser';
-import Institute from './Components/Pages/Institute';
-import Createrooms from './Components/Pages/Createrooms';
-import Viewerooms from './Components/Pages/Viewrooms';
-import Viewusers from './Components/Pages/Viewusers';
-import Home from './Components/Pages/Home';
-import Service from './Components/Pages/Service';
-import Product from './Components/Pages/Product';
+import Signin from './components/Sign/Auth';
+import Signup from './components/Sign/Signup';
+import Createuser from './components/Pages/Createuser';
+import Institute from './components/Pages/Institute';
+import Createrooms from './components/Pages/Createrooms';
+import Viewerooms from './components/Pages/Viewrooms';
+import Viewusers from './components/Pages/Viewusers';
+import Home from './components/Pages/Home';
+import Service from './components/Pages/Service';
+import Product from './components/Pages/Product';
 
 function App() {
   return (
