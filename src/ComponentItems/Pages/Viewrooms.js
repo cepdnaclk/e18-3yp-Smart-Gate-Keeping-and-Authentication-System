@@ -16,29 +16,41 @@
 // };
 
 // export default Viewerooms;
-import React from "react";
-import { Button, Table } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { CSSTransition } from "react-transition-group";
-import "./Viewroom.css";
+import React from 'react';
+import { Button, Table } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
+import './Viewroom.css';
+import { CSSTransition } from 'react-transition-group';
+// import CreateSlot from './CreateSlot';
 
 const Viewrooms = () => {
+  const navigate = useNavigate();
+
   const rooms = [
     {
       id: 1,
-      name: "Room 1",
-      type: "Pre-allocated",
+      name: 'Room 1',
+      type: 'Pre-allocated',
     },
     {
       id: 2,
-      name: "Room 2",
-      type: "None-allocated",
+      name: 'Room 2',
+      type: 'None-allocated',
     },
     // additional rooms go here
   ];
 
+  const handleCreateSlot = (roomId) => {
+    navigate(`/create-slot/${roomId}`);
+  };
+
   return (
-    <CSSTransition in={true} timeout={300} classNames="fade" unmountOnExit>
+    <CSSTransition
+      in={true}
+      timeout={300}
+      classNames="fade"
+      unmountOnExit
+    >
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -55,18 +67,20 @@ const Viewrooms = () => {
               <td>{room.name}</td>
               <td>{room.type}</td>
               <td>
-                <Link to="/create-slot">
-                  <Button variant="link" style={{ color: "black" }}>
-                    Create a Slot
-                  </Button>
-                </Link>
+                <Button
+                  variant="link"
+                  className="action-button"
+                  onClick={() => handleCreateSlot(room.id)}
+                >
+                  Create a Slot
+                </Button>
                 <Link to="/view-slots">
-                  <Button variant="link" style={{ color: "black" }}>
+                  <Button variant="link" className="action-button">
                     View Slots
                   </Button>
                 </Link>
                 <Link to="/view-users">
-                  <Button variant="link" style={{ color: "black" }}>
+                  <Button variant="link" className="action-button">
                     View Users
                   </Button>
                 </Link>
@@ -85,3 +99,5 @@ const Viewrooms = () => {
 };
 
 export default Viewrooms;
+
+
