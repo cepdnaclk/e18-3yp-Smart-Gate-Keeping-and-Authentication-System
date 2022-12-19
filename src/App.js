@@ -16,6 +16,7 @@ import Viewusers from './Components/Pages/Viewusers';
 import Home from './Components/Pages/Home';
 import Service from './Components/Pages/Service';
 import Product from './Components/Pages/Product';
+// import Form from './Components/Form/Form';
 
 function App() {
   return (
@@ -37,6 +38,8 @@ function App() {
             <Route path='/home' element={<Home/>} />
             <Route path='/service' element={<Service/>} />
             <Route path='/product' element={<Product/>} />
+
+            <Route path='/form' element={<Form/>} />
 
             {/* <Route path='/register' element={<Form/>} /> */}
           </Routes>
