@@ -26,7 +26,7 @@ import '../Form/Form.css';
  
 function Createrooms() {
     const [name , setName] = useState('');
-    const [Rid , setUserId] = useState('');
+    const [Rid , setroomId] = useState('');
     
  
     // function to update state of name with
@@ -36,7 +36,7 @@ function Createrooms() {
     }
     
     const handleRoomIdChange =(e)=>{
-      setName(e.target.value);
+      setroomId(e.target.value);
     }
     
     // below function will be called when user
