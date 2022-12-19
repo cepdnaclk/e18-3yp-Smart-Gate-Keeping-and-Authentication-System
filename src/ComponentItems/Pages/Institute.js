@@ -27,7 +27,7 @@ function Institute() {
 
     // <Navbar />
 
-    <ImageButton imageUrl="" />
+    <ImageButton imageUrl="../Button/button_images/addUser.jpg" />
     // <Router>
     //   <Navbar />
     //   <Routes>

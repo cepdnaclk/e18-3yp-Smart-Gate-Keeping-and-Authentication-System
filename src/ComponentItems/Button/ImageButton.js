@@ -6,7 +6,7 @@ function ImageButton(props) {
       className="image-button"
       style={{ backgroundImage: `url('${props.imageUrl}')` }}
     >
-      {props.text}
+      TEst
     </button>
   );
 }
