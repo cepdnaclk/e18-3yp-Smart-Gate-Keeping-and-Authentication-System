@@ -1,10 +1,10 @@
 
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
+//import ReactDOM from "react-dom";
 import {Routes, Route, useNavigate} from 'react-router-dom';
 import "./styles.css";
-import Signup from "./Signup";
-import Institute from "../Pages/Institute";
+// import Signup from "./Signup";
+// import Institute from "../Pages/Institute";
 function Signin() {
   const navigate = useNavigate();
   const navigateSignup = () => {

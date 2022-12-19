@@ -1,21 +1,21 @@
 // import './App.css';
-import Header from './Components/Header/Header'
-import Form from "./Components/Form/Form"
+//import Header from './components/Header/Header'
+import Form from "./components/Form/Form"
 import {
   BrowserRouter as Router,
   Routes,
   Route
 } from "react-router-dom";
-import Signin from './Components/Sign/Auth';
-import Signup from './Components/Sign/Signup';
-import Createuser from './Components/Pages/Createuser';
-import Institute from './Components/Pages/Institute';
-import Createrooms from './Components/Pages/Createrooms';
-import Viewerooms from './Components/Pages/Viewrooms';
-import Viewusers from './Components/Pages/Viewusers';
-import Home from './Components/Pages/Home';
-import Service from './Components/Pages/Service';
-import Product from './Components/Pages/Product';
+import Signin from './components/Sign/Auth';
+import Signup from './components/Sign/Signup';
+import Createuser from './components/pages/Createuser';
+import Institute from './components/pages/Institute';
+import Createrooms from './components/pages/Createrooms';
+import Viewerooms from './components/pages/Viewrooms';
+import Viewusers from './components/pages/Viewusers';
+import Home from './components/pages/Home';
+import Service from './components/pages/Service';
+import Product from './components/pages/Product';
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
       <div className="App">
         <>
             <Routes>
-            <Route index element={<Header/>} />
+            <Route index element={<Home/>} />
             <Route path='/form' element={<Form/>} />
             <Route path='/institute' element={<Institute/>} />
             <Route path='/sign-up' element={<Signin/>} />
