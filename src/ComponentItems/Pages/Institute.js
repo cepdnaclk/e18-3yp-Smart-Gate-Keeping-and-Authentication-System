@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {useNavigate} from 'react-router-dom';
+// import {useNavigate} from 'react-router-dom';
 //import Navbar from './Institutenavigationbar';
 //import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // import Home from './pages';
@@ -18,10 +18,10 @@ import Navbar from './Navbarinstitute';
 //import Createuser from './Createuser';
 
 function Institute() {
-  const navigate = useNavigate();
-  const navigatetocreateuser = () => {
-    navigate('./Createuser');
-  };
+  // const navigate = useNavigate();
+  // const navigatetocreateuser = () => {
+  //   navigate('./Createuser');
+  // };
   return (
 
     <Navbar/>

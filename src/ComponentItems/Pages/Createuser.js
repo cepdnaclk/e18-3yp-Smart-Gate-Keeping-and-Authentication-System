@@ -65,7 +65,7 @@ function Createuser() {
     // below function will be called when user
     // click on submit button .
     const handleSubmit=(e)=>{
-      if(password!=confPassword)
+      if(password!==confPassword)
       {
         // if 'password' and 'confirm password'
         // does not match.

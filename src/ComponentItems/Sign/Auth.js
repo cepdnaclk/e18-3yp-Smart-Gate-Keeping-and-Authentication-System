@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 //import ReactDOM from "react-dom";
-import {Routes, Route, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import "./styles.css";
 // import Signup from "./Signup";
 // import Institute from "../Pages/Institute";
@@ -14,48 +14,49 @@ function Signin() {
     navigate('../Institute');
   };
   // React States
-  const [errorMessages, setErrorMessages] = useState({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMessages] = useState({});
+  const [isSubmitted] = useState(false);
+  // const [errorMessages, setErrorMessages] = useState({});
+  // const [isSubmitted, setIsSubmitted] = useState(false);
+  // // User Login info
+  // const database = [
+  //   {
+  //     username: "user1",
+  //     password: "pass1"
+  //   },
+  //   {
+  //     username: "user2",
+  //     password: "pass2"
+  //   }
+  // ];
 
-  // User Login info
-  const database = [
-    {
-      username: "user1",
-      password: "pass1"
-    },
-    {
-      username: "user2",
-      password: "pass2"
-    }
-  ];
+  // const errors = {
+  //   uname: "invalid username",
+  //   pass: "invalid password"
+  // };
 
-  const errors = {
-    uname: "invalid username",
-    pass: "invalid password"
-  };
+  // const handleSubmit = (event) => {
+  //   //Prevent page reload
+  //   event.preventDefault();
 
-  const handleSubmit = (event) => {
-    //Prevent page reload
-    event.preventDefault();
+  //   var { uname, pass } = document.forms[0];
 
-    var { uname, pass } = document.forms[0];
+  //   // Find user login info
+  //   const userData = database.find((user) => user.username === uname.value);
 
-    // Find user login info
-    const userData = database.find((user) => user.username === uname.value);
-
-    // Compare user info
-    if (userData) {
-      if (userData.password !== pass.value) {
-        // Invalid password
-        setErrorMessages({ name: "pass", message: errors.pass });
-      } else {
-        setIsSubmitted(true);
-      }
-    } else {
-      // Username not found
-      setErrorMessages({ name: "uname", message: errors.uname });
-    }
-  };
+  //   // Compare user info
+  //   if (userData) {
+  //     if (userData.password !== pass.value) {
+  //       // Invalid password
+  //       setErrorMessages({ name: "pass", message: errors.pass });
+  //     } else {
+  //       setIsSubmitted(true);
+  //     }
+  //   } else {
+  //     // Username not found
+  //     setErrorMessages({ name: "uname", message: errors.uname });
+  //   }
+  // };
 
   // Generate JSX code for error message
   const renderErrorMessage = (name) =>
