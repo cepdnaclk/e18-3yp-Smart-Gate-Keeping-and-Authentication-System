@@ -1,0 +1,58 @@
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  
+  
+table {
+    width: 100%;
+    animation: fadeIn 0.5s ease-in-out;
+    margin: 0 auto;
+    text-align: center;
+    border-collapse: collapse;
+  }
+  
+  th {
+    background-color: #ddd;
+  }
+  
+  td, th {
+    padding: 15px;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  td:active, th:active {
+    /* other styles */
+    transform: rotate(2deg);
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .room-button {
+    transition: transform 0.2s ease-in-out;
+    margin: 5px;
+    background-color: #dde2e8;
+    color: rgb(14, 5, 5);
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .room-button:hover {
+    transform: scale(1.1);
+    background-color: #2873c4;
+  }
+  
+  .room-button:active {
+    transform: scale(0.9);
+    background-color: #82b6ed;
+  }
+  
