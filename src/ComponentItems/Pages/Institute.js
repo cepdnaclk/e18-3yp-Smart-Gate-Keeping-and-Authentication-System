@@ -14,7 +14,7 @@ import './App.css';
 // import Createuser from './Createuser';
 // import Viewrooms from './Viewrooms';
 // import Viewusers from './Viewusers';
-// import Navbar from './Navbarinstitute';
+import Navbar from './Navbarinstitute';
 import ImageButton from '../Button/ImageButton';
 //import Createuser from './Createuser';
 
@@ -26,8 +26,12 @@ function Institute() {
   return (
 
     // <Navbar />
-
+    <>
+    <Navbar />
     <ImageButton imageUrl="../Button/button_images/addUser.jpg" />
+    
+    </>
+
     // <Router>
     //   <Navbar />
     //   <Routes>
