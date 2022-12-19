@@ -41,7 +41,7 @@ const Viewrooms = () => {
   ];
 
   const handleCreateSlot = (roomId) => {
-    navigate(`/create-slot/${roomId}`);
+    navigate(`/CreateSlot/${roomId}`);
   };
 
   return (

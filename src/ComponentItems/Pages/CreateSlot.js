@@ -14,7 +14,10 @@ const CreateSlot = (props) => {
   
     return (
       <Form onSubmit={handleSubmit}>
-        <h2>Create a Slot for Room {props.roomId}</h2>
+        <div className="title-bar">
+        <h2>Create a Slot for Room {room.id}</h2>
+        <h3>{room.name}</h3>
+      </div>
         <FormGroup>
           <Label for="start-time">Start Time</Label>
           <DateTimePicker
