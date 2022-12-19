@@ -1,0 +1,62 @@
+Create Institute
+
+For Institute
+ - Authenticatoin handelling
+ - API 
+    -  CRUD for Institute name (IID)
+    -  Get all Users
+    -  Checking IID exists
+
+
+For Users
+Deatails  - (name , birthday , email , pasword , )
+ - CRUD for User name , birthday , email , UID(no delete for pasword) (inputs : IID ,UID)
+ - Fingerprint Verrification(inputs : UID)
+ - Checking UID exist (in perticular IID)
+
+ For Verificatoin Codes
+ - no use
+
+ For data entry when registraoin
+  - Input : Fingerprint data , UID , PASSWORD ,   
+  - 
+For Usages
+    # 
+
+For rooms
+    # Create rooms
+     - inputs: IId , RID
+    # Asign students to rooms
+     - inputs IID , RID , UID , 
+    #
+
+For Attendance
+    # Create a Instance/Time (like a day or time)
+     - inputs: TID , RID ,IID 
+
+    # Users coming to Instance
+    - inputs: TID , RID ,IID , UIDs ,currenttime , verificatoin mode , verificatoin data
+
+
+
+
+
+
+
+
+
+
+
+
+    Built api's
+    1). create Institute with NAME IID
+    2). Create Users for perticular Institiute
+    3). get all users for perticular Institute
+    4). get specific user details from spesific Institute
+    5). delete specific user details from spesific Institute
+    6). update specific user details from spesific Institute
+    7). Create rooms inputs: IId , RID
+    8). Asign students to rooms -> Did not checked inputs IID , RID , UID
+    9). For Attendance Create a Instance/Time (like a day or time) inputs: TID , RID , IID 
+    10).Users coming to Instance inputs: TID , RID ,IID , UIDs ,currenttime , verificatoin mode , verificatoin data
+    
