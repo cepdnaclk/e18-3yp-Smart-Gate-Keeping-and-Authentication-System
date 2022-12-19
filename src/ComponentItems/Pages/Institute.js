@@ -15,6 +15,7 @@ import {useNavigate} from 'react-router-dom';
 // import Viewrooms from './Viewrooms';
 // import Viewusers from './Viewusers';
 import Navbar from './Navbarinstitute';
+import ImageButton from '../Button/ImageButton';
 //import Createuser from './Createuser';
 
 function Institute() {
@@ -24,7 +25,9 @@ function Institute() {
   };
   return (
 
-    <Navbar/>
+    // <Navbar />
+
+    <ImageButton imageUrl="" />
     // <Router>
     //   <Navbar />
     //   <Routes>
