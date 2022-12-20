@@ -1,0 +1,9 @@
+.image-button {
+  padding: 50px 150px;
+  width: 100px;
+  height: 100px;
+  font-size: 24px;
+  background-size: cover; /* Resize the image to fit the button */
+  background-position: center; /* Center the image */
+  /* Add other styles as needed */
+}

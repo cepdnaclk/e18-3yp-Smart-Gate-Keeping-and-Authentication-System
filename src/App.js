@@ -16,6 +16,7 @@ import Viewusers from './ComponentItems/Pages/Viewusers';
 import Home from './ComponentItems/Pages/Home';
 import Service from './ComponentItems/Pages/Service';
 import Product from './ComponentItems/Pages/Product';
+import CreateSlot from './ComponentItems/Pages/CreateSlot';
 // import Form from './ComponentItems/Form/Form';
 
 function App() {
@@ -40,6 +41,8 @@ function App() {
             <Route path='/product' element={<Product/>} />
 
             <Route path='/form' element={<Form/>} />
+
+            <Route path='/CreateSlot' element={<CreateSlot/>} />
 
             {/* <Route path='/register' element={<Form/>} /> */}
           </Routes>
