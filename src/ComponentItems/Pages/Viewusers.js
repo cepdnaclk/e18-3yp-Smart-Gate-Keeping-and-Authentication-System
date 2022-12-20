@@ -63,12 +63,16 @@ import React, { useState } from 'react';
 import { Table, Button, Form, FormControl } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import './UserList.css';
+import Navbar from './Navbarinstitute';
+
 
 const Viewusers = () => {
   const navigate = useNavigate();
   const [users, setUsers] = useState([    { id: 1, name: 'John Smith', email: 'john@example.com', rooms: ['101', '102'] },
     { id: 2, name: 'Jane Doe', email: 'jane@example.com', rooms: ['103', '104'] },
-    { id: 3, name: 'Bob Johnson', email: 'bob@example.com', rooms: ['105'] }
+    { id: 3, name: 'Bob Johnson', email: 'bob@example.com', rooms: ['105'] },
+    { id: 4, name: 'Jane Dog', email: 'jke@example.com', rooms: ['107', '104'] },
+    { id: 5, name: 'Doe yut', email: 'yut@example.com', rooms: ['103', '109'] }
   ]);
   const [sort, setSort] = useState({ column: null, direction: 'asc' });
   const [search, setSearch] = useState('');
@@ -99,6 +103,7 @@ const Viewusers = () => {
 
   return (
     <>
+    <Navbar />
       <Form inline className="mb-3">
         <FormControl type="text" placeholder="Search" className="mr-sm-2" value={search} onChange={handleSearch} />
       </Form>

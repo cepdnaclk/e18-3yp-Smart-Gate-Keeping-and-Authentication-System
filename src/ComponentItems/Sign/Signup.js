@@ -85,6 +85,11 @@ function Signup() {
           <input type="password" name="pass" required />
           {renderErrorMessage("pass")}
         </div>
+        <div className="input-container">
+          <label>Conform Password </label>
+          <input type="password" name="pass" required />
+          {renderErrorMessage("pass")}
+        </div>
         <div className="button-container">
           <input type="submit"  onClick={navigateInstitutepage}/>
           {/* <button onClick={navigateHome}>Home</button> */}

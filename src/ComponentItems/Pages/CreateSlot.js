@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { Form, FormGroup, Label } from 'reactstrap';
 import DateTimePicker from 'react-datetime-picker';
 import '../Form/Form.css';
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
 
 
 const CreateSlot = (props) => {
     const [startTime, setStartTime] = useState(new Date());
     const [endTime, setEndTime] = useState(new Date());
-    const location = useLocation();
-    console.log(props,"props");
+    // const location = useLocation();
+    // console.log(props,"props");
 
-    const data = location.state?.data;
+    // const data = location.state?.data;
   
     const handleSubmit = (event) => {
       event.preventDefault();
@@ -23,7 +23,7 @@ const CreateSlot = (props) => {
       <header className="App-header">
         <div className="title-bar">
         <h2>Create a Slot for Room </h2>
-        <h3>{data.name}</h3>
+        {/* <h3>{data.name}</h3> */}
       </div>
       <br/>
       <br/>

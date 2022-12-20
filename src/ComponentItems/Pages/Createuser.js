@@ -24,7 +24,8 @@
 import React, {useState} from 'react';
 // import ReactDOM from 'react-dom';
 import '../Form/Form.css';
- 
+import Navbar from './Navbarinstitute';
+
 function Createuser() {
     const [name , setName] = useState('');
     const [birthday , setAge] = useState('');
@@ -83,6 +84,7 @@ function Createuser() {
     }
   return (
     <div className="App">
+      <Navbar />
       
     <header className="App-header">
     <form onSubmit={(e) => {handleSubmit(e)}}>

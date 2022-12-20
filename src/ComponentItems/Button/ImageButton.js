@@ -1,14 +1,15 @@
 import React from 'react';
 
-function ImageButton(props) {
+function ImageButton1(props) {
   return (
     <button
       className="image-button"
-      style={{ backgroundImage: `url('${props.imageUrl}')` }}
+      style={{ backgroundImage: "src/ComponentItems/Button/button_images/addUser.jpg" }}
     >
-      TEst
+      ADD USERS
     </button>
   );
 }
 
-export default ImageButton;
+export default ImageButton1;
+
