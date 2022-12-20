@@ -4,8 +4,7 @@ import Form from "./ComponentItems/Form/Form"
 import {
   BrowserRouter as Router,
   Routes,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import Signin from './ComponentItems/Sign/Auth';
 import Signup from './ComponentItems/Sign/Signup';
