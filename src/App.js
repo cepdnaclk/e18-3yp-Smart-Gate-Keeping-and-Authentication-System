@@ -4,7 +4,8 @@ import Form from "./ComponentItems/Form/Form"
 import {
   BrowserRouter as Router,
   Routes,
-  Route
+  Route,
+  Link
 } from "react-router-dom";
 import Signin from './ComponentItems/Sign/Auth';
 import Signup from './ComponentItems/Sign/Signup';
@@ -17,11 +18,17 @@ import Home from './ComponentItems/Pages/Home';
 import Service from './ComponentItems/Pages/Service';
 import Product from './ComponentItems/Pages/Product';
 import CreateSlot from './ComponentItems/Pages/CreateSlot';
+import Addusertorooms from "./ComponentItems/Pages/Addusertoroom";
+
 // import Form from './ComponentItems/Form/Form';
 
 function App() {
   return (
     <Router>
+      {/* <div>
+        <Link to = "/" className="link"> Home
+        </Link>
+      </div> */}
       <div className="App">
         <>
             <Routes>
@@ -32,6 +39,8 @@ function App() {
             <Route path='/signup' element={<Signup/>} />
 
             <Route path='/createuser' element={<Createuser/>} />
+            <Route path='/add-users' element={<Addusertorooms/>} />
+
             <Route path='/createrooms' element={<Createrooms/>} />
             <Route path='/viewerooms' element={<Viewerooms/>} />
             <Route path='/viewusers' element={<Viewusers/>} />
