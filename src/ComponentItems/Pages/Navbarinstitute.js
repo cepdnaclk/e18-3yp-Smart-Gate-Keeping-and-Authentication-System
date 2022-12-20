@@ -1,11 +1,17 @@
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
-// import { Button } from '../Button/Button';
+import { Button } from '../Button/Button';
 import './Navbar.css';
+import {useNavigate} from 'react-router-dom';
 
 
 function Navbar() {
+    const navigate = useNavigate();
+  const navigateLogout = () => {
+    navigate('../logout');
+  };
     const [click, setClick] = useState(false);
+    // const [button, setButton] = useState(true);
     // const [ setButton] = useState(true);
 
     
@@ -31,8 +37,8 @@ function Navbar() {
     <>
       <nav className='navbar'>
         <div className='navbar-container'>
-            <Link to="/" className='navbar-logo' onClick={closeMobileMenu}>
-                Company name <i className='fab fa-typo3'/>
+            <Link to="/institute" className='navbar-logo' onClick={closeMobileMenu}>
+                Sasip Institute <i className='fab fa-typo3'/>
             </Link>
             <div className='menu-icon' onClick={handleClick}>
                 <i className={click ? 'fas fa-times':'fas fa-bars'} />
@@ -40,7 +46,7 @@ function Navbar() {
             <ul className={click ? 'nav-menu active': 'nav-menu'} >
                 <li className='nav-item'>
                     <Link to='/createuser' className='nav-links' onClick={closeMobileMenu} >
-                        Create user
+                        Register user
                     </Link>
                 </li>
                 <li className='nav-item'>
@@ -65,8 +71,9 @@ function Navbar() {
                 </li> */}
                 
             </ul>
-            {/* {button && <Button buttonStyle='btn--outline'>SIGN UP</Button>} */}
+             
         </div>
+        <Button buttonStyle='btn--outline' onClick={navigateLogout}>Log out</Button>
       </nav>
     </>
   )

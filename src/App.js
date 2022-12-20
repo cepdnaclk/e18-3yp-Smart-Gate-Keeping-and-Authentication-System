@@ -18,7 +18,7 @@ import Service from './ComponentItems/Pages/Service';
 import Product from './ComponentItems/Pages/Product';
 import CreateSlot from './ComponentItems/Pages/CreateSlot';
 import Addusertorooms from "./ComponentItems/Pages/Addusertoroom";
-
+import Logout from "./ComponentItems/Pages/Logout";
 // import Form from './ComponentItems/Form/Form';
 
 function App() {
@@ -51,6 +51,7 @@ function App() {
             <Route path='/form' element={<Form/>} />
 
             <Route path='/CreateSlot' element={<CreateSlot/>} />
+            <Route path='/logout' element={<Logout/>} />
 
             {/* <Route path='/register' element={<Form/>} /> */}
           </Routes>
