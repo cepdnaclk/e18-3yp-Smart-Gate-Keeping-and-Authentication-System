@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { render, screen } from "@testing-library/react";
-import Signup from "../Sign/Signup";
+import Signin from "../Sign/Auth";
 
-describe("Test the Signup component", () => {
+describe("Test the Signin component", () => {
     test("render the signup form with 2 button", async () => {
-        render(<Signup />);
+        render(<Signin />);
         const buttonList = await screen.findAllByRole("Button");
         expect(buttonList).toHaveLength(1);
+        // console.log(buttonList);
     });
 });
-
