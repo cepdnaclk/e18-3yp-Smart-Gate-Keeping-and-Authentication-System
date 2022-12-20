@@ -23,7 +23,8 @@
 import React, {useState} from 'react';
 // import ReactDOM from 'react-dom';
 import '../Form/Form.css';
- 
+import Navbar from './Navbarinstitute';
+
 function Createrooms() {
     const [name , setName] = useState('');
     const [Rid , setroomId] = useState('');
@@ -51,6 +52,7 @@ function Createrooms() {
     }
   return (
     <div className="App">
+      <Navbar />
       
     <header className="App-header">
     <form onSubmit={(e) => {handleSubmit(e)}}>

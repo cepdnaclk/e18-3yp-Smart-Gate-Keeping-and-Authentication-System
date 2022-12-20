@@ -20,8 +20,9 @@ import React from 'react';
 import { Button, Table } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import './Viewroom.css';
-import { CSSTransition } from 'react-transition-group';
+// import { CSSTransition } from 'react-transition-group';
 // import CreateSlot from './CreateSlot';
+import Navbar from './Navbarinstitute';
 
 const Viewrooms = () => {
   const navigate = useNavigate();
@@ -37,27 +38,38 @@ const Viewrooms = () => {
       name: 'Room 2',
       type: 'None-allocated',
     },
+    {
+      id: 3,
+      name: 'Room 2',
+      type: 'None-allocated',
+    },
+    {
+      id: 4,
+      name: 'Room 2',
+      type: 'None-allocated',
+    },
     // additional rooms go here
   ];
 
   const handleCreateSlot = (roomId) => {
-    navigate(`/CreateSlot/${roomId}`);
+    navigate(`/CreateSlot`);
   };
 
   
   return (
-    <CSSTransition
+    <>
+    {/* <CSSTransition
       in={true}
       timeout={300}
       classNames="fade"
       unmountOnExit
-    >
+    > */}
+      <Navbar />
       <Table striped bordered hover>
         <thead>
           <tr>
             <th>Room ID</th>
             <th>Name</th>
-            <th>Type</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -66,7 +78,6 @@ const Viewrooms = () => {
             <tr key={room.id}>
               <td>{room.id}</td>
               <td>{room.name}</td>
-              <td>{room.type}</td>
               <td>
                 <Button
                   variant="link"
@@ -95,7 +106,8 @@ const Viewrooms = () => {
           ))}
         </tbody>
       </Table>
-    </CSSTransition>
+    {/* </CSSTransition> */}
+    </>
   );
 };
 

@@ -19,7 +19,7 @@ function Cards() {
         <div className='cards__wrapper'>
           <ul className='cards__items'>
             <CardItem
-              src='../src/assets/images/img-5.jpeg'
+              src='../../src/assets/images/img-5.jpeg'
               text='Register your employees, visitors and customers into the system with their FingerPrint Data'
               label='Add Your Users into the System'
               path='/service'
@@ -35,13 +35,13 @@ function Cards() {
           </ul>
           <ul className='cards__items'>
             <CardItem
-              src='../../assets/images/img-6.jpeg'
+              src='../assets/images/img-6.jpeg'
               text='Gather and analyze data of personals check-in and check-cut time with provided Extensive Tools and UI'
               label='Analyze Check-In and Check-Out Data'
               path='/service'
             />
             <CardItem
-              src='../../assets/images/img-7.jpg'
+              src='src/assets/images/img-7.jpg'
               text='Provide protection to your and your users data and privacy with the provided security techniques and tools'
               label='Data Protection and Secure Privacy'
               path='/service'
