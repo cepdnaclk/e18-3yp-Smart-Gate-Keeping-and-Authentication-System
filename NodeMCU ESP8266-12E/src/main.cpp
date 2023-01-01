@@ -74,41 +74,5 @@ void setup()
 
 void loop()
 {
-
-    // Firebase.ready() should be called repeatedly to handle authentication tasks.
-
-    if (Firebase.ready() && (millis() - dataMillis > 60000 || dataMillis == 0))
-    {
-        dataMillis = millis();
-
-        Serial.print("Query a Firestore database... ");
-
-        // If you have run the CreateDocuments example, the document b0 (in collection a0) contains the document collection c0, and
-        // c0 contains the collections d?.
-
-        // The following query will query at collection c0 to get the 3 documents in the payload result with descending order.
-
-        // For the usage of FirebaseJson, see examples/FirebaseJson/BasicUsage/Create.ino
-        FirebaseJson query;
-
-        query.set("select/fields/[0]/fieldPath", "myDouble");
-        query.set("select/fields/[1]/fieldPath", "myInteger");
-        // query.set("select/fields/[2]/fieldPath", "myTimestamp");
-
-        query.set("from/collectionId", "c0");
-        query.set("from/allDescendants", false);
-        query.set("orderBy/field/fieldPath", "myInteger");
-        query.set("orderBy/direction", "DESCENDING");
-        query.set("limit", 3);
-
-        // The consistencyMode and consistency arguments are not assigned
-        // The consistencyMode is set to fb_esp_firestore_consistency_mode_undefined by default.
-        // The arguments is the consistencyMode value, see the function description at
-        // https://github.com/mobizt/Firebase-ESP-Client/tree/main/src#runs-a-query
-
-        if (Firebase.Firestore.runQuery(&fbdo, FIREBASE_PROJECT_ID, "" /* databaseId can be (default) or empty */, "a0/b0" /* The document path */, &query /* The FirebaseJson object holds the StructuredQuery data */))
-            Serial.printf("ok\n%s\n\n", fbdo.payload().c_str());
-        else
-            Serial.println(fbdo.errorReason());
-    }
+    
 }
