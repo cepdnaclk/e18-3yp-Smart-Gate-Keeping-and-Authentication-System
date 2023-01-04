@@ -21,6 +21,8 @@
 #define USER_EMAIL "e18368@eng.pdn.ac.lk"
 #define USER_PASSWORD "abcd1234"
 
+#define MOTORPIN 6
+
 // Define Firebase Data object
 FirebaseData fbdo;
 
@@ -34,6 +36,9 @@ void setup()
 {
 
     Serial.begin(115200);
+
+    // set up pin for pwm to control servo motor
+    analogWrite(MOTORPIN,512);
 
     WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
     Serial.print("Connecting to Wi-Fi");
@@ -74,5 +79,7 @@ void setup()
 
 void loop()
 {
+    uint16_t dutyCycle = analogRead(A0);
+    
     
 }
