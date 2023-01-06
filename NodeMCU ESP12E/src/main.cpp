@@ -1,36 +1,107 @@
 #include <Arduino.h>
 #include <Adafruit_Fingerprint.h>
+#include <SoftwareSerial.h>
 
-Adafruit_Fingerprint finger = Adafruit_Fingerprint(&Serial);
-void setup(){
-  Serial.begin(9600);
-  while(!Serial);
-  finger.begin(57600);
-}
+SoftwareSerial mySerial(13, 15);
+Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial);
 
+void setup()
+{
+  Serial.begin(115200);
+  delay(100);
+  Serial.println("\n\nFingerprint sensor enrollment");
 
-void loop(){
-  uint8_t p = finger.getImage();
-  if (p != FINGERPRINT_OK) return;
+  finger.begin(57600); // set the data rate for the sensor serial port
 
-  // Image taken, convert it to feature template
-  p = finger.image2Tz();
-  if (p != FINGERPRINT_OK) return;
-
-  // Check if the user wants to register a new fingerprint
-  if (Serial.available() && Serial.read() == 'r') {
-    // Add the fingerprint template to the database
-    p = finger.storeModel(1);
-    if (p != FINGERPRINT_OK) return;
-    Serial.println("Fingerprint registered!");
-  } else {
-    // Identify the fingerprint against the database
-    uint8_t id = finger.fingerFastSearch();
-    if (id < 256) {
-      Serial.println("Fingerprint recognized, ID: " + String(id));
-    } else {
-      Serial.println("Fingerprint not recognized");
+  if (finger.verifyPassword())
+  {
+    Serial.println("Found fingerprint sensor!");
+  }
+  else
+  {
+    Serial.println("Did not find fingerprint sensor :(");
+    while (1)
+    {
+      delay(1);
     }
   }
-  
+}
+
+void loop()
+{
+  int id = 1;
+  Serial.println("Place finger on sensor to register");
+  int p = -1;
+
+  Serial.print("Waiting for valid finger to enroll as #");
+  while (p != FINGERPRINT_OK)
+  {
+    p = finger.getImage();
+    switch (p)
+    {
+    case FINGERPRINT_OK:
+      Serial.println("Image taken");
+      break;
+    case FINGERPRINT_NOFINGER:
+      Serial.println(".");
+      break;
+    case FINGERPRINT_PACKETRECIEVEERR:
+      Serial.println("Communication error");
+      break;
+    case FINGERPRINT_IMAGEFAIL:
+      Serial.println("Imaging error");
+      break;
+    default:
+      Serial.println("Unknown error");
+      break;
+    }
+
+    p = finger.image2Tz(2);
+    switch (p)
+    {
+    case FINGERPRINT_OK:
+      Serial.println("Image converted");
+      break;
+    case FINGERPRINT_IMAGEMESS:
+      Serial.println("Image too messy");
+      break;
+    case FINGERPRINT_PACKETRECIEVEERR:
+      Serial.println("Communication error");
+      break;
+    case FINGERPRINT_FEATUREFAIL:
+      Serial.println("Could not find fingerprint features");
+      break;
+    case FINGERPRINT_INVALIDIMAGE:
+      Serial.println("Could not find fingerprint features");
+      break;
+    default:
+      Serial.println("Unknown error");
+      break;
+    }
+
+    Serial.print("Creating model for #");
+    Serial.println(id);
+    p = finger.createModel();
+    if (p == FINGERPRINT_OK)
+    {
+      Serial.println("Prints matched!");
+    }
+    else if (p == FINGERPRINT_PACKETRECIEVEERR)
+    {
+      Serial.println("Communication error");
+      // return p;
+    }
+    else if (p == FINGERPRINT_ENROLLMISMATCH)
+    {
+      Serial.println("Fingerprints did not match");
+      // return p;
+    }
+    else
+    {
+      Serial.println("Unknown error");
+      // return p;
+    }
+
+    p = finger.storeModel(id);
+  }
 }
