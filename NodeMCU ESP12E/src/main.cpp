@@ -1,22 +1,15 @@
 #include <Arduino.h>
 #include <Adafruit_Fingerprint.h>
 
-
-
 Adafruit_Fingerprint finger = Adafruit_Fingerprint(&Serial);
-
-
-void setup() {
+void setup(){
   Serial.begin(9600);
-  while (!Serial);
+  while(!Serial);
   finger.begin(57600);
 }
 
 
-
-
-void loop() {
-  // Check if a finger is placed on the sensor
+void loop(){
   uint8_t p = finger.getImage();
   if (p != FINGERPRINT_OK) return;
 
@@ -39,4 +32,5 @@ void loop() {
       Serial.println("Fingerprint not recognized");
     }
   }
+  
 }
