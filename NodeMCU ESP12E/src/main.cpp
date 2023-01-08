@@ -2,6 +2,8 @@
 #include <Adafruit_Fingerprint.h>
 #include <SoftwareSerial.h>
 #include <LiquidCrystal_I2C.h>
+#include <ESP8266WiFi.h>
+#include <ESP8266HTTPClient.h>
 
 // set the LCD number of columns and rows
 #define LCDColumns 16
@@ -16,13 +18,22 @@ Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial); // fingerprint co
 uint8_t genarateNewID();
 uint16_t registerFingerprint();
 void displayText(String text, uint8_t cursor1, uint8_t cursor2);
+void connectToWiFi();
+
+// Define the WiFi credentials
+#define WIFI_SSID "Galaxy M02s5656"
+#define WIFI_PASSWORD "hiru2857756"
 
 void setup()
 {
   Serial.begin(115200);
+
+  /*  Wifi Set up for the internet   */
+  connectToWiFi();
+
   /* Set up for the LCD 16x2 display */
-  Wire.begin();
-  Serial.println("\nI2C Scanner");
+  // Wire.begin();
+  // Serial.println("\nI2C Scanner");
 
   /* Set up for the Fingerprint sensor */
 
@@ -46,6 +57,11 @@ void setup()
 
 void loop()
 {
+  // Check if the WiFi connection is still active
+  if (WiFi.status() != WL_CONNECTED)
+  {
+    connectToWiFi(); // If not, try to reconnect
+  }
   // int newID = genarateNewID();
   // Serial.println(newID);
   // displayText("Hello World!!",0,0);
@@ -69,4 +85,19 @@ void displayText(String text, uint8_t cursor1, uint8_t cursor2)
 {
   lcd.setCursor(cursor1, cursor2); // set the cursor position
   lcd.print(text);                 // print the text
+}
+
+void connectToWiFi()
+{
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  while (WiFi.status() != WL_CONNECTED)
+  {
+    delay(1000);
+    Serial.println("Connecting to WiFi..");
+  }
+  Serial.println();
+  Serial.print("Connected with IP: ");
+  Serial.println(WiFi.localIP());
+  Serial.println();
+  Serial.println("Connected to the WiFi network");
 }
