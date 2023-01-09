@@ -5,7 +5,7 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 #include <ESP8266WiFiMulti.h>
-#include <WiFiClient.h>
+#include <WiFiClientSecure.h>
 
 // set the LCD number of columns and rows
 #define LCDColumns 16
@@ -16,8 +16,6 @@ LiquidCrystal_I2C lcd(0x27, LCDColumns, LCDRow);
 // gloabl variables
 SoftwareSerial mySerial(13, 15);
 Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial); // fingerprint controller variable
-HTTPClient http;
-WiFiClient wifi_client;
 ESP8266WiFiMulti WiFiMulti;
 
 // function prototypes
@@ -35,7 +33,18 @@ void setup()
   Serial.begin(115200);
 
   /*  Wifi Set up for the internet   */
-  connectToWiFi();
+  Serial.println();
+
+  WiFi.mode(WIFI_STA);
+  WiFiMulti.addAP(WIFI_SSID, WIFI_PASSWORD);
+
+  // wait for WiFi connection
+  Serial.print("Waiting for WiFi to connect...");
+  while ((WiFiMulti.run() != WL_CONNECTED))
+  {
+    Serial.print(".");
+  }
+  Serial.println(" connected");
 
   /* Set up for the LCD 16x2 display */
   // Wire.begin();
@@ -63,43 +72,40 @@ void setup()
 
 void loop()
 {
-  // Check if the WiFi connection is still active
-  if (WiFi.status() != WL_CONNECTED)
-  {
-    connectToWiFi(); // If not, try to reconnect
-  }
-  // int newID = genarateNewID();
-  // Serial.println(newID);
-  // displayText("Hello World!!",0,0);
-  
+  WiFiClientSecure *client = new WiFiClientSecure;
+  HTTPClient https;
 
-  // Make a GET request to the API
-  http.begin(wifi_client,"https://www.google.com");
-  int httpCode = http.GET();
-
-  // Check the response status code
-  if (httpCode > 0)
-  {
-    // HTTP header has been send and Server response header has been handled
-    Serial.printf("[HTTP] GET... code: %d\n", httpCode);
-
-    // file found at server
-    if (httpCode == HTTP_CODE_OK || httpCode == HTTP_CODE_MOVED_PERMANENTLY)
+  Serial.print("[HTTPS] begin...\n");
+  if (https.begin(*client, "https://api.publicapis.org/entries"))
+  { // HTTPS
+    Serial.print("[HTTPS] GET...\n");
+    int httpCode = https.GET();
+    if (httpCode > 0)
     {
-      String payload = http.getString();
-      // Do something with the response data
-      Serial.println(payload);
+      Serial.printf("[HTTPS] GET... code: %d\n", httpCode);
+      if (httpCode == HTTP_CODE_OK || httpCode == HTTP_CODE_MOVED_PERMANENTLY)
+      {
+        String payload = https.getString();
+        Serial.println(payload);
+      }
     }
+    else
+    {
+      Serial.printf("[HTTPS] GET... failed, error: %s : %i\n", https.errorToString(httpCode).c_str(),httpCode);
+    }
+
+    https.end();
   }
   else
   {
-    Serial.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
-    connectToWiFi();
+    Serial.printf("[HTTPS] Unable to connect\n");
   }
 
-  http.end();
+  delete client;
 
-  delay(10000); // Delay for 10 seconds before making the next request
+  Serial.println();
+  Serial.println("Waiting 10s before the next round...");
+  delay(10000);
 }
 
 uint8_t genarateNewID()
@@ -120,18 +126,4 @@ void displayText(String text, uint8_t cursor1, uint8_t cursor2)
 {
   lcd.setCursor(cursor1, cursor2); // set the cursor position
   lcd.print(text);                 // print the text
-}
-
-void connectToWiFi()
-{
-  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
-  while (WiFi.status() != WL_CONNECTED)
-  {
-    delay(1000);
-    Serial.println("Connecting to WiFi..");
-  }
-  Serial.println();
-  Serial.print("Connected with IP: ");
-  Serial.println(WiFi.localIP());
-  Serial.println();
 }
