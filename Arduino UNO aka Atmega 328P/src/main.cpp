@@ -22,10 +22,10 @@ void setup()
 
 void loop()
 {
-  long distance1 = sensor1.distanceRead(); // read distance from sensor 1
-  long distance2 = sensor2.distanceRead(); // read distance from sensor 2
-  long distance3 = sensor3.distanceRead(); // read distance from sensor 3
-  long distance4 = sensor4.distanceRead(); // read distance from sensor 4
+  long distance1 = sensor1.read(); // read distance from sensor 1
+  long distance2 = sensor2.read(); // read distance from sensor 2
+  long distance3 = sensor3.read(); // read distance from sensor 3
+  long distance4 = sensor4.read(); // read distance from sensor 4
 
   // check if a person is passing through the gate
   if (distance1 < 100 && distance2 < 100 && distance3 > 100 && distance4 > 100)
