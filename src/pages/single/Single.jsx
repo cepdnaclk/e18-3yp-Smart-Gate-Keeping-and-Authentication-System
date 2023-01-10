@@ -1,26 +1,20 @@
 import "./single.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-import Chart from "../../components/chart/Chart";
 import List from "../../components/table/Table";
-import { useLocation} from 'react-router-dom';
 // import { useProps } from 'react';
 import { useParams } from "react-router-dom"; 
 import { useEffect, useState } from "react";
 import {
-  collection,
-  getDocs,
-  deleteDoc,
+  
   doc,
   getDoc,
-  onSnapshot,
 } from "firebase/firestore";
 import { db,auth } from "../../firebase";
 import 'firebase/firestore';
 // import {  getDoc } from "firebase/firestore";
 
 const Single =  () => {
-  const location = useLocation();
   let params = useParams();
   console.log(params.id);
 
@@ -93,7 +87,7 @@ const Single =  () => {
     // fetchData();
       
     };
-  }, [email,name ]);
+  }, [email,name ,data.birthday,data.email,data.username,params.id]);
 
 
   // const props = useProps();

@@ -25,12 +25,9 @@ import { useEffect, useState } from "react";
 import {
   collection,
   getDocs,
-  deleteDoc,
-  doc,
   // onSnapshot,
 } from "firebase/firestore";
 import { auth , db } from "../../firebase";
-import {useNavigate} from 'react-router-dom';
 const Roomdatatable = () => {
   const [data, setData] = useState([]);
   const [email, setEmail] = useState(" Non "); //e18068@eng.pdn.ac.lk
@@ -44,12 +41,8 @@ const Roomdatatable = () => {
   //     // No user is signed in.
   //   }
   // });
-  const navigate = useNavigate();
 
-  const navigateInstitutepage = () => {
-    navigate('../Institute');
-  };
-
+  
   useEffect(() => {
     const getEmail=async()=>{
       auth.onAuthStateChanged(function(user) {
@@ -107,14 +100,14 @@ const Roomdatatable = () => {
     };
   }, [email]);
 
-  const handleDelete = async (id) => {
-    try {
-      // await deleteDoc(doc(db, "rooms", id));
-      // setData(data.filter((item) => item.id !== id));
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // const handleDelete = async (id) => {
+  //   try {
+  //     // await deleteDoc(doc(db, "rooms", id));
+  //     // setData(data.filter((item) => item.id !== id));
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   const actionColumn = [
     {

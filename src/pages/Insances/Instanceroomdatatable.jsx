@@ -25,12 +25,9 @@ import { useEffect, useState } from "react";
 import {
   collection,
   getDocs,
-  deleteDoc,
-  doc,
   // onSnapshot,
 } from "firebase/firestore";
 import { auth , db } from "../../firebase";
-import {useNavigate} from 'react-router-dom';
 
 
 const Instanceroomdatatable = () => {
@@ -46,11 +43,7 @@ const Instanceroomdatatable = () => {
   //     // No user is signed in.
   //   }
   // });
-  const navigate = useNavigate();
 
-  const navigateInstitutepage = () => {
-    navigate('../Institute');
-  };
 
   useEffect(() => {
     const getEmail=async()=>{
@@ -109,14 +102,7 @@ const Instanceroomdatatable = () => {
     };
   }, [email]);
 
-  const handleDelete = async (id) => {
-    try {
-      // await deleteDoc(doc(db, "rooms", id));
-      // setData(data.filter((item) => item.id !== id));
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  
 
   const actionColumn = [
     {

@@ -1,13 +1,10 @@
 import "./roominstances.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { userColumns, userRows, roomUsersTableCol , roominstasnceTableCol } from "../../datatablesource";
+import {roominstasnceTableCol } from "../../datatablesource";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {
   collection,
-  getDocs,
-  deleteDoc,
-  doc,
   onSnapshot,
 } from "firebase/firestore";
 import { db,auth } from "../../firebase";
@@ -19,9 +16,7 @@ const RoomInstanceesDatatable = () => {
   const [data, setData] = useState([]);
   const [email, setEmail] = useState(" Non "); //e18068@eng.pdn.ac.lk
   const [roomid, setRoomid] = useState(" ");
-  // var email;
-  const data1 = { name: 'John', age: 30 };
-  
+  // var email;  
 
   
 
@@ -32,9 +27,6 @@ const RoomInstanceesDatatable = () => {
       auth.onAuthStateChanged(function(user) {
         try{
           if (user) {
-            // User is signed in.
-            // email = user.email.toString();
-            console.log(email);  // This will print the user's email to the console.
             // return email;
             setEmail(user.email.toString());
           }
@@ -44,7 +36,6 @@ const RoomInstanceesDatatable = () => {
          }
       });
     };
-    // console.log(email);
 
       
     
@@ -64,9 +55,6 @@ const RoomInstanceesDatatable = () => {
     //   }
     // };
     getEmail();
-    // fetchData();
-    // unsub();
-    // getEmail();
 
     // LISTEN (REALTIME)
     console.log(email);
@@ -92,17 +80,7 @@ const RoomInstanceesDatatable = () => {
     //   getEmail();
       
     };
-  }, [email]);
-
-//   const handleDelete = async (id) => {
-//     try {
-//       console.log(id)
-//       // await deleteDoc(doc(db, "users", id));
-//       // setData(data.filter((item) => item.id !== id));
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   };
+  }, [email,params.id,roomid]);
 
   const actionColumn = [
     {
@@ -116,12 +94,6 @@ const RoomInstanceesDatatable = () => {
               <div className="viewButton"
               >View Attendence</div>
             </Link>
-            {/* <div
-              className="deleteButton"
-              onClick={() => handleDelete(params.row.id)}
-            >
-              Add Rooms
-            </div> */}
           </div>
         );
       },

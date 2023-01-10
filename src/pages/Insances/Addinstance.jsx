@@ -1,22 +1,16 @@
 import "./addinstance.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useEffect, useState } from "react";
 import {
-  addDoc,
-  collection,
+
   doc,
-  serverTimestamp,
   getDoc,
   setDoc,
 } from "firebase/firestore";
-import { auth, db, storage } from "../../firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { useNavigate } from "react-router-dom";
+import { auth, db } from "../../firebase";
 import { useParams } from "react-router-dom";
-import { withAlert  } from 'react-alert'
+
 import RoomInstanceesDatatable from "./Roominstances";
 // import { ToastContainer, toast } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
@@ -35,12 +29,8 @@ const Addinstance = ({ inputs, title }) => {
 
   const [email, setEmail] = useState(" Non "); //e18068@eng.pdn.ac.lk
   const [idValidity, setIdValidity] = useState(false);
-  const navigate = useNavigate()
 
   useEffect(() => {
-
-   
-
 
     const getEmail=async()=>{
       auth.onAuthStateChanged(function(user) {
