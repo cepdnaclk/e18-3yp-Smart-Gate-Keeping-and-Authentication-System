@@ -114,11 +114,11 @@ app.get("/api/:iid/getallusers", (req, res) => {
   })();
 });
 
-// get specific user details from spesific Institute
+// get specific user details from spesific Institute #####
 app.get("/api/:iid/checkuser/:uid", (req, res) => {
   (async () => {
     try {
-      const reqDoc = db.collection("Institute").doc(`/${req.params.iid}/`).collection("Users").doc(`/${req.params.uid}/`);
+      const reqDoc = db.collection("Institutes").doc(`/${req.params.iid}/`).collection("users").doc(`/${req.params.uid}/`);
       let userDetail = await reqDoc.get();
       let response = userDetail.data();
       console.log(response);
@@ -233,19 +233,19 @@ app.delete("/api/:iid/deleteroom/:rid", (req, res) => {
       })();
     });
 
-    // read specific room in institiute 
+    // read specific room in institiute  #####
     // get
+
     app.get("/api/:iid/checkroom/:rid", (req, res) => {
       (async () => {
         try {
-          const reqDoc = db.collection("Institute").doc(`/${req.params.iid}/`).collection("Rooms").doc(`/${req.params.rid}/`);
+          const reqDoc = db.collection("Institutes").doc(`/${req.params.iid}/`).collection("rooms").doc(`/${req.params.rid}/`);
           let userDetail = await reqDoc.get();
           let response = userDetail.data();
           console.log(response);
           if(response==null){
-            return res.status(100).send({ status: "Success", data: "no such room" });
+            return res.status(100).send({ status: "Success", data: "no such room in this institute" });
           }
-
           return res.status(200).send({ status: "Success", data: response });
         } catch (error) {
           console.log(error);
@@ -266,7 +266,7 @@ app.delete("/api/:iid/deleteroom/:rid", (req, res) => {
      app.post("/api/:iid/instance/:rid/:tid", (req, res) => {
       (async () => {
         try {
-          await db.collection("Institute").doc(`/${req.params.iid}/`).collection("Rooms").doc(`/${req.params.rid}/`).collection("Instance").doc(`/${req.params.tid}/`).create({
+          await db.collection("Institutes").doc(`/${req.params.iid}/`).collection("Rooms").doc(`/${req.params.rid}/`).collection("Instance").doc(`/${req.params.tid}/`).create({
             tid:req.params.rid,
             // today:"day"
             today:req.body.today,
@@ -282,13 +282,13 @@ app.delete("/api/:iid/deleteroom/:rid", (req, res) => {
     });
 
 /**
- * # Users coming to Instance (Attend)
+ * # Users coming to Instance (Attend) #####-----
     - inputs: TID , RID ,IID , UIDs ,currenttime , verificatoin mode , verificatoin data
  */
     app.post("/api/:iid/room/:rid/instance/:tid/user/:uid/attend", (req, res) => {
       (async () => {
         try {
-          await db.collection("Institute").doc(`/${req.params.iid}/`).collection("Rooms").doc(`/${req.params.rid}/`).collection("Instance").doc(`/${req.params.tid}/`).collection("Attend").doc(`/${req.params.uid}/`).create({
+          await db.collection("Institutes").doc(`/${req.params.iid}/`).collection("rooms").doc(`/${req.params.rid}/`).collection("Instance").doc(`/${req.params.tid}/`).collection("Attend").doc(`/${req.params.uid}/`).create({
             verificationmode: req.body.verificationmode,
             currenttime: req.body.currenttime,
             verificatoindata: req.body.verificatoindata,
@@ -322,11 +322,11 @@ app.delete("/api/:iid/instance/:rid/delete/:tid", (req, res) => {
   })();
 });
 
-// get specific user details from spesific Institute
+// check the instace is valid #####---
 app.get("/api/:iid/room/:rid/checkinstance/:tid", (req, res) => {
   (async () => {
     try {
-      const reqDoc = db.collection("Institute").doc(`/${req.params.iid}/`).collection("Rooms").doc(`/${req.params.rid}/`).collection("Instance").doc(`/${req.params.tid}/`);
+      const reqDoc = db.collection("Institutes").doc(`/${req.params.iid}/`).collection("rooms").doc(`/${req.params.rid}/`).collection("Instance").doc(`/${req.params.tid}/`);
       let userDetail = await reqDoc.get();
       let response = userDetail.data();
       console.log(response);
@@ -341,11 +341,11 @@ app.get("/api/:iid/room/:rid/checkinstance/:tid", (req, res) => {
   })();
 });
 
-    // Finger Print registration
+    // Finger Print registration #####
     app.put("/api/:iid/fingerprintregistration/:uid", (req, res) => {
       (async () => {
         try {
-          const reqDoc =  db.collection("Institute").doc(`/${req.params.iid}/`).collection("Users").doc(`/${req.params.uid}/`);
+          const reqDoc =  db.collection("Institutes").doc(`/${req.params.iid}/`).collection("users").doc(`/${req.params.uid}/`);
           await reqDoc.update({
             fingerPrint: req.body.fingerPrint,
           });
@@ -355,6 +355,90 @@ app.get("/api/:iid/room/:rid/checkinstance/:tid", (req, res) => {
           res.status(500).send({ status: "Failed", msg: error });
         }
       })();
+    });
+
+    // read details of all users in specific room in institiute  #####
+    // get
+
+    // app.get("/api/:iid/rooms/:rid/allusers", (req, res) => {
+    //   (async () => {
+    //     try {
+    //       response = await db.collection("Institutes").doc(`/${req.params.iid}/`).collection("rooms").doc(`/${req.params.rid}/`).collection("Users").get(
+            
+    //       );
+    //       // let userDetail = await reqDoc.get();
+    //       // let response = userDetail;
+    //       // let lisroomuserid = [];
+    //       // var userdetailslist = [];
+    //       // console.log(response);
+    //       // if(response.empty){
+    //       //   console.log("No documents");
+    //       //   res.status(500).send({ status: "Failed", msg: error });
+    //       // }
+    //       // response.forEach(
+    //       //   async doc => {
+    //       //     // console.log("==============================");
+    //       //     // console.log(doc.id, '=>', doc.data());
+    //       //     lisroomuserid.push(doc.id);
+    //       //     const reqDocusers = db.collection("Institutes").doc(`/${req.params.iid}/`).collection("users").doc(`/${doc.id}/`);
+    //       //     let userDetails = await reqDocusers.get();
+    //       //     let response = userDetails.data();
+    //       //     userdetailslist.push(response);
+    //       //     console.log(userdetailslist);
+    //       //     // if(response==null){
+    //       //     //   return res.status(100).send({ status: "Success", data: "no data" });
+    //       //     // }
+    //       //     // return res.status(200).send({ status: "Success", data: userdetailslist });
+             
+    //       //   }
+    //       // );
+    //       // console.log("==============================");
+    //       // console.log(userdetailslist);
+    //       // return res.status(200).send({ status: "Success", data: userdetailslist });
+    //       // if(response==null){
+    //       //   return res.status(100).send({ status: "Success", data: "no such room in this institute" });
+    //       // }
+    //       // return res.status(200).send({ status: "Success", data: response });
+    //     } 
+    //     catch (error) {
+    //       console.log(error);
+    //       res.status(500).send({ status: "Failed", msg: error });
+    //     }
+    //   }
+    //   )();
+    // });
+
+
+    // read id of all users in specific room in institiute  #####
+    // get
+
+    app.get("/api/:iid/rooms/:rid/allusersid", (req, res) => {
+      (async () => {
+        try {
+          const reqDoc = db.collection("Institutes").doc(`/${req.params.iid}/`).collection("rooms").doc(`/${req.params.rid}/`).collection("Users");
+          let userDetail = await reqDoc.get();
+          let response = userDetail;
+          let lisroomuserid = [];
+          var userdetailslist = [];
+          // console.log(response);
+          if(response.empty){
+            console.log("No documents");
+            res.status(500).send({ status: "Failed", msg: error });
+          }
+          response.forEach(
+             doc => {
+              lisroomuserid.push(doc.id);
+            }
+          );
+
+          return res.status(200).send({ status: "Success", data: lisroomuserid });
+        } 
+        catch (error) {
+          console.log(error);
+          res.status(500).send({ status: "Failed", msg: error });
+        }
+      }
+      )();
     });
     
 

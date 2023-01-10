@@ -4,7 +4,7 @@ import List from "./pages/list/List";
 // import Single from "./pages/single/Single";
 import New from "./pages/new/New";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { productInputs, userInputs,roomInput , userAddRoom,InstituteDetailsform } from "./formSource";
+import { productInputs, userInputs,roomInput , userAddRoom,InstituteDetailsform , instanceAddRoom } from "./formSource";
 import "./style/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
@@ -18,6 +18,10 @@ import Single from "./pages/single/Single";
 import Adduser from "./pages/room/AddUser";
 import Signup from "./pages/signup/Signup";
 import InstituteDetails from "./pages/institutedetails/InstituteDetails";
+import Instanceroomlist from "./pages/Insances/Instanceroomlist";
+import Addinstance from "./pages/Insances/Addinstance";
+import AttendanceDatatable from "./pages/Insances/attendance";
+
 function App() {
   const { darkMode } = useContext(DarkModeContext);
 
@@ -79,6 +83,26 @@ function App() {
                 }
               />
             </Route>
+            <Route path="instance">
+              <Route
+                index
+                element={
+                  <RequireAuth>
+                    <Instanceroomlist />
+                  </RequireAuth>
+                }
+              />
+            </Route>
+            <Route path="attendance/:rid/:tid">
+              <Route
+                index
+                element={
+                  <RequireAuth>
+                    <AttendanceDatatable />
+                  </RequireAuth>
+                }
+              />
+            </Route>
             <Route path="newroom">
               <Route
                 index
@@ -94,7 +118,17 @@ function App() {
                 index
                 element={
                   <RequireAuth>
-                    <Adduser inputs={ userAddRoom} title="Add New Users to A room" />
+                    <Adduser inputs={ userAddRoom} title="Add New Users to a Room" />
+                  </RequireAuth>
+                }
+              />
+            </Route>
+            <Route path="addinstance/:id">
+              <Route
+                index
+                element={
+                  <RequireAuth>
+                    <Addinstance inputs={ instanceAddRoom} title="Add New Instance to a Room" />
                   </RequireAuth>
                 }
               />

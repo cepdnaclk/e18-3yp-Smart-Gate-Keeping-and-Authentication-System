@@ -125,10 +125,12 @@ const Sidebar = () => {
             <span>Rooms</span>
           </li>
           </Link>
+          <Link to="/instance" style={{ textDecoration: "none" }}>
           <li>
             <LocalShippingIcon className="icon" />
             <span>Instances</span>
           </li>
+          </Link>
           <p className="title">USEFUL</p>
           {/* <li>
             <InsertChartIcon className="icon" />

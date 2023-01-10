@@ -68,7 +68,7 @@ export const userTableCol = [
 export const roomTableCol = [
   { 
     field: "roomid", 
-    headerName: "ROOM ID", 
+    headerName: "ID", 
     width: 70 
   },
     {
@@ -87,4 +87,43 @@ export const roomTableCol = [
     }
       
     ];
+
+    export const roominstasnceTableCol = [
+      { 
+        field: "id", 
+        headerName: "Instance ID", 
+        width: 150 
+      },{ 
+        field: "name", 
+        headerName: "Instance Name", 
+        width: 500 
+      }
+        
+      ];
+
+      export const attendanceTableCol = [
+        { 
+          field: "uid", 
+          headerName: "User ID", 
+          width: 150 
+        },
+        { 
+          field: "currenttime", 
+          headerName: "Time", 
+          width: 200 
+        },
+        { 
+          field: "verificationmode", 
+          headerName: "Verify mode", 
+          width: 200 
+        },
+        { 
+          field: "verificatoindata", 
+          headerName: "verificatoin data", 
+          width: 200 
+        }
+          
+        ];
+
+
 
