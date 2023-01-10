@@ -1,4 +1,6 @@
 import "./roominstances.scss";
+import Sidebar from "../../components/sidebar/Sidebar";
+import Navbar from "../../components/navbar/Navbar";
 import { DataGrid } from "@mui/x-data-grid";
 import { attendanceTableCol } from "../../datatablesource";
 import { Link } from "react-router-dom";
@@ -125,9 +127,13 @@ const AttendanceDatatable = () => {
     },
   ];
   return (
-    <div className="datatable">
+    <div className="new">
+      <Sidebar />
+      <div className="newContainer">
+        <Navbar />
+        <div className="datatable">
       <div className="datatableTitle">
-        Instances list for Room
+        Attendence list for room {params.rid} and instance {params.tid}
         {/* <Link to="/users/new" className="link">
           Add New
         </Link> */}
@@ -141,6 +147,9 @@ const AttendanceDatatable = () => {
         // checkboxSelection
       />
     </div>
+    </div>
+</div>
+    
   );
 };
 
