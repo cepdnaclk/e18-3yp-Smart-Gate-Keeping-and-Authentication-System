@@ -3,9 +3,7 @@
 #include <SoftwareSerial.h>
 #include <LiquidCrystal_I2C.h>
 #include <ESP8266WiFi.h>
-#include <ESP8266HTTPClient.h>
-#include <ESP8266WiFiMulti.h>
-#include <WiFiClientSecure.h>
+// #include <ESP8266HTTPClient.h>
 
 // set the LCD number of columns and rows
 #define LCDColumns 16
@@ -14,37 +12,42 @@
 LiquidCrystal_I2C lcd(0x27, LCDColumns, LCDRow);
 
 // gloabl variables
-SoftwareSerial mySerial(13, 15);
+SoftwareSerial mySerial(6, 7);
 Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial); // fingerprint controller variable
-ESP8266WiFiMulti WiFiMulti;
+WiFiClient client;
+const char *host = "api.publicapis.org";
+const char *endpoint = "/entries";
 
 // function prototypes
 uint8_t genarateNewID();
 uint16_t registerFingerprint();
 void displayText(String text, uint8_t cursor1, uint8_t cursor2);
-void connectToWiFi();
 
 // Define the WiFi credentials
 #define WIFI_SSID "Galaxy M02s5656"
 #define WIFI_PASSWORD "hiru2857756"
 
+// Define firebase credentials
+#define FIREBASE_HOST "your-firebase-project-id.firebaseio.com"
+#define FIREBASE_AUTH "your-firebase-secret"
+
 void setup()
 {
-  Serial.begin(115200);
+  Serial.begin(115200);      // baud rate set to 115200
 
   /*  Wifi Set up for the internet   */
-  Serial.println();
-
-  WiFi.mode(WIFI_STA);
-  WiFiMulti.addAP(WIFI_SSID, WIFI_PASSWORD);
-
-  // wait for WiFi connection
-  Serial.print("Waiting for WiFi to connect...");
-  while ((WiFiMulti.run() != WL_CONNECTED))
-  {
-    Serial.print(".");
-  }
-  Serial.println(" connected");
+  // WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  // Serial.print("Connecting to Wi-Fi");
+  // while (WiFi.status() != WL_CONNECTED)
+  // {
+  //   Serial.print(".");
+  //   delay(250);
+  // }
+  // Serial.println();
+  // Serial.print("Connected with IP: ");
+  // Serial.println(WiFi.localIP());
+  // WiFi.setAutoConnect(true);   //  automatically connect to the last-connected network after a reboot or power-on
+  // WiFi.setAutoReconnect(true); // automatically reconnect to the network if the connection is lost
 
   /* Set up for the LCD 16x2 display */
   // Wire.begin();
@@ -52,60 +55,65 @@ void setup()
 
   /* Set up for the Fingerprint sensor */
 
-  // Serial.println("\n\nFingerprint sensor enrollment");
+  Serial.println("\n\nFingerprint sensor enrollment");
 
-  // finger.begin(57600); // set the data rate for the sensor serial port
+  finger.begin(57600); // set the data rate for the sensor serial port
 
-  // if (finger.verifyPassword()) // check sensor is active and responding
-  // {
-  //   Serial.println("Found fingerprint sensor!");
-  // }
-  // else
-  // {
-  //   Serial.println("Did not find fingerprint sensor :------------");
-  //   while (1)
-  //   {
-  //     delay(1);
-  //   }
-  // }
+  if (finger.verifyPassword()) // check sensor is active and responding
+  {
+    Serial.println("Found fingerprint sensor!");
+  }
+  else
+  {
+    Serial.println("Did not find fingerprint sensor :------------");
+    while (1)
+    {
+      delay(1);
+    }
+  }
 }
 
 void loop()
 {
-  WiFiClientSecure *client = new WiFiClientSecure;
-  HTTPClient https;
+  /* Network Code */
+  // // handle wifi connection errors and reconnect
+  // if (WiFi.status() != WL_CONNECTED)
+  // {
+  //   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  //   Serial.print("Reconnecting");
+  //   while (WiFi.status() != WL_CONNECTED)
+  //   {
+  //     Serial.print(".");
+  //     delay(250);
+  //   }
+  //   Serial.println();
+  // }
 
-  Serial.print("[HTTPS] begin...\n");
-  if (https.begin(*client, "https://api.publicapis.org/entries"))
-  { // HTTPS
-    Serial.print("[HTTPS] GET...\n");
-    int httpCode = https.GET();
-    if (httpCode > 0)
-    {
-      Serial.printf("[HTTPS] GET... code: %d\n", httpCode);
-      if (httpCode == HTTP_CODE_OK || httpCode == HTTP_CODE_MOVED_PERMANENTLY)
-      {
-        String payload = https.getString();
-        Serial.println(payload);
-      }
-    }
-    else
-    {
-      Serial.printf("[HTTPS] GET... failed, error: %s : %i\n", https.errorToString(httpCode).c_str(),httpCode);
-    }
+  // if (!client.connect(host, 80))
+  // {
+  //   Serial.println("Connection failed");
+  //   return;
+  // }
+  // Serial.println("Connected");
+  // // Send the GET request
+  // client.print(String("GET ") + endpoint + " HTTP/1.1\r\n" +
+  //              "Host: " + host + "\r\n" +
+  //              "Connection: close\r\n\r\n");
 
-    https.end();
-  }
-  else
-  {
-    Serial.printf("[HTTPS] Unable to connect\n");
-  }
+  // // Read the response
+  // while (client.connected())
+  // {
+  //   String line = client.readStringUntil('\n');
+  //   if (line == "\r")
+  //   {
+  //     break;
+  //   }
+  // }
+  // String response = client.readStringUntil('\n');
+  // Serial.println(response);
 
-  delete client;
-
-  Serial.println();
-  Serial.println("Waiting 10s before the next round...");
-  delay(10000);
+  // client.stop();
+  // delay(5000);
 }
 
 uint8_t genarateNewID()
