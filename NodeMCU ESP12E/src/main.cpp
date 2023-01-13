@@ -3,17 +3,27 @@
 #include <SoftwareSerial.h>
 #include <LiquidCrystal_I2C.h>
 #include <ESP8266WiFi.h>
-// #include <ESP8266HTTPClient.h>
+
 
 // set the LCD number of columns and rows
 #define LCDColumns 16
 #define LCDRow 2
 
-LiquidCrystal_I2C lcd(0x27, LCDColumns, LCDRow);
+#define ServoMotorpin  D4
+
+// Fingerprint scanner Pins        / red - Vin / Black - GND
+#define Finger_Rx 14 // D5 - connect yellow wire
+#define Finger_Tx 12 // D6 - connect white wire
+// connect blue wire to 3.3V out        / Green - Touch (Zero when touched)
 
 // gloabl variables
-SoftwareSerial mySerial(6, 7);
-Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial); // fingerprint controller variable
+LiquidCrystal_I2C lcd(0x27, LCDColumns, LCDRow);
+SoftwareSerial mySerial(Finger_Rx, Finger_Tx);
+Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial); // fingerprint controll variable
+uint8_t operation;
+uint8_t id;
+
+// api request test
 WiFiClient client;
 const char *host = "api.publicapis.org";
 const char *endpoint = "/entries";
@@ -33,7 +43,8 @@ void displayText(String text, uint8_t cursor1, uint8_t cursor2);
 
 void setup()
 {
-  Serial.begin(115200);      // baud rate set to 115200
+  Serial.begin(115200); // baud rate set to 115200
+  delay(100);
 
   /*  Wifi Set up for the internet   */
   // WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
@@ -71,6 +82,9 @@ void setup()
       delay(1);
     }
   }
+
+  /*  Set up Servo Motor */
+  
 }
 
 void loop()
@@ -114,6 +128,13 @@ void loop()
 
   // client.stop();
   // delay(5000);
+
+  /*    Fingerprint Code    */
+
+  // Serial.printf("Fingerprint Count - %i\n", genarateNewID() - 1); // count of fingerprints
+  /* Servo control */
+
+
 }
 
 uint8_t genarateNewID()
