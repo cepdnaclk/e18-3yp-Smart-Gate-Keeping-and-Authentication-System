@@ -3,7 +3,8 @@
 #include <SoftwareSerial.h>
 #include <LiquidCrystal_I2C.h>
 #include <ESP8266WiFi.h>
-#include <Servo.h>
+#include <NTPClient.h>
+#include <WiFiUdp.h>
 
 // set the LCD number of columns and rows
 #define LCDColumns 16
@@ -21,6 +22,10 @@ Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial);   // fingerprint 
 uint8_t id;
 uint8_t operation;
 
+// time operation
+const long utcOffsetInSeconds = 19800;
+char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+
 // function prototypes
 bool detectFingerprintScanner();
 void verifyScannerParameters();
@@ -33,6 +38,10 @@ void deleteDatabase();
 // Define the WiFi credentials
 #define WIFI_SSID "Galaxy M02s5656"
 #define WIFI_PASSWORD "hiru2857756"
+
+// time clients for ntp
+WiFiUDP ntpUDP;
+NTPClient timeClient(ntpUDP, "pool.ntp.org", utcOffsetInSeconds);
 
 void setup()
 {
@@ -73,7 +82,8 @@ void setup()
   }
 
   verifyScannerParameters();
-  /*  Set up Servo Motor */
+  // time client for ntp
+  timeClient.begin();
 }
 
 void loop()

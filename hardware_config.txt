@@ -13,6 +13,20 @@ Orange wire - Signal (D4)
 Red wire - Vin 
 Brown wire - GND
 
+// get time by ntp
+
+timeClient.update();
+
+  Serial.print(daysOfTheWeek[timeClient.getDay()]);
+  Serial.print(", ");
+  Serial.print(timeClient.getHours());
+  Serial.print(":");
+  Serial.print(timeClient.getMinutes());
+  Serial.print(":");
+  Serial.println(timeClient.getSeconds());
+  //Serial.println(timeClient.getFormattedTime());
+
+  delay(1000);
 
 
 
