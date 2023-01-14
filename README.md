@@ -27,7 +27,7 @@ whether a person is registered or not.
 
 ## Project Timeline
 
-![timeline](./images/timeline.PNG)
+![timeline](./docs/timeline.PNG)
 
 
 ## Team
