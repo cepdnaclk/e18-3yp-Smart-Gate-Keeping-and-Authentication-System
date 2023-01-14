@@ -17,7 +17,7 @@
 // gloabl control variables
 LiquidCrystal_I2C lcd(0x27, LCDColumns, LCDRow);
 SoftwareSerial mySerial(Finger_Rx, Finger_Tx);
-Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial); // fingerprint controll variable
+Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial);   // fingerprint controll variable
 uint8_t id;
 uint8_t operation;
 
@@ -27,7 +27,7 @@ void verifyScannerParameters();
 uint8_t readUserInput(void);
 uint8_t getFingerprintEnroll();
 void enrollFingerprint();
-void deleteFingerprint();
+void deleteFingerprint(uint8_t id);
 void deleteDatabase();
 
 // Define the WiFi credentials
@@ -38,6 +38,7 @@ void setup()
 {
   Serial.begin(115200); // baud rate set to 115200
   delay(100);
+
   Serial.println(">>>>>>>>>>>>>>>>System Boot Up>>>>>>>>>>>>>>>>>");
 
   /*  Wifi Set up for the internet   */
@@ -63,17 +64,21 @@ void setup()
   delay(200);
   Serial.println("..Welcome to ACCOL..");
   finger.begin(57600);
-  if (!detectFingerprintScanner())       // could not detect any fingerprint scanner
+  if (!detectFingerprintScanner()) // could not detect any fingerprint scanner
   {
-    
+    Serial.println("Could not Found a Fingerprint Scanner");
+    Serial.println("System Reboot");
+
+    setup();
   }
-  
+
   verifyScannerParameters();
   /*  Set up Servo Motor */
 }
 
 void loop()
 {
+  int p = -1;
   /*   Network Connection  */
   // handle wifi connection errors and reconnect
   if (WiFi.status() != WL_CONNECTED)
@@ -92,7 +97,9 @@ void loop()
   Serial.println("Select an option: ");
   Serial.println("Press 1 to enroll a fingerprint");
   Serial.println("Press 2 to delete a fingerprint");
-  Serial.println("Press 3 to empty fingerprint database");
+  Serial.println("Press 3 to access with fingerprint");
+  Serial.println("Press 4 to delete the whole database");
+
   operation = readUserInput();
   if (operation == 1)
   {
@@ -100,20 +107,80 @@ void loop()
   }
   else if (operation == 2)
   {
-    deleteFingerprint();
+    deleteFingerprint(id);
   }
   else if (operation == 3)
+  {
+    while (p == FINGERPRINT_NOFINGER);
+    
+    while (p != FINGERPRINT_OK)
+    {
+      delay(1000);
+      p = finger.getImage();
+      switch (p)
+      {
+      case FINGERPRINT_OK:
+        Serial.println("Image taken");
+        break;
+      case FINGERPRINT_NOFINGER:
+        Serial.println(".");
+        break;
+      case FINGERPRINT_PACKETRECIEVEERR:
+        Serial.println("Communication error");
+        break;
+      case FINGERPRINT_IMAGEFAIL:
+        Serial.println("Imaging error");
+        break;
+      default:
+        Serial.println("Unknown error");
+        break;
+      }
+    }
+    p = finger.image2Tz();
+    switch (p)
+    {
+    case FINGERPRINT_OK:
+      Serial.println("Image converted");
+      break;
+    case FINGERPRINT_IMAGEMESS:
+      Serial.println("Image too messy");
+    case FINGERPRINT_PACKETRECIEVEERR:
+      Serial.println("Communication error");
+    case FINGERPRINT_FEATUREFAIL:
+      Serial.println("Could not find fingerprint features");
+    case FINGERPRINT_INVALIDIMAGE:
+      Serial.println("Could not find fingerprint features");
+    default:
+      Serial.println("Unknown error");
+    }
+
+    Serial.println("Remove finger");
+    delay(1000);
+    p = finger.fingerFastSearch();
+    if (p == FINGERPRINT_OK)
+    {
+      Serial.printf("Welcome %i\n", finger.fingerID);
+      delay(5000);
+    }
+    else
+    {
+      Serial.println(" Access Denied ");
+    }
+  }
+  else if (operation == 4)
   {
     deleteDatabase();
   }
   else
-    return;
+     return;
+  
+  
+   
 
-  // getFingerprintEnroll();
 }
 
 bool detectFingerprintScanner()
-{ 
+{
   if (finger.verifyPassword())
   {
     return true;
@@ -160,13 +227,12 @@ uint8_t readUserInput(void)
 
 uint8_t getFingerprintEnroll()
 {
-
-  // Scan for First Time
   int p = -1;
   Serial.print("Waiting for valid finger to enroll as #");
   Serial.println(id);
   while (p != FINGERPRINT_OK)
   {
+    delay(1000);
     p = finger.getImage();
     switch (p)
     {
@@ -189,6 +255,7 @@ uint8_t getFingerprintEnroll()
   }
 
   // OK success!
+
   p = finger.image2Tz(1);
   switch (p)
   {
@@ -211,22 +278,22 @@ uint8_t getFingerprintEnroll()
     Serial.println("Unknown error");
     return p;
   }
+
   Serial.println("Remove finger");
   delay(2000);
   p = 0;
   while (p != FINGERPRINT_NOFINGER)
   {
     p = finger.getImage();
+    delay(1000);
   }
-  Serial.println("");
   Serial.print("ID ");
   Serial.println(id);
   p = -1;
-
-  // Scan for Second Time
   Serial.println("Place same finger again");
   while (p != FINGERPRINT_OK)
   {
+    delay(1000);
     p = finger.getImage();
     switch (p)
     {
@@ -247,6 +314,9 @@ uint8_t getFingerprintEnroll()
       break;
     }
   }
+
+  // OK success!
+
   p = finger.image2Tz(2);
   switch (p)
   {
@@ -269,11 +339,11 @@ uint8_t getFingerprintEnroll()
     Serial.println("Unknown error");
     return p;
   }
-  Serial.println("");
 
-  // Creating Model
+  // OK converted!
   Serial.print("Creating model for #");
   Serial.println(id);
+
   p = finger.createModel();
   if (p == FINGERPRINT_OK)
   {
@@ -295,13 +365,12 @@ uint8_t getFingerprintEnroll()
     return p;
   }
 
-  // Storing Model
   Serial.print("ID ");
   Serial.println(id);
   p = finger.storeModel(id);
   if (p == FINGERPRINT_OK)
   {
-    Serial.println("Congratulations! Fingerprint is successfully enrolled.");
+    Serial.println("Stored!");
   }
   else if (p == FINGERPRINT_PACKETRECIEVEERR)
   {
@@ -324,8 +393,6 @@ uint8_t getFingerprintEnroll()
     return p;
   }
 
-  Serial.println("");
-  Serial.println("");
   return true;
 }
 
@@ -361,10 +428,8 @@ void enrollFingerprint()
     ;
 }
 
-void deleteFingerprint()
+void deleteFingerprint(uint8_t id)
 {
-  Serial.println("Please type in the ID # (from 1 to 127) you want to delete...");
-  uint8_t id = readUserInput();
   if (id == 0)
   {
     return;
