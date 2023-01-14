@@ -23,9 +23,26 @@ gate, the laser sensors will detect whether the user passed the gate or not. So,
 entrance of the user from the website. So, the system will provide a solution for the above problem by reducing the time spent on the process and by accurately verifying 
 whether a person is registered or not.
 
-![Project_Into_Image](./docs/System.png)
+![System](./docs/System.PNG)
+
+## Project Timeline
+
+![timeline](./images/timeline.PNG)
 
 
+## Team
+-  E/18/086, Devinda G.C. [e18068@eng.pdn.ac.lk](mailto:e18068@eng.pdn.ac.lk)
+-  E/18/330, Sewwandi H.R. [e18330@eng.pdn.ac.lk](mailto:e18330@eng.pdn.ac.lk)
+-  E/18/375, Uduwanage H.U. [e18368@eng.pdn.ac.lk](mailto:e18368@eng.pdn.ac.lk)
 
-## High level solution architeture
+## Supervisor
 
+Dr. Mahanama Wickramasinghe [mahanamaw@eng.pdn.ac.lk](mailto:mahanamaw@eng.pdn.ac.lk)
+Dr. Isuru Nawinne [isurunawinne@eng.pdn.ac.lk](mailto:isurunawinne@eng.pdn.ac.lk)
+
+## Links
+
+- [Project Repository](https://cepdnaclk.github.com/e18-3yp-Smart-Gate-Keeping-and-Authentication-System/)
+- [Project Page](https://cepdnaclk.github.io/e18-3yp-Smart-Gate-Keeping-and-Authentication-System/)
+- [Department of Computer Engineering](http://www.ce.pdn.ac.lk/)
+- [University of Peradeniya](https://eng.pdn.ac.lk/)
