@@ -12,6 +12,8 @@ import { auth, db } from "../../firebase";
 import { useParams } from "react-router-dom";
 
 import RoomInstanceesDatatable from "./Roominstances";
+// import { onValue, ref , set  } from "firebase/database";
+
 // import { ToastContainer, toast } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
 // import  { Toaster } from "react-hot-toast";
@@ -45,11 +47,12 @@ const Addinstance = ({ inputs, title }) => {
       });
     };
 
+    
+
 
     getEmail();
-    // getDoc();
-    // fetchData();
-
+    handleAdd();
+  
     return () => {
       // unsub();
       // fetchData();
@@ -75,15 +78,18 @@ const Addinstance = ({ inputs, title }) => {
     try {
      
       console.log(email);
-      console.log(data.userid);
-      console.log(email);
+      console.log(data.instanceid);
       const docRef = doc(db, "Institutes",email ,"rooms",params.id);//
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         setData(docSnap.data());
         console.log("=========");
+        console.log(data);
         
-        setIdValidity(true);
+        // setIdValidity(true);// "Institutes/"+email +"/rooms/"+params.id+"/Instance/"+data.instanceid
+        // set(ref(rtdb,'Institutes/users/instances/'+data.instanceid+"/"), {// rtdb, 'users/' + data.instanceid
+        //   ...data,
+        // });
         
       } else {
         
@@ -93,12 +99,14 @@ const Addinstance = ({ inputs, title }) => {
         setIdValidity(false);
       }
       if(idValidity){
-        console.log(data.instanceid);
+        console.log(data);
         await setDoc(doc(db,"Institutes",email ,"rooms",params.id,"Instance",data.instanceid), {
-          "id":data.instanceid,
-          "name": data.instancename,
+          ...data,
+          // "id":data.instanceid,
+          // "name": data.instancename,
           // timeStamp: serverTimestamp(),
         });
+        
       }
       
     } catch (err) {

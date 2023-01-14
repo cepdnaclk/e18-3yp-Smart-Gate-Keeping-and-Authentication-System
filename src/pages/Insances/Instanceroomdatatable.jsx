@@ -27,12 +27,14 @@ import {
   getDocs,
   // onSnapshot,
 } from "firebase/firestore";
-import { auth , db } from "../../firebase";
-
+import { auth , db , rtdb } from "../../firebase";
+import { onValue, ref } from "firebase/database";
 
 const Instanceroomdatatable = () => {
   const [data, setData] = useState([]);
   const [email, setEmail] = useState(" Non "); //e18068@eng.pdn.ac.lk
+  const [projects, setProjects] = useState([]);
+  let list = [];
   // var email;
   // auth.onAuthStateChanged(function(user) {
   //   if (user) {
@@ -63,7 +65,7 @@ const Instanceroomdatatable = () => {
       });
     };
     const fetchData = async () => {
-      let list = [];
+      
       try {
         const querySnapshot = await getDocs(collection(db,"Institutes",email ,"rooms"));
         querySnapshot.forEach((doc) => {
@@ -75,6 +77,16 @@ const Instanceroomdatatable = () => {
         console.log(err);
       }
     };
+    // const query = ref(rtdb, "projects");
+    // return onValue(query, (snapshot) => {
+    //   const data = snapshot.val();
+
+    //   if (snapshot.exists()) {
+    //     Object.values(data).map((project) => {
+    //       setProjects((projects) => [...projects, project]);
+    //     });
+    //   }
+    // });
     
     // LISTEN (REALTIME)
     // const unsub = onSnapshot(
@@ -92,13 +104,14 @@ const Instanceroomdatatable = () => {
       
 
     // );
-    fetchData();
     getEmail();
+    fetchData();
+    
     // unsub();
     return () => {
       // unsub();
-      fetchData();
-      getEmail();
+      // fetchData();
+      // getEmail();
     };
   }, [email]);
 

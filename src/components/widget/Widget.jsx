@@ -7,11 +7,13 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 import { useEffect, useState } from "react";
 import { collection, query, where, getDocs } from "firebase/firestore";
-import { db } from "../../firebase";
+import { db,auth } from "../../firebase";
 
 const Widget = ({ type }) => {
   const [amount, setAmount] = useState(null);
   const [diff, setDiff] = useState(null);
+  const [email, setEmail] = useState(" Non "); //e18068@eng.pdn.ac.lk
+
   let data;
 
   switch (type) {
@@ -35,6 +37,7 @@ const Widget = ({ type }) => {
       case "devices":
         data = {
           title: "DEVICES",
+          query:"devices",
           isMoney: false,
           link: "View all devices",
           icon: (
@@ -50,7 +53,8 @@ const Widget = ({ type }) => {
         break;
       case "rooms":
           data = {
-            title: "ROOMS",
+            title: "Rooms",
+            query:"rooms",
             isMoney: false,
             link: "View all rooms",
             icon: (
@@ -114,33 +118,52 @@ const Widget = ({ type }) => {
   }
 
   useEffect(() => {
+    const getEmail=async()=>{
+      auth.onAuthStateChanged(function(user) {
+        try{
+          if (user) {
+            // User is signed in.
+            // email = user.email.toString();
+            console.log(email);  // This will print the user's email to the console.
+            // return email;
+            setEmail(user.email.toString());
+          }
+        }
+         catch (err){
+          console.log(err);
+         }
+      });
+    };
     const fetchData = async () => {
       const today = new Date();
       const lastMonth = new Date(new Date().setMonth(today.getMonth() - 1));
       const prevMonth = new Date(new Date().setMonth(today.getMonth() - 2));
 
       const lastMonthQuery = query(
-        collection(db, data.query),
-        where("timeStamp", "<=", today),
-        where("timeStamp", ">", lastMonth)
+        collection(db,"Institutes",email, data.query), // "Institutes",email, "users"
+        // where("timeStamp", "<=", today),
+        // where("timeStamp", ">", lastMonth)
       );
-      const prevMonthQuery = query(
-        collection(db, data.query),
-        where("timeStamp", "<=", lastMonth),
-        where("timeStamp", ">", prevMonth)
-      );
+      console.log(lastMonthQuery);
+      // const prevMonthQuery = query(
+      //   collection(db, data.query),
+      //   // where("timeStamp", "<=", lastMonth),
+      //   // where("timeStamp", ">", prevMonth)
+      // );
 
       const lastMonthData = await getDocs(lastMonthQuery);
-      const prevMonthData = await getDocs(prevMonthQuery);
+      console.log(lastMonthData.docs);
+      // const prevMonthData = await getDocs(prevMonthQuery);
 
       setAmount(lastMonthData.docs.length);
-      setDiff(
-        ((lastMonthData.docs.length - prevMonthData.docs.length) / prevMonthData.docs.length) *
-          100
-      );
+      // setDiff(
+      //   ((lastMonthData.docs.length - prevMonthData.docs.length) / prevMonthData.docs.length) *
+      //     100
+      // );
     };
     fetchData();
-  }, []);
+    getEmail();
+  }, [email,amount]);
 
   return (
     <div className="widget">

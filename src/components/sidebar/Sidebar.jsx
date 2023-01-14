@@ -24,7 +24,7 @@ import { db,auth } from "../../firebase";
 import 'firebase/firestore';
 const Sidebar = () => {
   const [email, setEmail] = useState(" Non "); //e18068@eng.pdn.ac.lk
-  const [name , setName] = useState("name");
+  const [name , setName] = useState("");
   // var email;
   const [data, setData] = useState("");
   useEffect(() => {
@@ -113,18 +113,19 @@ const Sidebar = () => {
               <span>Users</span>
             </li>
           </Link>
-          <Link to="/devicelist" style={{ textDecoration: "none" }}>
-            <li>
-              <StoreIcon className="icon" />
-              <span>Devices</span>
-            </li>
-          </Link>
           <Link to="/roomlist" style={{ textDecoration: "none" }}>
           <li>
             <CreditCardIcon className="icon" />
             <span>Rooms</span>
           </li>
           </Link>
+          <Link to="/devicelist" style={{ textDecoration: "none" }}>
+            <li>
+              <StoreIcon className="icon" />
+              <span>Devices</span>
+            </li>
+          </Link>
+          
           <Link to="/instance" style={{ textDecoration: "none" }}>
           <li>
             <LocalShippingIcon className="icon" />

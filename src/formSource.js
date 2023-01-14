@@ -79,6 +79,28 @@ export const userInputs = [
     
   ];
 
+  export const newDeviceform = [
+    {
+      id: "deviceid",
+      label: "Device Id",
+      type: "text",
+      placeholder: "id",
+    },
+    {
+      id: "password",
+      label: "Password",
+      type: "password",
+      placeholder: "xxx",
+    },
+    {
+      id: "details",
+      label: "Descriptoin",
+      type: "text",
+      placeholder: "type here",
+    }
+    
+  ];
+
   export const InstituteDetailsform = [
     {
       id: "Name",
@@ -89,13 +111,13 @@ export const userInputs = [
     {
       id: "email",
       label: "email ",
-      type: "text",
+      type: "email",
       placeholder: "emailDescription",
     },
     {
       id: "StartedDate",
       label: "Started date ",
-      type: "text",
+      type: "date",
       placeholder: "yyyy/mm/dd",
     }
   ];
