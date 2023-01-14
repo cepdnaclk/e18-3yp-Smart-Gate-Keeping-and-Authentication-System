@@ -38,11 +38,12 @@ whether a person is registered or not.
 ## Supervisor
 
 Dr. Mahanama Wickramasinghe [mahanamaw@eng.pdn.ac.lk](mailto:mahanamaw@eng.pdn.ac.lk)
+
 Dr. Isuru Nawinne [isurunawinne@eng.pdn.ac.lk](mailto:isurunawinne@eng.pdn.ac.lk)
 
 ## Links
 
-- [Project Repository](https://cepdnaclk.github.com/e18-3yp-Smart-Gate-Keeping-and-Authentication-System/)
+- [Project Repository](https://github.com/cepdnaclk/e18-3yp-Smart-Gate-Keeping-and-Authentication-System)
 - [Project Page](https://cepdnaclk.github.io/e18-3yp-Smart-Gate-Keeping-and-Authentication-System/)
 - [Department of Computer Engineering](http://www.ce.pdn.ac.lk/)
 - [University of Peradeniya](https://eng.pdn.ac.lk/)
