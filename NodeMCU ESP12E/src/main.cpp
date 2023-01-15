@@ -13,7 +13,8 @@
 // connect blue wire to 3.3V out        / Green - Touch (Zero when touched)
 
 // gloabl control variables
-LiquidCrystal_I2C lcd(0x27, 16, 2);
+// enter the I2C address and the dimensions of your LCD here
+LiquidCrystal_I2C lcd(0x3F, 16, 2);
 SoftwareSerial mySerial(Finger_Rx, Finger_Tx);
 Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial); // fingerprint controll variable
 uint8_t id;
@@ -31,7 +32,7 @@ uint8_t getFingerprintEnroll();
 void enrollFingerprint();
 void deleteFingerprint(uint8_t id);
 void deleteDatabase();
-void display(String text);
+void display(String text,int cursor1 = 0 ,int cursor2 = 0 );
 
 // Define the WiFi credentials
 #define WIFI_SSID "Galaxy M02s5656"
@@ -62,8 +63,9 @@ void setup()
   WiFi.setAutoReconnect(true); // automatically reconnect to the network if the connection is lost
 
   /* Set up for the LCD 16x2 display */
-  lcd.init(); // Initialize the LCD
-  lcd.backlight(); // Turn on the backlight
+  lcd.init();
+  lcd.clear();         
+  lcd.backlight();      // Make sure backlight is on
 
   /* Set up for the Fingerprint sensor */
   while (!Serial)
@@ -86,104 +88,103 @@ void setup()
 
 void loop()
 {
-  display("Hello Welcome");
-  delay(3000);
-  int p = -1;
-  /*   Network Connection  */
-  // handle wifi connection errors and reconnect
-  if (WiFi.status() != WL_CONNECTED)
-  {
-    WiFi.reconnect();
-    Serial.print("Reconnecting");
-    while (WiFi.status() != WL_CONNECTED)
-    {
-      Serial.print(".");
-      delay(250);
-    }
-    Serial.println();
-  }
+  // delay(3000);
+  // int p = -1;
+  // /*   Network Connection  */
+  // // handle wifi connection errors and reconnect
+  // if (WiFi.status() != WL_CONNECTED)
+  // {
+  //   WiFi.reconnect();
+  //   Serial.print("Reconnecting");
+  //   while (WiFi.status() != WL_CONNECTED)
+  //   {
+  //     Serial.print(".");
+  //     delay(250);
+  //   }
+  //   Serial.println();
+  // }
 
-  /*    Fingerprint program   */
-  Serial.println("Select an option: ");
-  Serial.println("Press 1 to enroll a fingerprint");
-  Serial.println("Press 2 to delete a fingerprint");
-  Serial.println("Press 3 to access with fingerprint");
-  Serial.println("Press 4 to delete the whole database");
+  // /*    Fingerprint program   */
+  // Serial.println("Select an option: ");
+  // Serial.println("Press 1 to enroll a fingerprint");
+  // Serial.println("Press 2 to delete a fingerprint");
+  // Serial.println("Press 3 to access with fingerprint");
+  // Serial.println("Press 4 to delete the whole database");
 
-  operation = readUserInput();
-  if (operation == 1)
-  {
-    enrollFingerprint();
-  }
-  else if (operation == 2)
-  {
-    deleteFingerprint(id);
-  }
-  else if (operation == 3)
-  {
-    while (p == FINGERPRINT_NOFINGER)
-      ;
+  // operation = readUserInput();
+  // if (operation == 1)
+  // {
+  //   enrollFingerprint();
+  // }
+  // else if (operation == 2)
+  // {
+  //   deleteFingerprint(id);
+  // }
+  // else if (operation == 3)
+  // {
+  //   while (p == FINGERPRINT_NOFINGER)
+  //     ;
 
-    while (p != FINGERPRINT_OK)
-    {
-      delay(1000);
-      p = finger.getImage();
-      switch (p)
-      {
-      case FINGERPRINT_OK:
-        Serial.println("Image taken");
-        break;
-      case FINGERPRINT_NOFINGER:
-        Serial.println(".");
-        break;
-      case FINGERPRINT_PACKETRECIEVEERR:
-        Serial.println("Communication error");
-        break;
-      case FINGERPRINT_IMAGEFAIL:
-        Serial.println("Imaging error");
-        break;
-      default:
-        Serial.println("Unknown error");
-        break;
-      }
-    }
-    p = finger.image2Tz();
-    switch (p)
-    {
-    case FINGERPRINT_OK:
-      Serial.println("Image converted");
-      break;
-    case FINGERPRINT_IMAGEMESS:
-      Serial.println("Image too messy");
-    case FINGERPRINT_PACKETRECIEVEERR:
-      Serial.println("Communication error");
-    case FINGERPRINT_FEATUREFAIL:
-      Serial.println("Could not find fingerprint features");
-    case FINGERPRINT_INVALIDIMAGE:
-      Serial.println("Could not find fingerprint features");
-    default:
-      Serial.println("Unknown error");
-    }
+  //   while (p != FINGERPRINT_OK)
+  //   {
+  //     delay(1000);
+  //     p = finger.getImage();
+  //     switch (p)
+  //     {
+  //     case FINGERPRINT_OK:
+  //       Serial.println("Image taken");
+  //       break;
+  //     case FINGERPRINT_NOFINGER:
+  //       Serial.println(".");
+  //       break;
+  //     case FINGERPRINT_PACKETRECIEVEERR:
+  //       Serial.println("Communication error");
+  //       break;
+  //     case FINGERPRINT_IMAGEFAIL:
+  //       Serial.println("Imaging error");
+  //       break;
+  //     default:
+  //       Serial.println("Unknown error");
+  //       break;
+  //     }
+  //   }
+  //   p = finger.image2Tz();
+  //   switch (p)
+  //   {
+  //   case FINGERPRINT_OK:
+  //     Serial.println("Image converted");
+  //     break;
+  //   case FINGERPRINT_IMAGEMESS:
+  //     Serial.println("Image too messy");
+  //   case FINGERPRINT_PACKETRECIEVEERR:
+  //     Serial.println("Communication error");
+  //   case FINGERPRINT_FEATUREFAIL:
+  //     Serial.println("Could not find fingerprint features");
+  //   case FINGERPRINT_INVALIDIMAGE:
+  //     Serial.println("Could not find fingerprint features");
+  //   default:
+  //     Serial.println("Unknown error");
+  //   }
 
-    Serial.println("Remove finger");
-    delay(1000);
-    p = finger.fingerFastSearch();
-    if (p == FINGERPRINT_OK)
-    {
-      Serial.printf("Welcome %i\n", finger.fingerID);
-      delay(5000);
-    }
-    else
-    {
-      Serial.println(" Access Denied ");
-    }
-  }
-  else if (operation == 4)
-  {
-    deleteDatabase();
-  }
-  else
-    return;
+  //   Serial.println("Remove finger");
+  //   delay(1000);
+  //   p = finger.fingerFastSearch();
+  //   if (p == FINGERPRINT_OK)
+  //   {
+  //     Serial.printf("Welcome %i\n", finger.fingerID);
+  //     delay(5000);
+  //   }
+  //   else
+  //   {
+  //     Serial.println(" Access Denied ");
+  //   }
+  // }
+  // else if (operation == 4)
+  // {
+  //   deleteDatabase();
+  // }
+  // else
+  //   return;
 }
 
 bool detectFingerprintScanner()
@@ -471,9 +472,8 @@ void deleteFingerprint(uint8_t id)
   return;
 }
 
-
-void display(String text) {
+void display(String text,int cursor1 = 0 ,int cursor2 = 0 ) {
   lcd.clear(); // Clear the display
-  lcd.setCursor(0, 0); // Set the cursor to the top-left corner
+  lcd.setCursor(cursor1, cursor2); // Set the cursor to the top-left corner
   lcd.print(text); // Print the text on the LCD
 }
