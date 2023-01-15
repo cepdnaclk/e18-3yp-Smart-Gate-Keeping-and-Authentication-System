@@ -3,9 +3,11 @@
 #include <SoftwareSerial.h>
 #include <LiquidCrystal_I2C.h>
 #include <ESP8266WiFi.h>
+#include <Wire.h>
 // time calculate libraries
 #include <NTPClient.h>
 #include <WiFiUdp.h>
+#include <I2CKeyPad.h>
 
 // Fingerprint scanner Pins        / red - Vin / Black - GND
 #define Finger_Rx 14 // D5 - connect yellow wire
@@ -14,9 +16,10 @@
 
 // gloabl control variables
 // enter the I2C address and the dimensions of your LCD here
-LiquidCrystal_I2C lcd(0x3F, 16, 2);
+LiquidCrystal_I2C lcd(0x3F, 16, 2);                 // lcd control 
 SoftwareSerial mySerial(Finger_Rx, Finger_Tx);
 Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial); // fingerprint controll variable
+I2CKeyPad keyPad(0x20);         // keypad control variable
 uint8_t id;
 uint8_t operation;
 
@@ -32,7 +35,7 @@ uint8_t getFingerprintEnroll();
 void enrollFingerprint();
 void deleteFingerprint(uint8_t id);
 void deleteDatabase();
-void display(String text,int cursor1 = 0 ,int cursor2 = 0 );
+void display(String text,int cursor1 ,int cursor2 );
 
 // Define the WiFi credentials
 #define WIFI_SSID "Galaxy M02s5656"
@@ -45,45 +48,49 @@ NTPClient timeClient(ntpUDP, "pool.ntp.org", utcOffsetInSeconds);
 void setup()
 {
   Serial.begin(115200); // baud rate set to 115200
-  delay(100);
+  // delay(100);
 
-  Serial.println(">>>>>>>>>>>>>>>>System Boot Up>>>>>>>>>>>>>>>>>");
+  // Serial.println(">>>>>>>>>>>>>>>>System Boot Up>>>>>>>>>>>>>>>>>");
 
-  /*  Wifi Set up for the internet   */
-  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
-  Serial.print("Connecting to a Network");
-  while (WiFi.status() != WL_CONNECTED)
-  {
-    Serial.print(".");
-    delay(250);
-  }
-  Serial.println();
-  Serial.println("Connected to Wifi");
-  WiFi.setAutoConnect(true);   //  automatically connect to the last-connected network after a reboot or power-on
-  WiFi.setAutoReconnect(true); // automatically reconnect to the network if the connection is lost
+  // /*  Wifi Set up for the internet   */
+  // WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  // Serial.print("Connecting to a Network");
+  // while (WiFi.status() != WL_CONNECTED)
+  // {
+  //   Serial.print(".");
+  //   delay(250);
+  // }
+  // Serial.println();
+  // Serial.println("Connected to Wifi");
+  // WiFi.setAutoConnect(true);   //  automatically connect to the last-connected network after a reboot or power-on
+  // WiFi.setAutoReconnect(true); // automatically reconnect to the network if the connection is lost
 
   /* Set up for the LCD 16x2 display */
   lcd.init();
   lcd.clear();         
   lcd.backlight();      // Make sure backlight is on
 
-  /* Set up for the Fingerprint sensor */
-  while (!Serial)
-    ;
-  delay(200);
-  Serial.println("..Welcome to ACCOL..");
-  finger.begin(57600);
-  if (!detectFingerprintScanner()) // could not detect any fingerprint scanner
-  {
-    Serial.println("Could not Found a Fingerprint Scanner");
-    Serial.println("System Reboot");
+  /* Set up for 4x4 keypad */
+  Wire.begin();
+  keyPad.begin();
 
-    setup();
-  }
+  // /* Set up for the Fingerprint sensor */
+  // while (!Serial)
+  //   ;
+  // delay(200);
+  // Serial.println("..Welcome to ACCOL..");
+  // finger.begin(57600);
+  // if (!detectFingerprintScanner()) // could not detect any fingerprint scanner
+  // {
+  //   Serial.println("Could not Found a Fingerprint Scanner");
+  //   Serial.println("System Reboot");
 
-  verifyScannerParameters();
-  // time client for ntp
-  timeClient.begin();
+  //   setup();
+  // }
+
+  // verifyScannerParameters();
+  // // time client for ntp
+  // timeClient.begin();
 }
 
 void loop()
@@ -472,7 +479,7 @@ void deleteFingerprint(uint8_t id)
   return;
 }
 
-void display(String text,int cursor1 = 0 ,int cursor2 = 0 ) {
+void display(String text,int cursor1,int cursor2 ) {
   lcd.clear(); // Clear the display
   lcd.setCursor(cursor1, cursor2); // Set the cursor to the top-left corner
   lcd.print(text); // Print the text on the LCD
