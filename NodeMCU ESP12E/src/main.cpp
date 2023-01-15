@@ -194,6 +194,7 @@ void loop()
   //   return;
 }
 
+
 bool detectFingerprintScanner()
 {
   if (finger.verifyPassword())
