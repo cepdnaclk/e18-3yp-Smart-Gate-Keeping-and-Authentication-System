@@ -1,0 +1,68 @@
+****** Fingerprint Configuaration ***************
+Red wire - Vin pin
+Black wire - GND pin 
+Yellow wire - D5
+White wire - D6
+Blue wire - 3.3V
+Green wire - touch output
+
+
+
+******* Servo Motor Configuration ********
+Orange wire - Signal (D4)
+Red wire - Vin 
+Brown wire - GND
+
+// get time by ntp
+
+timeClient.update();
+
+  Serial.print(daysOfTheWeek[timeClient.getDay()]);
+  Serial.print(", ");
+  Serial.print(timeClient.getHours());
+  Serial.print(":");
+  Serial.print(timeClient.getMinutes());
+  Serial.print(":");
+  Serial.println(timeClient.getSeconds());
+  //Serial.println(timeClient.getFormattedTime());
+
+  delay(1000);
+
+
+***************
+lcd i2c - 63 (0x3F)
+keypad i2c - 32 (0x20)
+**************************
+
+  // get i2c address
+  Serial.begin(115200); // baud rate set to 115200
+   while (!Serial) 
+    {
+    }
+  Serial.println ("I2C scanner. Scanning ...");
+  byte count = 0;
+  
+  Wire.begin();
+  for (byte i = 8; i < 120; i++)
+  {
+    Wire.beginTransmission (i);
+    if (Wire.endTransmission () == 0)
+      {
+      Serial.print ("Found address: ");
+      Serial.print (i, DEC);
+      Serial.print (" (0x");
+      Serial.print (i, HEX);
+      Serial.println (")");
+      count++;
+      delay (1);  // maybe unneeded?
+      } // end of good response
+  } // end of for loop
+  Serial.println ("Done.");
+  Serial.print ("Found ");
+  Serial.print (count, DEC);
+  Serial.println (" device(s).");
+
+
+
+
+

@@ -17,6 +17,13 @@ void setup()
 
 void loop()
 {
+<<<<<<< HEAD
+  long distance1 = sensor1.read(); // read distance from sensor 1
+  long distance2 = sensor2.read(); // read distance from sensor 2
+  long distance3 = sensor3.read(); // read distance from sensor 3
+  long distance4 = sensor4.read(); // read distance from sensor 4
+=======
+>>>>>>> 3f414cb5b296af77b3ba9ce0608ece24f8392c93
 
   // sensor 1
   while (1)
