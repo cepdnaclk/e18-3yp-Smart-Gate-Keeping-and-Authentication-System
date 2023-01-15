@@ -3,12 +3,9 @@
 #include <SoftwareSerial.h>
 #include <LiquidCrystal_I2C.h>
 #include <ESP8266WiFi.h>
+// time calculate libraries
 #include <NTPClient.h>
 #include <WiFiUdp.h>
-
-// set the LCD number of columns and rows
-#define LCDColumns 16
-#define LCDRow 2
 
 // Fingerprint scanner Pins        / red - Vin / Black - GND
 #define Finger_Rx 14 // D5 - connect yellow wire
@@ -16,9 +13,9 @@
 // connect blue wire to 3.3V out        / Green - Touch (Zero when touched)
 
 // gloabl control variables
-LiquidCrystal_I2C lcd(0x27, LCDColumns, LCDRow);
+LiquidCrystal_I2C lcd(0x27, 16, 2);
 SoftwareSerial mySerial(Finger_Rx, Finger_Tx);
-Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial);   // fingerprint controll variable
+Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial); // fingerprint controll variable
 uint8_t id;
 uint8_t operation;
 
@@ -34,6 +31,7 @@ uint8_t getFingerprintEnroll();
 void enrollFingerprint();
 void deleteFingerprint(uint8_t id);
 void deleteDatabase();
+void display(String text);
 
 // Define the WiFi credentials
 #define WIFI_SSID "Galaxy M02s5656"
@@ -64,8 +62,8 @@ void setup()
   WiFi.setAutoReconnect(true); // automatically reconnect to the network if the connection is lost
 
   /* Set up for the LCD 16x2 display */
-  // Wire.begin();
-  // Serial.println("\nI2C Scanner");
+  lcd.init(); // Initialize the LCD
+  lcd.backlight(); // Turn on the backlight
 
   /* Set up for the Fingerprint sensor */
   while (!Serial)
@@ -88,6 +86,8 @@ void setup()
 
 void loop()
 {
+  display("Hello Welcome");
+  delay(3000);
   int p = -1;
   /*   Network Connection  */
   // handle wifi connection errors and reconnect
@@ -121,8 +121,9 @@ void loop()
   }
   else if (operation == 3)
   {
-    while (p == FINGERPRINT_NOFINGER);
-    
+    while (p == FINGERPRINT_NOFINGER)
+      ;
+
     while (p != FINGERPRINT_OK)
     {
       delay(1000);
@@ -182,11 +183,7 @@ void loop()
     deleteDatabase();
   }
   else
-     return;
-  
-  
-   
-
+    return;
 }
 
 bool detectFingerprintScanner()
@@ -472,4 +469,11 @@ void deleteFingerprint(uint8_t id)
   Serial.println("");
   Serial.println("");
   return;
+}
+
+
+void display(String text) {
+  lcd.clear(); // Clear the display
+  lcd.setCursor(0, 0); // Set the cursor to the top-left corner
+  lcd.print(text); // Print the text on the LCD
 }
