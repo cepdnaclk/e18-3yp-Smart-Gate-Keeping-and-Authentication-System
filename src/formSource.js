@@ -62,6 +62,23 @@ export const userInputs = [
     // }
     
   ];
+
+  export const instanceAddRoom = [
+    {
+      id: "instanceid",
+      label: "Instance Id",
+      type: "text",
+      placeholder: "xxx",
+    },
+    {
+      id: "instancename",
+      label: "Instance Name",
+      type: "text",
+      placeholder: "name",
+    }
+    
+  ];
+
   export const InstituteDetailsform = [
     {
       id: "Name",

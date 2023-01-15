@@ -1,48 +1,91 @@
 #include <Arduino.h>
-#include <Ultrasonic.h> // library for ultrasonic sensor
+#include <Ultrasonic.h>
 
-const int trigPin1 = 5;  // ultrasonic sensor 1 trigger pin
-const int echoPin1 = 6;  // ultrasonic sensor 1 echo pin
-const int trigPin2 = 7;  // ultrasonic sensor 2 trigger pin
-const int echoPin2 = 8;  // ultrasonic sensor 2 echo pin
-const int trigPin3 = 9;  // ultrasonic sensor 3 trigger pin
-const int echoPin3 = 10; // ultrasonic sensor 3 echo pin
-const int trigPin4 = 11; // ultrasonic sensor 4 trigger pin
-const int echoPin4 = 12; // ultrasonic sensor 4 echo pin
+unsigned long t1, t2, t3, t4;
 
-Ultrasonic sensor1(trigPin1, echoPin1); // create ultrasonic sensor objects
-Ultrasonic sensor2(trigPin2, echoPin2);
-Ultrasonic sensor3(trigPin3, echoPin3);
-Ultrasonic sensor4(trigPin4, echoPin4);
+// initilize in[ut/output ports for each sensor
+Ultrasonic ultrasonic1(5, 4);
+Ultrasonic ultrasonic2(2, 3);
+Ultrasonic ultrasonic3(11, 10);
+Ultrasonic ultrasonic4(7, 6);
+float max_distance = 30; // movement sensing range (in cm)
 
 void setup()
 {
-  Serial.begin(9600); // initialize serial communication
+  Serial.begin(9600);
 }
 
 void loop()
 {
+<<<<<<< HEAD
   long distance1 = sensor1.read(); // read distance from sensor 1
   long distance2 = sensor2.read(); // read distance from sensor 2
   long distance3 = sensor3.read(); // read distance from sensor 3
   long distance4 = sensor4.read(); // read distance from sensor 4
+=======
+>>>>>>> 3f414cb5b296af77b3ba9ce0608ece24f8392c93
 
-  // check if a person is passing through the gate
-  if (distance1 < 100 && distance2 < 100 && distance3 > 100 && distance4 > 100)
+  // sensor 1
+  while (1)
   {
-    // person is moving from left to right
-    Serial.println("Person moving from left to right");
-  }
-  else if (distance1 > 100 && distance2 > 100 && distance3 < 100 && distance4 < 100)
-  {
-    // person is moving from right to left
-    Serial.println("Person moving from right to left");
-  }
-  else
-  {
-    // no person detected
-    Serial.println("No person detected");
+    long distance1 = ultrasonic1.distanceRead();
+
+    // if sensor distance drops below limit, record timestamp
+    if (distance1 < max_distance)
+    {
+      // Serial.print("Distance 1: ");
+      // Serial.println(distance1);
+      // t1 = millis();
+      // detected++;
+      break;
+    }
   }
 
-  delay(500); // delay for half a second
+  // sensor 2
+  while (1)
+  {
+    long distance2 = ultrasonic2.distanceRead();
+
+    if (distance2 < max_distance)
+    {
+      // Serial.print("Distance 2: ");
+      // Serial.println(distance2);
+      // t2 = millis();
+      // detected++;
+      break;
+    }
+  }
+
+  // sensor 3
+  while (1)
+  {
+    long distance3 = ultrasonic3.distanceRead();
+
+    if (distance3 < max_distance)
+    {
+      // Serial.print("Distance 3: ");
+      // Serial.println(distance3);
+      // t3 = millis();
+      // detected++;
+      break;
+    }
+  }
+
+  // sensor 4
+  while (1)
+  {
+    long distance4 = ultrasonic4.distanceRead();
+
+    if (distance4 < max_distance)
+    {
+      // Serial.print("Distance 4: ");
+      // Serial.println(distance4);
+      // t4 = millis();
+      // detected++;
+      // Serial.println("Entered");
+      Serial.write("Object detected!");
+      break;
+    }
+  }
+  delay(1000);
 }
