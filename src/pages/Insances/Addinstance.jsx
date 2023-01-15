@@ -62,7 +62,7 @@ const Addinstance = ({ inputs, title }) => {
     // fetchData();
       
     };
-  }, [email ]);
+  }, [email,data ]);
 
 
   const handleInput = (e) => {

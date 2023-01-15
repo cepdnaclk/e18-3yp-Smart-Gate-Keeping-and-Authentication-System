@@ -8,8 +8,11 @@ import {
   collection,
   onSnapshot,
 } from "firebase/firestore";
-import { db,auth } from "../../firebase";
+import { db,auth,rtdb } from "../../firebase";
 import { useParams } from "react-router-dom";
+import {  ref,   child, get} from "firebase/database";
+
+
 
 const AttendanceDatatable = () => {
     let params = useParams();
@@ -36,6 +39,7 @@ const AttendanceDatatable = () => {
           console.log(err);
          }
       });
+      
     };
     // console.log(email);
 
@@ -72,11 +76,36 @@ const AttendanceDatatable = () => {
         });
         setData(list);
         console.log(list);
+        // ------------
+        let reft = ref(rtdb,"/Institutes/e18068@eng/users/10");
+        reft.on("value", snapshot => {
+        const datat = snapshot.val()
+        console.log(datat);
+        });
+        // ------------
+        get(child(rtdb,"/Institutes/e18068@eng/users/10")).then((snapshot) => {
+          if (snapshot.exists()) {
+            console.log(snapshot.val());
+          } else {
+            console.log("No data available");
+          }
+        }).catch((error) => {
+          console.error(error);
+        });
       },
       (error) => {
         console.log(error);
       }
     );
+    // var sleep = ref(rtdb,'/Institutes/e18068@eng/users/');
+    // sleep.on('value', function(snapshot) {
+    //   snapshot.forEach((childSnapshot) => {
+    //   console.log(childSnapshot.val().sleep);
+    //   });
+    // });
+    getEmail();
+    unsub();
+    
 
     return () => {
         getEmail();

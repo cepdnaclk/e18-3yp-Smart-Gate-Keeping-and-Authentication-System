@@ -6,9 +6,6 @@ import { useEffect, useState } from "react";
 import {
   collection,
   getDocs,
-  deleteDoc,
-  doc,
-  onSnapshot,
 } from "firebase/firestore";
 import { db,auth } from "../../firebase";
 
@@ -85,15 +82,7 @@ const Devicedatatable = () => {
     };
   }, [email]);
 
-  const handleDelete = async (id) => {
-    try {
-      console.log(id)
-      // await deleteDoc(doc(db, "users", id));
-      // setData(data.filter((item) => item.id !== id));
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  
 
  
   return (

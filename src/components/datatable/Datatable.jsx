@@ -1,14 +1,12 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { userColumns, userRows, userTableCol } from "../../datatablesource";
+import { userTableCol } from "../../datatablesource";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {
   collection,
   getDocs,
-  deleteDoc,
-  doc,
-  onSnapshot,
+  
 } from "firebase/firestore";
 import { db,auth } from "../../firebase";
 
@@ -85,15 +83,7 @@ const Datatable = () => {
     };
   }, [email]);
 
-  const handleDelete = async (id) => {
-    try {
-      console.log(id)
-      // await deleteDoc(doc(db, "users", id));
-      // setData(data.filter((item) => item.id !== id));
-    } catch (err) {
-      console.log(err);
-    }
-  };
+
 
   const actionColumn = [
     {

@@ -1,17 +1,15 @@
 import "./widget.scss";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 import { useEffect, useState } from "react";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, getDocs } from "firebase/firestore";
 import { db,auth } from "../../firebase";
 
 const Widget = ({ type }) => {
   const [amount, setAmount] = useState(null);
-  const [diff, setDiff] = useState(null);
   const [email, setEmail] = useState(" Non "); //e18068@eng.pdn.ac.lk
 
   let data;
@@ -135,10 +133,7 @@ const Widget = ({ type }) => {
       });
     };
     const fetchData = async () => {
-      const today = new Date();
-      const lastMonth = new Date(new Date().setMonth(today.getMonth() - 1));
-      const prevMonth = new Date(new Date().setMonth(today.getMonth() - 2));
-
+    
       const lastMonthQuery = query(
         collection(db,"Institutes",email, data.query), // "Institutes",email, "users"
         // where("timeStamp", "<=", today),
@@ -163,7 +158,7 @@ const Widget = ({ type }) => {
     };
     fetchData();
     getEmail();
-  }, [email,amount]);
+  }, [email,amount,data.query]);
 
   return (
     <div className="widget">
@@ -175,10 +170,10 @@ const Widget = ({ type }) => {
         <span className="link">{data.link}</span>
       </div>
       <div className="right">
-        <div className={`percentage ${diff < 0 ? "negative" : "positive"}`}>
+        {/* <div className={`percentage ${diff < 0 ? "negative" : "positive"}`}>
           {diff < 0 ? <KeyboardArrowDownIcon/> : <KeyboardArrowUpIcon/> }
           {diff} %
-        </div>
+        </div> */}
         {data.icon}
       </div>
     </div>

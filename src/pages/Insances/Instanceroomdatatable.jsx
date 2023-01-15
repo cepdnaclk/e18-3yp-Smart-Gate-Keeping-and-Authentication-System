@@ -27,13 +27,13 @@ import {
   getDocs,
   // onSnapshot,
 } from "firebase/firestore";
-import { auth , db , rtdb } from "../../firebase";
-import { onValue, ref } from "firebase/database";
+import { auth , db  } from "../../firebase";
+// import { onValue, sref } from "firebase/database";
 
 const Instanceroomdatatable = () => {
   const [data, setData] = useState([]);
   const [email, setEmail] = useState(" Non "); //e18068@eng.pdn.ac.lk
-  const [projects, setProjects] = useState([]);
+  // const [projects, setProjects] = useState([]);
   let list = [];
   // var email;
   // auth.onAuthStateChanged(function(user) {

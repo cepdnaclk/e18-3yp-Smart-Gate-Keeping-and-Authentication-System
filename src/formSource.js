@@ -14,7 +14,7 @@ export const userInputs = [
     {
       id: "email",
       label: "Email",
-      type: "mail",
+      type: "email",
       placeholder: "xxxxxx@gmail.com",
     },
     
@@ -27,7 +27,7 @@ export const userInputs = [
     {
       id: "birthday",
       label: "Birthday",
-      type: "text",
+      type: "date",
       placeholder: "yyyy/mm/dd",
     },
   ];
