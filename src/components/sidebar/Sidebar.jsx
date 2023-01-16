@@ -22,10 +22,15 @@ import {
 } from "firebase/firestore";
 import { db,auth } from "../../Firebase";
 import 'firebase/firestore';
+import { useNavigate } from "react-router-dom";
+
+
+
 const Sidebar = () => {
   const [email, setEmail] = useState(" Non "); //e18068@eng.pdn.ac.lk
   const [name , setName] = useState("");
   // var email;
+  const navitage = useNavigate()
   const [data, setData] = useState("");
   useEffect(() => {
     const fetchData = async () => {
@@ -83,8 +88,11 @@ const Sidebar = () => {
     // fetchData();
       
     };
-  }, [email,name,data.Name]);
+  }, ); // [email,name,data.Name]
   const signout = () => {
+    console.log("log out")
+    auth.signOut();
+    navitage("/login")
     
   };
 

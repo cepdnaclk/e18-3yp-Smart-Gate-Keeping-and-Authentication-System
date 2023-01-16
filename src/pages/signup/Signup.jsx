@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import {AuthContext} from "../../context/AuthContext"
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 const Signup = () => {
-  // const [error, setError] = useState(false);
+  const [error, setError] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const auth = getAuth();
@@ -21,10 +21,12 @@ const Signup = () => {
         // Signed in
         const user = userCredential.user;
         dispatch({type:"SIGNUP", payload:user})
-        navitage("/")
+        navitage("/details");
       })
       .catch((error) => {
         // setError(true);
+      }).catch((error) => {
+        setError(true);
       });
   };
 
@@ -43,7 +45,7 @@ const Signup = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit">Sign Up</button>
-        {/* {error && <span>Wrong email or password!</span>} */}
+        {error && <span>Mayhave used email already! </span>}
       </form>
     </div>
   );
