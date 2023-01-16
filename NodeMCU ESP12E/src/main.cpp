@@ -16,26 +16,33 @@
 
 // gloabl control variables
 // enter the I2C address and the dimensions of your LCD here
-LiquidCrystal_I2C lcd(0x3F, 16, 2);                 // lcd control 
+LiquidCrystal_I2C lcd(0x3F, 16, 2); // lcd control
 SoftwareSerial mySerial(Finger_Rx, Finger_Tx);
 Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial); // fingerprint controll variable
-I2CKeyPad keyPad(0x20);         // keypad control variable
+I2CKeyPad keyPad(0x20);                                        // keypad control variable
 uint8_t id;
 uint8_t operation;
+
+// Pin where the piezo buzzer is connected
+const int BUZZER_PIN = 8;
 
 // time operation
 const long utcOffsetInSeconds = 19800;
 char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
+// keypad
+char keys[] = "123A456B789C*0#DNF"; // N = NoKey, F = Fail
+uint32_t lastKeyPressed = 0;
+
 // function prototypes
 bool detectFingerprintScanner();
 void verifyScannerParameters();
-uint8_t readUserInput(void);
+String userIn(void);
 uint8_t getFingerprintEnroll();
 void enrollFingerprint();
 void deleteFingerprint(uint8_t id);
 void deleteDatabase();
-void display(String text,int cursor1 ,int cursor2 );
+void display(String text, int cursor1, int cursor2);
 
 // Define the WiFi credentials
 #define WIFI_SSID "Galaxy M02s5656"
@@ -48,152 +55,160 @@ NTPClient timeClient(ntpUDP, "pool.ntp.org", utcOffsetInSeconds);
 void setup()
 {
   Serial.begin(115200); // baud rate set to 115200
-  // delay(100);
+  delay(100);
 
-  // Serial.println(">>>>>>>>>>>>>>>>System Boot Up>>>>>>>>>>>>>>>>>");
+  Serial.println(">>>>>>>>>>>>>>>>System Boot Up>>>>>>>>>>>>>>>>>");
 
-  // /*  Wifi Set up for the internet   */
-  // WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
-  // Serial.print("Connecting to a Network");
-  // while (WiFi.status() != WL_CONNECTED)
-  // {
-  //   Serial.print(".");
-  //   delay(250);
-  // }
-  // Serial.println();
-  // Serial.println("Connected to Wifi");
-  // WiFi.setAutoConnect(true);   //  automatically connect to the last-connected network after a reboot or power-on
-  // WiFi.setAutoReconnect(true); // automatically reconnect to the network if the connection is lost
+  /*  Wifi Set up for the internet   */
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  Serial.print("Connecting to a Network");
+  while (WiFi.status() != WL_CONNECTED)
+  {
+    Serial.print(".");
+    delay(250);
+  }
+  Serial.println();
+  Serial.println("Connected to Wifi");
+  WiFi.setAutoConnect(true);   //  automatically connect to the last-connected network after a reboot or power-on
+  WiFi.setAutoReconnect(true); // automatically reconnect to the network if the connection is lost
 
   /* Set up for the LCD 16x2 display */
   lcd.init();
-  lcd.clear();         
-  lcd.backlight();      // Make sure backlight is on
+  lcd.clear();
+  lcd.backlight(); // Make sure backlight is on
 
   /* Set up for 4x4 keypad */
+  Serial.println(__FILE__);
+
   Wire.begin();
-  keyPad.begin();
+  Wire.setClock(400000);
+  if (keyPad.begin() == false)
+  {
+    Serial.println("\nERROR: cannot communicate to keypad.\nPlease reboot.\n");
+    while (1)
+      ;
+  }
 
-  // /* Set up for the Fingerprint sensor */
-  // while (!Serial)
-  //   ;
-  // delay(200);
-  // Serial.println("..Welcome to ACCOL..");
-  // finger.begin(57600);
-  // if (!detectFingerprintScanner()) // could not detect any fingerprint scanner
-  // {
-  //   Serial.println("Could not Found a Fingerprint Scanner");
-  //   Serial.println("System Reboot");
+  /* Set up for the Fingerprint sensor */
+  while (!Serial)
+    ;
+  delay(200);
+  Serial.println("..Welcome to ACCOL..");
+  finger.begin(57600);
+  if (!detectFingerprintScanner()) // could not detect any fingerprint scanner
+  {
+    Serial.println("Could not Found a Fingerprint Scanner");
+    Serial.println("System Reboot");
 
-  //   setup();
-  // }
+    setup();
+  }
 
-  // verifyScannerParameters();
-  // // time client for ntp
-  // timeClient.begin();
+  verifyScannerParameters();
+  // time client for ntp
+  timeClient.begin();
 }
+
+
 
 void loop()
 {
-  // delay(3000);
-  // int p = -1;
-  // /*   Network Connection  */
-  // // handle wifi connection errors and reconnect
-  // if (WiFi.status() != WL_CONNECTED)
-  // {
-  //   WiFi.reconnect();
-  //   Serial.print("Reconnecting");
-  //   while (WiFi.status() != WL_CONNECTED)
-  //   {
-  //     Serial.print(".");
-  //     delay(250);
-  //   }
-  //   Serial.println();
-  // }
+  int p = -1;
+  /*   Network Connection  */
+  // handle wifi connection errors and reconnect
+  if (WiFi.status() != WL_CONNECTED)
+  {
+    WiFi.reconnect();
+    Serial.print("Reconnecting");
+    while (WiFi.status() != WL_CONNECTED)
+    {
+      Serial.print(".");
+      delay(250);
+    }
+    Serial.println();
+  }
 
-  // /*    Fingerprint program   */
-  // Serial.println("Select an option: ");
-  // Serial.println("Press 1 to enroll a fingerprint");
-  // Serial.println("Press 2 to delete a fingerprint");
-  // Serial.println("Press 3 to access with fingerprint");
-  // Serial.println("Press 4 to delete the whole database");
+  /*    Fingerprint program   */
+  Serial.println("Select an option: ");
+  Serial.println("Press 1 to enroll a fingerprint");
+  Serial.println("Press 2 to delete a fingerprint");
+  Serial.println("Press 3 to access with fingerprint");
+  Serial.println("Press 4 to delete the whole database");
 
-  // operation = readUserInput();
-  // if (operation == 1)
-  // {
-  //   enrollFingerprint();
-  // }
-  // else if (operation == 2)
-  // {
-  //   deleteFingerprint(id);
-  // }
-  // else if (operation == 3)
-  // {
-  //   while (p == FINGERPRINT_NOFINGER)
-  //     ;
+  operation = userIn().toInt();
+  if (operation == 1)
+  {
+    enrollFingerprint();
+  }
+  else if (operation == 2)
+  {
+    deleteFingerprint(id);
+  }
+  else if (operation == 3)
+  {
+    while (p == FINGERPRINT_NOFINGER)
+      ;
 
-  //   while (p != FINGERPRINT_OK)
-  //   {
-  //     delay(1000);
-  //     p = finger.getImage();
-  //     switch (p)
-  //     {
-  //     case FINGERPRINT_OK:
-  //       Serial.println("Image taken");
-  //       break;
-  //     case FINGERPRINT_NOFINGER:
-  //       Serial.println(".");
-  //       break;
-  //     case FINGERPRINT_PACKETRECIEVEERR:
-  //       Serial.println("Communication error");
-  //       break;
-  //     case FINGERPRINT_IMAGEFAIL:
-  //       Serial.println("Imaging error");
-  //       break;
-  //     default:
-  //       Serial.println("Unknown error");
-  //       break;
-  //     }
-  //   }
-  //   p = finger.image2Tz();
-  //   switch (p)
-  //   {
-  //   case FINGERPRINT_OK:
-  //     Serial.println("Image converted");
-  //     break;
-  //   case FINGERPRINT_IMAGEMESS:
-  //     Serial.println("Image too messy");
-  //   case FINGERPRINT_PACKETRECIEVEERR:
-  //     Serial.println("Communication error");
-  //   case FINGERPRINT_FEATUREFAIL:
-  //     Serial.println("Could not find fingerprint features");
-  //   case FINGERPRINT_INVALIDIMAGE:
-  //     Serial.println("Could not find fingerprint features");
-  //   default:
-  //     Serial.println("Unknown error");
-  //   }
+    while (p != FINGERPRINT_OK)
+    {
+      delay(1000);
+      p = finger.getImage();
+      switch (p)
+      {
+      case FINGERPRINT_OK:
+        Serial.println("Image taken");
+        break;
+      case FINGERPRINT_NOFINGER:
+        Serial.println(".");
+        break;
+      case FINGERPRINT_PACKETRECIEVEERR:
+        Serial.println("Communication error");
+        break;
+      case FINGERPRINT_IMAGEFAIL:
+        Serial.println("Imaging error");
+        break;
+      default:
+        Serial.println("Unknown error");
+        break;
+      }
+    }
+    p = finger.image2Tz();
+    switch (p)
+    {
+    case FINGERPRINT_OK:
+      Serial.println("Image converted");
+      break;
+    case FINGERPRINT_IMAGEMESS:
+      Serial.println("Image too messy");
+    case FINGERPRINT_PACKETRECIEVEERR:
+      Serial.println("Communication error");
+    case FINGERPRINT_FEATUREFAIL:
+      Serial.println("Could not find fingerprint features");
+    case FINGERPRINT_INVALIDIMAGE:
+      Serial.println("Could not find fingerprint features");
+    default:
+      Serial.println("Unknown error");
+    }
 
-  //   Serial.println("Remove finger");
-  //   delay(1000);
-  //   p = finger.fingerFastSearch();
-  //   if (p == FINGERPRINT_OK)
-  //   {
-  //     Serial.printf("Welcome %i\n", finger.fingerID);
-  //     delay(5000);
-  //   }
-  //   else
-  //   {
-  //     Serial.println(" Access Denied ");
-  //   }
-  // }
-  // else if (operation == 4)
-  // {
-  //   deleteDatabase();
-  // }
-  // else
-  //   return;
+    Serial.println("Remove finger");
+    delay(1000);
+    p = finger.fingerFastSearch();
+    if (p == FINGERPRINT_OK)
+    {
+      Serial.printf("Welcome %i\n", finger.fingerID);
+      delay(5000);
+    }
+    else
+    {
+      Serial.println(" Access Denied ");
+    }
+  }
+  else if (operation == 4)
+  {
+    deleteDatabase();
+  }
+  else
+    return;
 }
-
 
 bool detectFingerprintScanner()
 {
@@ -227,18 +242,6 @@ void verifyScannerParameters()
   Serial.println(finger.baud_rate);
   Serial.println("");
   Serial.println("");
-}
-
-uint8_t readUserInput(void)
-{
-  uint8_t num = 0;
-  while (num == 0)
-  {
-    while (!Serial.available())
-      ;
-    num = Serial.parseInt();
-  }
-  return num;
 }
 
 uint8_t getFingerprintEnroll()
@@ -433,7 +436,7 @@ void enrollFingerprint()
 {
   Serial.println("Ready to enroll a fingerprint!");
   Serial.println("Please type in the ID # (from 1 to 127) you want to save this finger as...");
-  id = readUserInput();
+  id = userIn().toInt();
   if (id == 0)
   {
     return;
@@ -480,8 +483,50 @@ void deleteFingerprint(uint8_t id)
   return;
 }
 
-void display(String text,int cursor1,int cursor2 ) {
-  lcd.clear(); // Clear the display
+void display(String text, int cursor1, int cursor2)
+{
+  lcd.clear();                     // Clear the display
   lcd.setCursor(cursor1, cursor2); // Set the cursor to the top-left corner
-  lcd.print(text); // Print the text on the LCD
+  lcd.print(text);                 // Print the text on the LCD
+}
+
+void ringBuzzer(int frequency, long duration)
+{
+  // Set the pin to output mode
+  pinMode(BUZZER_PIN, OUTPUT);
+
+  // Generate the tone
+  tone(BUZZER_PIN, frequency, duration);
+
+  // Wait for the tone to finish
+  delay(duration);
+
+  // Turn off the tone
+  noTone(BUZZER_PIN);
+}
+
+String userIn(void)
+{
+  static uint8_t lastKey = 0;
+  uint32_t now = millis();
+  String input = "";
+  uint8_t index = keyPad.getKey();
+  while (index != 14) // exit after # key (enter key)
+  {
+    /* valid key press */
+    lastKeyPressed = now;
+    index = keyPad.getKey();
+    if (index == 16) // no key pressed
+      continue;
+
+    if (index != lastKey && index != 14) // new key press other than #
+    {
+      lastKey = index;
+      // next key press
+      input += keys[index];
+    }
+    now = millis();
+  }
+  lastKey = 0;
+  return input; // return the user input as a string
 }
