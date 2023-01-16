@@ -54,15 +54,9 @@ const Addinstance = ({ inputs, title }) => {
     handleAdd();
   
     return () => {
-      // unsub();
-      // fetchData();
-      // getEmail();
-    //   getEmail();
-    // // getDoc();
-    // fetchData();
       
     };
-  }, [email,data ]);
+  }, ); //   }, [email,data ]); 
 
 
   const handleInput = (e) => {
@@ -102,9 +96,7 @@ const Addinstance = ({ inputs, title }) => {
         console.log(data);
         await setDoc(doc(db,"Institutes",email ,"rooms",params.id,"Instance",data.instanceid), {
           ...data,
-          // "id":data.instanceid,
-          // "name": data.instancename,
-          // timeStamp: serverTimestamp(),
+
         });
         
       }
