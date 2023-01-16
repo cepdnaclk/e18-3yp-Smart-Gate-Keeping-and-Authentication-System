@@ -64,5 +64,13 @@ keypad i2c - 32 (0x20)
 
 
 
+/////////////////////
+ keypad templates
 
+ display("Enter Your Input : ", 0, 0);
+  String in = userIn();
+  display(in, 3, 1);
+  delay(2000);
+
+  ////////////////////////
 
