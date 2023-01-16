@@ -27,7 +27,7 @@ import {
   getDocs,
   // onSnapshot,
 } from "firebase/firestore";
-import { auth , db  } from "../../firebase";
+import { auth , db  } from "../../Firebase";
 // import { onValue, sref } from "firebase/database";
 
 const Instanceroomdatatable = () => {

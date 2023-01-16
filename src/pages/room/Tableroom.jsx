@@ -27,7 +27,7 @@ import {
   getDocs,
   // onSnapshot,
 } from "firebase/firestore";
-import { auth , db } from "../../firebase";
+import { auth , db } from "../../Firebase";
 const Roomdatatable = () => {
   const [data, setData] = useState([]);
   const [email, setEmail] = useState(" Non "); //e18068@eng.pdn.ac.lk

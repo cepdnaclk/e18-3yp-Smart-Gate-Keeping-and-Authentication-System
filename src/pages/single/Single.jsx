@@ -10,7 +10,7 @@ import {
   doc,
   getDoc,
 } from "firebase/firestore";
-import { db,auth } from "../../firebase";
+import { db,auth } from "../../Firebase";
 import 'firebase/firestore';
 // import {  getDoc } from "firebase/firestore";
 

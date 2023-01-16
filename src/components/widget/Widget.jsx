@@ -6,7 +6,7 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 import { useEffect, useState } from "react";
 import { collection, query, getDocs } from "firebase/firestore";
-import { db,auth } from "../../firebase";
+import { db,auth } from "../../Firebase";
 
 const Widget = ({ type }) => {
   const [amount, setAmount] = useState(null);

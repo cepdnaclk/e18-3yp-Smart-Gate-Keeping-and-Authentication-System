@@ -8,7 +8,7 @@ import {
   collection,
   onSnapshot,
 } from "firebase/firestore";
-import { db,auth,rtdb } from "../../firebase";
+import { db,auth,rtdb } from "../../Firebase";
 import { useParams } from "react-router-dom";
 import {  ref,   child, get} from "firebase/database";
 

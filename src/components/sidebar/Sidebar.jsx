@@ -20,7 +20,7 @@ import {
   doc,
   getDoc,
 } from "firebase/firestore";
-import { db,auth } from "../../firebase";
+import { db,auth } from "../../Firebase";
 import 'firebase/firestore';
 const Sidebar = () => {
   const [email, setEmail] = useState(" Non "); //e18068@eng.pdn.ac.lk

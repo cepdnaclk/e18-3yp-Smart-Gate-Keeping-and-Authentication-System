@@ -8,7 +8,7 @@ import {
   getDoc,
   setDoc,
 } from "firebase/firestore";
-import { auth, db } from "../../firebase";
+import { auth, db } from "../../Firebase";
 import { useParams } from "react-router-dom";
 // import { ToastContainer, toast } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';

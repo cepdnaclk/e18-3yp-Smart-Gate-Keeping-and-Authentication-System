@@ -7,7 +7,7 @@ import {
   collection,
   getDocs,
 } from "firebase/firestore";
-import { db,auth } from "../../firebase";
+import { db,auth } from "../../Firebase";
 
 const Devicedatatable = () => {
   const [data, setData] = useState([]);

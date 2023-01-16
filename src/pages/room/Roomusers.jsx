@@ -7,7 +7,7 @@ import {
   collection,
   onSnapshot,
 } from "firebase/firestore";
-import { db,auth } from "../../firebase";
+import { db,auth } from "../../Firebase";
 import { useParams } from "react-router-dom";
 
 const RoomUserDatatable = () => {

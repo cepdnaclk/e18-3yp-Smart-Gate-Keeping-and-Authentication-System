@@ -5,7 +5,7 @@ import {
   doc,
   setDoc,
 } from "firebase/firestore";
-import { auth, db } from "../../firebase";
+import { auth, db } from "../../Firebase";
 import { useNavigate } from "react-router-dom";
 
 const New = ({ inputs, title }) => {
