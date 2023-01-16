@@ -11,6 +11,9 @@ import { useNavigate } from "react-router-dom";
 
 const New = ({ inputs, title }) => {
   const [data, setData] = useState({});
+  const [error, setError] = useState(false);
+  const [errormsg, setErrormsg] = useState("");
+
   const navigate = useNavigate();
   var email;
   auth.onAuthStateChanged(function(user) {
@@ -72,16 +75,29 @@ const New = ({ inputs, title }) => {
   };
 
   const handleAdd = async (e) => {
-    e.preventDefault();
-    try {
-      await setDoc(doc(db,"Institutes",email ,"users",data.userid), {
-        ...data,
-      });
-      console.log(data);
-      navigate(-1)
-    } catch (err) {
-      console.log(err);
+    if (!data.email) {
+      // errors.EmailId = 'Please Enter Email ID';
+      setErrormsg( 'Please Enter Email ID');
+      console.log('Please Enter Email ID');
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(data.email)) {
+      setErrormsg( 'Invalid email address');
+      setError(true);
+      console.log('Invalid email address');
     }
+    else{
+      console.log('good email address');
+      e.preventDefault();
+      try {
+        await setDoc(doc(db,"Institutes",email ,"users",data.userid), {
+          ...data,
+        });
+        console.log(data);
+        navigate(-1)
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    
   };
 
   return (
@@ -118,6 +134,7 @@ const New = ({ inputs, title }) => {
                   />
                 </div>
               ))}
+              {error && <span>{errormsg}</span>}
               <button type="submit">
                 Send
               </button>

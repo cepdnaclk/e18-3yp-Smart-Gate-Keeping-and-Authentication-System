@@ -56,6 +56,7 @@ const Login = () => {
           </div>
       </Link>
       </form>
+      <img src="https://t4.ftcdn.net/jpg/03/61/52/11/360_F_361521180_mMN9HNjxBWBy4DV6nRqCgt23VtcFiscL.jpg"></img>
       
       
     </div>

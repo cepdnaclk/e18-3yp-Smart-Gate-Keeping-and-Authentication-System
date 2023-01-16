@@ -47,6 +47,7 @@ const Signup = () => {
         <button type="submit">Sign Up</button>
         {error && <span>Mayhave used email already! </span>}
       </form>
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjt6kYNwFy4_gStca5N_ZMrGu0SjfwN9IvGQ&usqp=CAU" alt="Sign up" />
     </div>
   );
 };

@@ -35,16 +35,16 @@ const Sidebar = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log(email);
+        // console.log(email);
         const docRef = doc(db, "Institutes",email );//
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
           setData(docSnap.data());
-          console.log("Document data:", docSnap.data());
+          // console.log("Document data:", docSnap.data());
           // console.log(data.userid);
           setData(docSnap.data());
           setName(data.Name.toUpperCase());
-          console.log(data.Name);
+          // console.log(data.Name);
           // console.log(data.email);
         } else {
           // doc.data() will be undefined in this case
@@ -168,7 +168,7 @@ const Sidebar = () => {
             <SettingsApplicationsIcon className="icon" />
             <span>New Instances</span>
           </li> */}
-          <p className="title">USER</p>
+          <p className="title">WEB</p>
           <Link to="/details" style={{ textDecoration: "none" }}>
           <li>
             <AccountCircleOutlinedIcon className="icon" />

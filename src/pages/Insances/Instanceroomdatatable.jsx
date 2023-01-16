@@ -34,19 +34,7 @@ const Instanceroomdatatable = () => {
   const [data, setData] = useState([]);
   const [email, setEmail] = useState(" Non "); //e18068@eng.pdn.ac.lk
   // const [projects, setProjects] = useState([]);
-  let list = [];
-  // var email;
-  // auth.onAuthStateChanged(function(user) {
-  //   if (user) {
-  //     // User is signed in.
-  //     email = user.email;
-  //     console.log(email);  // This will print the user's email to the console.
-  //   } else {
-  //     // No user is signed in.
-  //   }
-  // });
-
-
+  
   useEffect(() => {
     const getEmail=async()=>{
       auth.onAuthStateChanged(function(user) {
@@ -67,6 +55,7 @@ const Instanceroomdatatable = () => {
     const fetchData = async () => {
       
       try {
+        let list = [];
         const querySnapshot = await getDocs(collection(db,"Institutes",email ,"rooms"));
         querySnapshot.forEach((doc) => {
           list.push({ id: doc.id, ...doc.data() });
@@ -113,7 +102,7 @@ const Instanceroomdatatable = () => {
       // fetchData();
       // getEmail();
     };
-  },);//[email]
+  },[email]);//[email]
 
   
 

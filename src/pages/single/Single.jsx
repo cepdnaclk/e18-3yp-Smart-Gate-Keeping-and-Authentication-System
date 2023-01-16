@@ -1,7 +1,7 @@
 import "./single.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-import List from "../../components/table/Table";
+// import List from "../../components/table/Table";
 // import { useProps } from 'react';
 import { useParams } from "react-router-dom"; 
 import { useEffect, useState } from "react";
@@ -105,7 +105,7 @@ const Single =  () => {
         <div className="top">
           <div className="left">
             <div className="editButton">Edit</div>
-            <h1 className="title">Information</h1>
+            <h1 className="title">Information about : {data.userid} </h1>
             <div className="item">
              
               <div className="details">
@@ -131,10 +131,10 @@ const Single =  () => {
             {/* <Chart aspect={3 / 1} title="User Spending ( Last 6 Months)" /> */}
           </div>
         </div>
-        <div className="bottom">
-        <h1 className="title">Last Transactions</h1>
+        {/* <div className="bottom">
+        <h1 className="title">Last </h1>
           <List/>
-        </div>
+        </div> */}
       </div>
     </div>
   );
