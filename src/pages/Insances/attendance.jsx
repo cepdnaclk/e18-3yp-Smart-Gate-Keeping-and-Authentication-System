@@ -10,7 +10,7 @@ import {
 } from "firebase/firestore";
 import { db,auth,rtdb } from "../../Firebase";
 import { useParams } from "react-router-dom";
-import {  ref,    onValue} from "firebase/database";
+import {  ref} from "firebase/database";
 
 
 
@@ -20,7 +20,7 @@ const AttendanceDatatable = () => {
   const [data, setData] = useState([]);
   const [email, setEmail] = useState(" Non "); //e18068@eng.pdn.ac.lk
   // var email;
-  let recordes=[];
+  // let recordes=[];
   
 
   useEffect(() => {
@@ -44,19 +44,19 @@ const AttendanceDatatable = () => {
     };
     // console.log(email);
 
-    const getData=async()=>{
-      const dbref = ref(rtdb,"/Institutes/Rooms");
+    // const getData=async()=>{
+    //   const dbref = ref(rtdb,"/Institutes/Rooms");
 
-      onValue(dbref,(snapshot)=>{
+    //   onValue(dbref,(snapshot)=>{
         
-        snapshot.forEach(childSnapshot=>{
-          let id=childSnapshot.key;
-          let data = childSnapshot.val();
-          console.log(data);
-          recordes.push({"key":id,"data":data});
-        })
-      })
-    }
+    //     snapshot.forEach(childSnapshot=>{
+    //       let id=childSnapshot.key;
+    //       let data = childSnapshot.val();
+    //       console.log(data);
+    //       recordes.push({"key":id,"data":data});
+    //     })
+    //   })
+    // }
     
 
 
