@@ -67,7 +67,7 @@ Git is a version control system that lets you manage and keep track of your sour
 -  E/18/330, Sewwandi H.R. [e18330@eng.pdn.ac.lk](mailto:e18330@eng.pdn.ac.lk)
 -  E/18/375, Uduwanage H.U. [e18368@eng.pdn.ac.lk](mailto:e18368@eng.pdn.ac.lk)
 
-## Supervisor
+## Supervisors
 
 Dr. Mahanama Wickramasinghe [mahanamaw@eng.pdn.ac.lk](mailto:mahanamaw@eng.pdn.ac.lk)
 
