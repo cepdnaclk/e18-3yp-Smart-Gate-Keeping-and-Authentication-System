@@ -4,7 +4,7 @@ import {  useEffect, useState } from "react";
 import {
   doc,
   getDoc,
-  updateDoc 
+  setDoc 
 } from "firebase/firestore";
 import { auth, db } from "../../Firebase";
 import { useNavigate } from "react-router-dom";
@@ -59,7 +59,7 @@ const New = ({ inputs, title }) => {
   const handleAdd = async (e) => {
     e.preventDefault();
     try {
-      await updateDoc(doc(db,"Institutes",email), {
+      await setDoc(doc(db,"Institutes",email), {
         ...data,
       });
       console.log(data);

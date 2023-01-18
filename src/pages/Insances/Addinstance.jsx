@@ -30,7 +30,7 @@ const Addinstance = ({ inputs, title }) => {
   
 
   const [email, setEmail] = useState(" Non "); //e18068@eng.pdn.ac.lk
-  const [idValidity, setIdValidity] = useState(false);
+  const [idValidity, setIdValidity] = useState(true);
 
   useEffect(() => {
 
@@ -48,12 +48,12 @@ const Addinstance = ({ inputs, title }) => {
     };
 
     getEmail();
-    handleAdd();
+    // handleAdd();
   
     return () => {
       
     };
-  }, ); //   }, [email,data ]); 
+  }, [email,data.instanceid ]); //   }, [email,data ]); 
 
 
   const handleInput = (e) => {

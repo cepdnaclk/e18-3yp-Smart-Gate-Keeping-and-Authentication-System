@@ -35,16 +35,16 @@ db = firestore.client()
 #               level 1 -------- Low water warning
 #               level 0 -------- Do not turn on pump!!
 
-lightList = ['F', 'S', 'N']
-moistureList = ['D', 'M', 'We', 'Wa']
-waterList = ['level 3', 'level 2', 'level 1', 'level 0']
-email="govinnachian@gmail.com"
+ridl = ['45', '56', '67']
+tidl = ['55', '66', '77', '88']
+uidl = ['3', '2', '6', '6']
+email="govinnachiran@gmail.com"
 # Print
 print("Sending data to firestore database")
 
 # Get user inputs for device ID and sleep time
-DEVICE_ID = input("Enter Device ID: ")
-SLEEP_TIME = int(input("Enter a time interval(minutes): "))
+# DEVICE_ID = input("Enter Device ID: ")
+# SLEEP_TIME = int(input("Enter a time interval(minutes): "))
 
 if(SLEEP_TIME < 1):
     SLEEP_TIME = 1
@@ -53,15 +53,14 @@ if(SLEEP_TIME < 1):
 # ---------------------------
 while True:
     DateTime = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-    rid = random.choice(lightList)
-    tid = random.choice(moistureList)
-    # Temperature = round(random.uniform(8.5, 40.9), 1)
-    uid = random.choice(waterList)
+    rid = random.choice(ridl)
+    tid = random.choice(tidl)
+    uid = random.choice(uidl)
 
-    print(DateTime)
+    print(DateTime, rid , tid , uid)
 
     # doc_ref = db.collection('Plants_Data').document(DEVICE_ID)
-    doc_ref = db.collection(db,"Institutes",email ,"rooms",rid,"Instance",tid,"Attend",uid)
+    doc_ref = db.collection("Institutes",email ,"rooms",rid,"Instance",tid,"Attend").document(uid)
 
     #Multi-location update data
     doc_ref.set({"DateTime":DateTime})
