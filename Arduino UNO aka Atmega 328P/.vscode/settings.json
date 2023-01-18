@@ -1,0 +1,50 @@
+{
+  "C_Cpp_Runner.cCompilerPath": "C:/Users/USER/.platformio/packages/toolchain-atmelavr/bin/avr-gcc.exe",
+  "C_Cpp_Runner.cppCompilerPath": "C:/Users/USER/.platformio/packages/toolchain-atmelavr/bin/avr-g++.exe",
+  "C_Cpp_Runner.debuggerPath": "C:/Users/USER/.platformio/packages/toolchain-atmelavr/bin/avr-gdb.exe",
+  "C_Cpp_Runner.cStandard": "c11",
+  "C_Cpp_Runner.cppStandard": "c++17",
+  "C_Cpp_Runner.msvcBatchPath": "",
+  "C_Cpp_Runner.useMsvc": false,
+  "C_Cpp_Runner.warnings": [
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-Wshadow",
+    "-Wformat=2",
+    "-Wconversion",
+    "-Wnull-dereference",
+    "-Wsign-conversion"
+  ],
+  "C_Cpp_Runner.enableWarnings": true,
+  "C_Cpp_Runner.warningsAsError": false,
+  "C_Cpp_Runner.compilerArgs": [],
+  "C_Cpp_Runner.linkerArgs": [],
+  "C_Cpp_Runner.includePaths": [
+    "c:/Users/USER/ReactProjects/e18-3yp-Smart-Gate-Keeping-and-Authentication-System/Arduino UNO aka Atmega 328P/include",
+    "c:/Users/USER/ReactProjects/e18-3yp-Smart-Gate-Keeping-and-Authentication-System/Arduino UNO aka Atmega 328P/src",
+    "C:/Users/USER/.platformio/packages/framework-arduino-avr-minicore/cores/MiniCore",
+    "C:/Users/USER/.platformio/packages/framework-arduino-avr-minicore/variants/standard",
+    "C:/Users/USER/.platformio/packages/framework-arduino-avr-minicore/libraries/AVR_examples/src",
+    "C:/Users/USER/.platformio/packages/framework-arduino-avr-minicore/libraries/EEPROM/src",
+    "C:/Users/USER/.platformio/packages/framework-arduino-avr-minicore/libraries/Optiboot_flasher/src",
+    "C:/Users/USER/.platformio/packages/framework-arduino-avr-minicore/libraries/SPI/src",
+    "C:/Users/USER/.platformio/packages/framework-arduino-avr-minicore/libraries/SPI1/src",
+    "C:/Users/USER/.platformio/packages/framework-arduino-avr-minicore/libraries/SoftwareSerial/src",
+    "C:/Users/USER/.platformio/packages/framework-arduino-avr-minicore/libraries/Wire/src",
+    "C:/Users/USER/.platformio/packages/framework-arduino-avr-minicore/libraries/Wire1/src",
+    ""
+  ],
+  "C_Cpp_Runner.includeSearch": [
+    "*",
+    "**/*"
+  ],
+  "C_Cpp_Runner.excludeSearch": [
+    "**/build",
+    "**/build/**",
+    "**/.*",
+    "**/.*/**",
+    "**/.vscode",
+    "**/.vscode/**"
+  ]
+}
