@@ -29,6 +29,34 @@ whether a person is registered or not.
 
 ![solution](./docs/solution.PNG)
 
+A fingerprint module is a device that captures and processes fingerprint data to verify an individual's identity (User Authentication). R037 Fingerprint module captures an image of fingerprint data and sends that image to our hardware platform, the NODEMCU microcontroller to either verify or store data inside our external storage (SD card module) other than in in-built flash memory. The data on the position of the verified person on the pathway into the controlled environment is sent to the microcontroller (NODEMCU) by the ultrasonic sensor modules. There is a keypad as an additional input and verification method when something goes wrong with scanning the fingerprint correctly. Depending on these inputs, the control platform (NODEMCU) will send the control signals to the LED indicators, buzzers, and servo motor.
+
+Another important aspect of the solution architecture is the software that runs on the hardware platform and cloud which interacts with administrators (Institutions, Companies, etc.). This includes the firmware that controls the hardware components of the module, as well as web applications deployed on the cloud platform (Firebase) which provides services such as registration of their visitors, checking out logging details, and creating the controlled environments as they wish. All the communication between these platforms is done by secure Rest APIs and all the data stored and transmitted will be encrypted.    
+
+## Technologies
+
+### React js
+
+React is a JavaScript library for building user interfaces.React is used to build single-page applications.React allows us to create reusable UI components.
+
+### Node js
+
+Used for server-side programming, and primarily deployed for non-blocking, event-driven servers, such as traditional web sites and back-end API services
+
+### Postman
+
+Postman is an application used for API testing. It is an HTTP client that tests HTTP requests, utilizing a graphical user interface, through which we obtain different types of responses that need to be subsequently validated.
+
+### PlatformIO
+
+PlatformIO is a cross-platform, cross-architecture, multi-framework professional IDE tool for embedded system and software engineers who write embedded applications. By providing a universal IDE interface using PlatformIO, Using this we will be able to program your hardware in a more developing-friendly way!
+
+### Git and GitHub
+
+Git is a version control system that lets you manage and keep track of your source code history. GitHub is a cloud-based hosting service that lets you manage Git repositories.
+
+
+
 ## Project Timeline
 
 ![timeline](./docs/timeline.PNG)
