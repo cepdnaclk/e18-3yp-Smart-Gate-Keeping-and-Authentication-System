@@ -35,9 +35,9 @@ db = firestore.client()
 #               level 1 -------- Low water warning
 #               level 0 -------- Do not turn on pump!!
 
-uidl = ['456', '745', '67']
-tidl = ['20230117', '20230118']
-ridl = ['321', '323', '323', ]
+uidl = ['456', '745', '67','70' ,'45','37']
+tidl = ['20230117'] # '20230118'
+ridl = [ '323', ]#'321', '323',
 # email="govinnachiran@gmail.com"
 email="e18068@eng.pdn.ac.lk"
 # Print
@@ -64,7 +64,7 @@ while True:
     doc_ref = db.collection("Institutes",email ,"rooms","323","Instance","20230117","Attend").document(uid)
 
     #Multi-location update data
-    doc_ref.set({"currenttime":DateTime})
+    doc_ref.set({"currenttime":DateTime,"verificationmode": "Fingerprint","uid":uid})
     # print(Temperature)
     # Sleep time
     time.sleep(SLEEP_TIME * 30)

@@ -24,8 +24,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {
   collection,
-  getDocs,
-  // onSnapshot,
+  onSnapshot,
 } from "firebase/firestore";
 import { auth , db  } from "../../Firebase";
 // import { onValue, sref } from "firebase/database";
@@ -52,20 +51,20 @@ const Instanceroomdatatable = () => {
          }
       });
     };
-    const fetchData = async () => {
+    // const fetchData = async () => {
       
-      try {
-        let list = [];
-        const querySnapshot = await getDocs(collection(db,"Institutes",email ,"rooms"));
-        querySnapshot.forEach((doc) => {
-          list.push({ id: doc.id, ...doc.data() });
-        });
-        setData(list);
-        console.log(list);
-      } catch (err) {
-        console.log(err);
-      }
-    };
+    //   try {
+    //     let list = [];
+    //     const querySnapshot = await getDocs(collection(db,"Institutes",email ,"rooms"));
+    //     querySnapshot.forEach((doc) => {
+    //       list.push({ id: doc.id, ...doc.data() });
+    //     });
+    //     setData(list);
+    //     console.log(list);
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // };
     // const query = ref(rtdb, "projects");
     // return onValue(query, (snapshot) => {
     //   const data = snapshot.val();
@@ -78,27 +77,27 @@ const Instanceroomdatatable = () => {
     // });
     
     // LISTEN (REALTIME)
-    // const unsub = onSnapshot(
-    //   collection(db,"Institutes",email ,"rooms"),
-    //   (snapShot) => {
-    //     let list = [];
-    //     snapShot.docs.forEach((doc) => {
-    //       list.push({ id: doc.id, ...doc.data() });
-    //     });
-    //     setData(list);
-    //   },
-    //   (error) => {
-    //     console.log(error);
-    //   }
+    const unsub = onSnapshot(
+      collection(db,"Institutes",email ,"rooms"),
+      (snapShot) => {
+        let list = [];
+        snapShot.docs.forEach((doc) => {
+          list.push({ id: doc.id, ...doc.data() });
+        });
+        setData(list);
+      },
+      (error) => {
+        console.log(error);
+      }
       
 
-    // );
+    );
     getEmail();
-    fetchData();
+    // fetchData();
     
     // unsub();
     return () => {
-      // unsub();
+      unsub();
       // fetchData();
       // getEmail();
     };
