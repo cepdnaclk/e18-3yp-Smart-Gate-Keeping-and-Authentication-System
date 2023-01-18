@@ -124,18 +124,18 @@ export const roomTableCol = [
         { 
           field: "currenttime", 
           headerName: "Time", 
-          width: 200 
+          width: 300 
         },
         { 
           field: "verificationmode", 
           headerName: "Verify mode", 
-          width: 200 
+          width: 300 
         },
-        { 
-          field: "verificatoindata", 
-          headerName: "verificatoin data", 
-          width: 200 
-        }
+        // { 
+        //   field: "verificatoindata", 
+        //   headerName: "verificatoin data", 
+        //   width: 200 
+        // }
           
         ];
 

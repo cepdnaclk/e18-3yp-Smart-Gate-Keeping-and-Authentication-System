@@ -6,7 +6,7 @@ import { attendanceTableCol } from "../../datatablesource";
 import { useEffect, useState } from "react";
 import {
   collection,
-  onSnapshot,
+  getDocs,
 } from "firebase/firestore";
 import { db,auth } from "../../Firebase";
 import { useParams } from "react-router-dom";
@@ -41,34 +41,64 @@ const AttendanceDatatable = () => {
       });
       
     };
+
     // console.log(email);
     // LISTEN (REALTIME)
     console.log(email); // e18068@eng.pdn.ac.lk
     console.log(params.rid);
     console.log(params.tid);
-    const unsub = onSnapshot(
-      collection(db,"Institutes","e18068@eng.pdn.ac.lk" ,"rooms"),// db,"Institutes",email ,"rooms",params.rid,"Instance",params.tid,"Attend"
-      (snapShot) => {
-        let list = [];                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
-        snapShot.docs.forEach((doc) => {
-          list.push({ id: doc.id, ...doc.data()});
+    // const unsub = onSnapshot(
+    //   collection(db,"Institutes"),// db,"Institutes",email ,"rooms",params.rid,"Instance",params.tid,"Attend"
+    //   (snapShot) => {
+    //     let list = [];                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+    //     snapShot.docs.forEach((doc) => {
+    //       list.push({ id: doc.id, ...doc.data()});
+    //     });
+    //     setData(list);
+    //     console.log("========================");
+    //     console.log(list);
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // );
+    // LISTEN (REALTIME)
+    // const unsub = onSnapshot(
+    //   collection(db,"Institutes",email ,"rooms",params.rid,"Instance",params.tid,"Attend"),
+    //   (snapShot) => {
+    //     let list = [];
+    //     snapShot.docs.forEach((doc) => {
+    //       list.push({ id: doc.id, ...doc.data() });
+    //     });
+    //     setData(list);
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+      
+
+    // );
+    const fetchData = async () => {
+      
+      try {
+        let list = [];
+        const querySnapshot = await getDocs(collection(db,"Institutes",email ,"rooms",params.rid,"Instance",params.tid,"Attend"));
+        querySnapshot.forEach((doc) => {
+          list.push({ id: doc.id, ...doc.data() });
         });
         setData(list);
-        console.log("========================");
         console.log(list);
-      },
-      (error) => {
-        console.log(error);
+      } catch (err) {
+        console.log(err);
       }
-    );
+    };
 
     getEmail();
-    unsub();
+    // unsub();
+    fetchData();
     
-
     return () => {
-        getEmail();
-        unsub();
+        // unsub();
       
     };
   }, [email,params.rid , params.tid]);
