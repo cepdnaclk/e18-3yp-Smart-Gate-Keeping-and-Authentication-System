@@ -1,16 +1,15 @@
-import "./datatable.scss";
+import "./devicedatatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { userTableCol } from "../../datatablesource";
+import { deviceTableCol} from "../../datatablesource";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {
   collection,
   getDocs,
-  
 } from "firebase/firestore";
 import { db,auth } from "../../Firebase";
 
-const Datatable = () => {
+const Devicedatatable = () => {
   const [data, setData] = useState([]);
   const [email, setEmail] = useState(" Non "); //e18068@eng.pdn.ac.lk
   // var email;
@@ -45,7 +44,7 @@ const Datatable = () => {
     const fetchData = async () => {
       let list = [];
       try {
-        const querySnapshot = await getDocs(collection(db,"Institutes",email ,"users"));
+        const querySnapshot = await getDocs(collection(db,"Institutes",email ,"devices"));
         querySnapshot.forEach((doc) => {
           list.push({ id: doc.id, ...doc.data() });
         });
@@ -83,43 +82,21 @@ const Datatable = () => {
     };
   }, [email]);
 
+  
 
-
-  const actionColumn = [
-    {
-      field: "action",
-      headerName: "Action",
-      width: 200,
-      renderCell: (params) => {
-        return (
-          <div className="cellAction">
-            <Link to={{ pathname: "/singleview/".concat(params.row.id) }} style={{ textDecoration: "none" }} >
-              <div className="viewButton"
-              >View</div>
-            </Link>
-            {/* <div
-              className="deleteButton"
-              onClick={() => handleDelete(params.row.id)}
-            >
-              Add Rooms
-            </div> */}
-          </div>
-        );
-      },
-    },
-  ];
+ 
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        Add New User
-        <Link to="/users/new" className="link">
+        Add New Device
+        <Link to="/newdevice" className="link">
           Add New
         </Link>
       </div>
       <DataGrid
         className="datagrid"
         rows={data}
-        columns={userTableCol.concat(actionColumn)}
+        columns={deviceTableCol}
         pageSize={9}
         rowsPerPageOptions={[9]}
         // checkboxSelection
@@ -128,4 +105,4 @@ const Datatable = () => {
   );
 };
 
-export default Datatable;
+export default Devicedatatable;

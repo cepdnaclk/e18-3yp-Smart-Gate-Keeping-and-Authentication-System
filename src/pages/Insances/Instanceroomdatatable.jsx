@@ -25,33 +25,16 @@ import { useEffect, useState } from "react";
 import {
   collection,
   getDocs,
-  deleteDoc,
-  doc,
   // onSnapshot,
 } from "firebase/firestore";
-import { auth , db } from "../../firebase";
-import {useNavigate} from 'react-router-dom';
-
+import { auth , db  } from "../../Firebase";
+// import { onValue, sref } from "firebase/database";
 
 const Instanceroomdatatable = () => {
   const [data, setData] = useState([]);
   const [email, setEmail] = useState(" Non "); //e18068@eng.pdn.ac.lk
-  // var email;
-  // auth.onAuthStateChanged(function(user) {
-  //   if (user) {
-  //     // User is signed in.
-  //     email = user.email;
-  //     console.log(email);  // This will print the user's email to the console.
-  //   } else {
-  //     // No user is signed in.
-  //   }
-  // });
-  const navigate = useNavigate();
-
-  const navigateInstitutepage = () => {
-    navigate('../Institute');
-  };
-
+  // const [projects, setProjects] = useState([]);
+  
   useEffect(() => {
     const getEmail=async()=>{
       auth.onAuthStateChanged(function(user) {
@@ -70,8 +53,9 @@ const Instanceroomdatatable = () => {
       });
     };
     const fetchData = async () => {
-      let list = [];
+      
       try {
+        let list = [];
         const querySnapshot = await getDocs(collection(db,"Institutes",email ,"rooms"));
         querySnapshot.forEach((doc) => {
           list.push({ id: doc.id, ...doc.data() });
@@ -82,6 +66,16 @@ const Instanceroomdatatable = () => {
         console.log(err);
       }
     };
+    // const query = ref(rtdb, "projects");
+    // return onValue(query, (snapshot) => {
+    //   const data = snapshot.val();
+
+    //   if (snapshot.exists()) {
+    //     Object.values(data).map((project) => {
+    //       setProjects((projects) => [...projects, project]);
+    //     });
+    //   }
+    // });
     
     // LISTEN (REALTIME)
     // const unsub = onSnapshot(
@@ -99,24 +93,18 @@ const Instanceroomdatatable = () => {
       
 
     // );
-    fetchData();
     getEmail();
+    fetchData();
+    
     // unsub();
     return () => {
       // unsub();
-      fetchData();
-      getEmail();
+      // fetchData();
+      // getEmail();
     };
-  }, [email]);
+  },[email]);//[email]
 
-  const handleDelete = async (id) => {
-    try {
-      // await deleteDoc(doc(db, "rooms", id));
-      // setData(data.filter((item) => item.id !== id));
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  
 
   const actionColumn = [
     {

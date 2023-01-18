@@ -1,19 +1,21 @@
 import { useContext, useState } from "react";
 import "./login.scss";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase";
+// import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import {AuthContext} from "../../context/AuthContext"
 import { Link } from "react-router-dom";
+import { auth } from "../../Firebase";
+// import { auth } from "firebase/auth";
 
 const Login = () => {
   const [error, setError] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const navitage = useNavigate()
+  const navitage = useNavigate();
 
-  const {dispatch} = useContext(AuthContext)
+  const {dispatch} = useContext(AuthContext);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -54,6 +56,7 @@ const Login = () => {
           </div>
       </Link>
       </form>
+      <img src="https://t4.ftcdn.net/jpg/03/61/52/11/360_F_361521180_mMN9HNjxBWBy4DV6nRqCgt23VtcFiscL.jpg"  alt="Sign up"/>
       
       
     </div>

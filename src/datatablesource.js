@@ -78,6 +78,20 @@ export const roomTableCol = [
     }
     
   ];
+  export const deviceTableCol = [
+    { 
+      field: "deviceid", 
+      headerName: "ID", 
+      width: 100 
+    },
+    { 
+      field: "details", 
+      headerName: "Descriptoin", 
+      width: 300 
+    }
+      
+      
+    ];
 
   export const roomUsersTableCol = [
     { 
@@ -94,7 +108,7 @@ export const roomTableCol = [
         headerName: "Instance ID", 
         width: 150 
       },{ 
-        field: "name", 
+        field: "instancename", 
         headerName: "Instance Name", 
         width: 500 
       }

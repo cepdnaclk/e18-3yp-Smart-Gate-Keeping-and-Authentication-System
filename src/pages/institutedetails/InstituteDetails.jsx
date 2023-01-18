@@ -1,26 +1,43 @@
 // import "./new.scss";
-import Sidebar from "../../components/sidebar/Sidebar";
-import Navbar from "../../components/navbar/Navbar";
-import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
-import { useEffect, useState } from "react";
+
+import {  useEffect, useState } from "react";
 import {
-  addDoc,
-  collection,
   doc,
-  serverTimestamp,
-  setDoc,
+  getDoc,
+  setDoc 
 } from "firebase/firestore";
-import { auth, db, storage } from "../../firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { auth, db } from "../../Firebase";
 import { useNavigate } from "react-router-dom";
 
 const New = ({ inputs, title }) => {
-  const [file, setFile] = useState("");
   const [data, setData] = useState({});
-  const [per, setPerc] = useState(null);
+  const [predata, setPreData] = useState({});
   const navigate = useNavigate();
   var email;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        console.log(email);
+        const docRef = doc(db, "Institutes",email);//
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setPreData(docSnap.data());
+          console.log("Document data:",  predata.Name);
+          // InstituteDetailsform[0].placeholder = predata.Name;
+          
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+    
+  },[predata.Name,email]);
+   
   auth.onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in.
@@ -30,48 +47,8 @@ const New = ({ inputs, title }) => {
       // No user is signed in.
     }
   });
-
-  useEffect(() => {
-    const uploadFile = () => {
-      const name = new Date().getTime() + file.name;
-
-      console.log(name);
-      const storageRef = ref(storage, file.name);
-      const uploadTask = uploadBytesResumable(storageRef, file);
-
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done");
-          setPerc(progress);
-          switch (snapshot.state) {
-            case "paused":
-              console.log("Upload is paused");
-              break;
-            case "running":
-              console.log("Upload is running");
-              break;
-            default:
-              break;
-          }
-        },
-        (error) => {
-          console.log(error);
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            setData((prev) => ({ ...prev, img: downloadURL }));
-          });
-        }
-      );
-    };
-    file && uploadFile();
-  }, [file]);
-
   
-
+  
   const handleInput = (e) => {
     const id = e.target.id;
     const value = e.target.value;
@@ -113,8 +90,6 @@ const New = ({ inputs, title }) => {
           </div> */}
           <div className="right">
             <form onSubmit={handleAdd}>
-              
-
               {inputs.map((input) => (
                 <div className="formInput" key={input.id }>
                   <label>{input.label}</label>

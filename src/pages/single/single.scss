@@ -5,23 +5,24 @@
     flex: 6;
 
     .top {
-      padding: 20px;
+      padding: 50px;
       display: flex;
       gap: 20px;
+      position: center;
 
       .left {
         flex: 1;
         -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
         box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
         padding: 20px;
-        position: relative;
+        position: center;
 
         .editButton {
           position: absolute;
           top: 0;
           right: 0;
           padding: 5px;
-          font-size: 12px;
+          font-size: 20px;
           color: #7451f8;
           background-color: #7551f818;
           cursor: pointer;
@@ -30,7 +31,8 @@
 
         .item {
           display: flex;
-          gap: 20px;
+          gap: 30px;
+          font-size: 30px;
 
           .itemImg {
             width: 100px;
@@ -53,10 +55,12 @@
                 font-weight: bold;
                 color: gray;
                 margin-right: 5px;
+                font-size: 20px;
               }
 
               .itemValue {
                 font-weight: 300;
+                font-size: 20px;
               }
             }
           }
@@ -76,9 +80,10 @@
     }
 
     .title {
-      font-size: 16px;
-      color: lightgray;
+      font-size: 25px;
+      color: rgb(34, 190, 63);
       margin-bottom: 20px;
+      font-weight: 500px;
     }
   }
 }

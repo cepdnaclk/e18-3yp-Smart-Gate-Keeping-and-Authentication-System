@@ -1,23 +1,19 @@
 import "./addinstance.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useEffect, useState } from "react";
 import {
-  addDoc,
-  collection,
+
   doc,
-  serverTimestamp,
   getDoc,
   setDoc,
 } from "firebase/firestore";
-import { auth, db, storage } from "../../firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { useNavigate } from "react-router-dom";
+import { auth, db } from "../../Firebase";
 import { useParams } from "react-router-dom";
-import { withAlert  } from 'react-alert'
+
 import RoomInstanceesDatatable from "./Roominstances";
+// import { onValue, ref , set  } from "firebase/database";
+
 // import { ToastContainer, toast } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
 // import  { Toaster } from "react-hot-toast";
@@ -34,13 +30,9 @@ const Addinstance = ({ inputs, title }) => {
   
 
   const [email, setEmail] = useState(" Non "); //e18068@eng.pdn.ac.lk
-  const [idValidity, setIdValidity] = useState(false);
-  const navigate = useNavigate()
+  const [idValidity, setIdValidity] = useState(true);
 
   useEffect(() => {
-
-   
-
 
     const getEmail=async()=>{
       auth.onAuthStateChanged(function(user) {
@@ -55,21 +47,13 @@ const Addinstance = ({ inputs, title }) => {
       });
     };
 
-
     getEmail();
-    // getDoc();
-    // fetchData();
-
+    // handleAdd();
+  
     return () => {
-      // unsub();
-      // fetchData();
-      // getEmail();
-    //   getEmail();
-    // // getDoc();
-    // fetchData();
       
     };
-  }, [email ]);
+  }, [email,data.instanceid ]); //   }, [email,data ]); 
 
 
   const handleInput = (e) => {
@@ -85,30 +69,33 @@ const Addinstance = ({ inputs, title }) => {
     try {
      
       console.log(email);
-      console.log(data.userid);
-      console.log(email);
+      console.log(data.instanceid);
       const docRef = doc(db, "Institutes",email ,"rooms",params.id);//
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         setData(docSnap.data());
         console.log("=========");
-        
-        setIdValidity(true);
+        console.log(data);
+        setIdValidity(true);// "Institutes/"+email +"/rooms/"+params.id+"/Instance/"+data.instanceid
+        // set(ref(rtdb,'Institutes/users/instances/'+data.instanceid+"/"), {// rtdb, 'users/' + data.instanceid
+        //   ...data,
+        // });
         
       } else {
         
         // alert.show('No such document!')
         console.log("No such document!");
         // toast("Wow so easy!");
+
         setIdValidity(false);
       }
       if(idValidity){
-        console.log(data.instanceid);
+        console.log("========= idValidity");
+        console.log(data);
         await setDoc(doc(db,"Institutes",email ,"rooms",params.id,"Instance",data.instanceid), {
-          "id":data.instanceid,
-          "name": data.instancename,
-          // timeStamp: serverTimestamp(),
+          ...data,
         });
+        
       }
       
     } catch (err) {
@@ -146,6 +133,7 @@ const Addinstance = ({ inputs, title }) => {
                 Submit
               </button>
             </form>
+            {idValidity && <span>errormsg</span>}
             <div>
             <RoomInstanceesDatatable/>
             </div>

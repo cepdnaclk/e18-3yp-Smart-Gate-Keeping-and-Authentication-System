@@ -1,16 +1,13 @@
 import "./roomusers.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { userColumns, userRows, roomUsersTableCol } from "../../datatablesource";
+import {roomUsersTableCol } from "../../datatablesource";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {
   collection,
-  getDocs,
-  deleteDoc,
-  doc,
   onSnapshot,
 } from "firebase/firestore";
-import { db,auth } from "../../firebase";
+import { db,auth } from "../../Firebase";
 import { useParams } from "react-router-dom";
 
 const RoomUserDatatable = () => {
@@ -19,7 +16,6 @@ const RoomUserDatatable = () => {
   const [data, setData] = useState([]);
   const [email, setEmail] = useState(" Non "); //e18068@eng.pdn.ac.lk
   // var email;
-  const data1 = { name: 'John', age: 30 };
 
   
 
@@ -89,7 +85,7 @@ const RoomUserDatatable = () => {
     //   getEmail();
       
     };
-  }, [email]);
+  }, [email,params.id]);
 
 //   const handleDelete = async (id) => {
 //     try {

@@ -4,7 +4,7 @@ import List from "./pages/list/List";
 // import Single from "./pages/single/Single";
 import New from "./pages/new/New";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { productInputs, userInputs,roomInput , userAddRoom,InstituteDetailsform , instanceAddRoom } from "./formSource";
+import { productInputs, userInputs,roomInput , userAddRoom,InstituteDetailsform , instanceAddRoom ,newDeviceform} from "./formSource";
 import "./style/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
@@ -133,12 +133,12 @@ function App() {
                 }
               />
             </Route>
-            <Route path="newdevice">
+            <Route path="newdevice" >
               <Route
                 index
                 element={
                   <RequireAuth>
-                    <Newdevice />
+                    <Newdevice inputs={newDeviceform} title="Add New Devices"/>
                   </RequireAuth>
                 }
               />
