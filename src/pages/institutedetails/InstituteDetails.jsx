@@ -14,10 +14,30 @@ const New = ({ inputs, title }) => {
   const [predata, setPreData] = useState({});
   const navigate = useNavigate();
   var email;
+
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        console.log(email);
+        const docRef = doc(db, "Institutes",email);//
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setPreData(docSnap.data());
+          console.log("Document data:",  predata.Name);
+          // InstituteDetailsform[0].placeholder = predata.Name;
+          
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
     fetchData();
     
-  });
+  },[predata.Name,email]);
+   
   auth.onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in.
@@ -28,25 +48,7 @@ const New = ({ inputs, title }) => {
     }
   });
   
-  const fetchData = async () => {
-    try {
-      console.log(email);
-      const docRef = doc(db, "Institutes",email);//
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        setPreData(docSnap.data());
-        console.log("Document data:", predata);
-        // console.log(data.userid);
-        // console.log(data.Name);
-        // console.log(data.email);
-      } else {
-        // doc.data() will be undefined in this case
-        console.log("No such document!");
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  
   const handleInput = (e) => {
     const id = e.target.id;
     const value = e.target.value;
@@ -94,7 +96,7 @@ const New = ({ inputs, title }) => {
                   <input
                     id={input.id}
                     type={input.type}
-                    placeholder={predata.name}
+                    placeholder={input.placeholder}
                     onChange={handleInput}
                   />
                 </div>

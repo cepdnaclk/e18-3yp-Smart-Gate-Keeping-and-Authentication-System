@@ -47,9 +47,6 @@ const Addinstance = ({ inputs, title }) => {
       });
     };
 
-    
-
-
     getEmail();
     handleAdd();
   
@@ -79,8 +76,7 @@ const Addinstance = ({ inputs, title }) => {
         setData(docSnap.data());
         console.log("=========");
         console.log(data);
-        
-        // setIdValidity(true);// "Institutes/"+email +"/rooms/"+params.id+"/Instance/"+data.instanceid
+        setIdValidity(true);// "Institutes/"+email +"/rooms/"+params.id+"/Instance/"+data.instanceid
         // set(ref(rtdb,'Institutes/users/instances/'+data.instanceid+"/"), {// rtdb, 'users/' + data.instanceid
         //   ...data,
         // });
@@ -90,13 +86,14 @@ const Addinstance = ({ inputs, title }) => {
         // alert.show('No such document!')
         console.log("No such document!");
         // toast("Wow so easy!");
+
         setIdValidity(false);
       }
       if(idValidity){
+        console.log("========= idValidity");
         console.log(data);
         await setDoc(doc(db,"Institutes",email ,"rooms",params.id,"Instance",data.instanceid), {
           ...data,
-
         });
         
       }
@@ -136,6 +133,7 @@ const Addinstance = ({ inputs, title }) => {
                 Submit
               </button>
             </form>
+            {idValidity && <span>errormsg</span>}
             <div>
             <RoomInstanceesDatatable/>
             </div>
