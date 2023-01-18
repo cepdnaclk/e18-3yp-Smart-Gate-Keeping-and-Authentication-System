@@ -37,9 +37,9 @@ db = firestore.client()
 
 uidl = ['456', '745', '67','70' ,'45','37']
 tidl = ['20230117'] # '20230118'
-ridl = [ '323', ]#'321', '323',
-# email="govinnachiran@gmail.com"
-email="e18068@eng.pdn.ac.lk"
+ridl = [ '321', '323','322' ]#'321', '323',
+email="govinnachiran@gmail.com"
+# email="e18068@eng.pdn.ac.lk"
 # Print
 print("Sending data to firestore database")
 
@@ -61,7 +61,7 @@ while True:
     print(DateTime, rid , tid , uid)
 
     # doc_ref = db.collection('Plants_Data').document(DEVICE_ID)
-    doc_ref = db.collection("Institutes",email ,"rooms","323","Instance","20230117","Attend").document(uid)
+    doc_ref = db.collection("Institutes",email ,"rooms",rid,"Instance",tid,"Attend").document(uid)
 
     #Multi-location update data
     doc_ref.set({"currenttime":DateTime,"verificationmode": "Fingerprint","uid":uid})
