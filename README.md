@@ -23,11 +23,11 @@ gate, the laser sensors will detect whether the user passed the gate or not. So,
 entrance of the user from the website. So, the system will provide a solution for the above problem by reducing the time spent on the process and by accurately verifying 
 whether a person is registered or not.
 
-![System](./docs/System.PNG)
+![System](./System.PNG)
 
 ## Solution Architecture
 
-![solution](./docs/solution.PNG)
+![solution](./solution.PNG)
 
 A fingerprint module is a device that captures and processes fingerprint data to verify an individual's identity (User Authentication). R037 Fingerprint module captures an image of fingerprint data and sends that image to our hardware platform, the NODEMCU microcontroller to either verify or store data inside our external storage (SD card module) other than in in-built flash memory. The data on the position of the verified person on the pathway into the controlled environment is sent to the microcontroller (NODEMCU) by the ultrasonic sensor modules. There is a keypad as an additional input and verification method when something goes wrong with scanning the fingerprint correctly. Depending on these inputs, the control platform (NODEMCU) will send the control signals to the LED indicators, buzzers, and servo motor.
 
@@ -59,7 +59,7 @@ Git is a version control system that lets you manage and keep track of your sour
 
 ## Project Timeline
 
-![timeline](./docs/timeline.PNG)
+![timeline](./timeline.PNG)
 
 
 ## Team
