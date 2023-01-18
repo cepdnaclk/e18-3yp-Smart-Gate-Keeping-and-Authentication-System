@@ -25,6 +25,10 @@ whether a person is registered or not.
 
 ![System](./docs/System.PNG)
 
+## Solution Architecture
+
+![solution](./docs/solution.PNG)
+
 ## Project Timeline
 
 ![timeline](./docs/timeline.PNG)
