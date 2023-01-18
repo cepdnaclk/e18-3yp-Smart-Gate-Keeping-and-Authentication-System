@@ -8,9 +8,8 @@ import {
   collection,
   onSnapshot,
 } from "firebase/firestore";
-import { db,auth,rtdb } from "../../Firebase";
+import { db,auth } from "../../Firebase";
 import { useParams } from "react-router-dom";
-import {  ref} from "firebase/database";
 
 
 
@@ -43,79 +42,26 @@ const AttendanceDatatable = () => {
       
     };
     // console.log(email);
-
-    // const getData=async()=>{
-    //   const dbref = ref(rtdb,"/Institutes/Rooms");
-
-    //   onValue(dbref,(snapshot)=>{
-        
-    //     snapshot.forEach(childSnapshot=>{
-    //       let id=childSnapshot.key;
-    //       let data = childSnapshot.val();
-    //       console.log(data);
-    //       recordes.push({"key":id,"data":data});
-    //     })
-    //   })
-    // }
-    
-
-
-    // const fetchData = async () => {
-    //   let list = [];
-    //   try {
-    //     const querySnapshot = await getDocs(collection(db,"Institutes",email ,"rooms",params.id,"Users"));
-    //     querySnapshot.forEach((doc) => {
-    //       list.push({ id: doc.id, ...doc.data() });
-    //     });
-    //     setData(list);
-    //     console.log(list);
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // };
-    getEmail();
-    // fetchData();
-    // unsub();
-    // getEmail();
-
     // LISTEN (REALTIME)
-    console.log(email);
+    console.log(email); // e18068@eng.pdn.ac.lk
+    console.log(params.rid);
+    console.log(params.tid);
     const unsub = onSnapshot(
-      collection(db,"Institutes",email ,"rooms",params.rid,"Instance",params.tid,"Attend"),// "Institutes",email ,
+      collection(db,"Institutes","e18068@eng.pdn.ac.lk" ,"rooms"),// db,"Institutes",email ,"rooms",params.rid,"Instance",params.tid,"Attend"
       (snapShot) => {
         let list = [];                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
         snapShot.docs.forEach((doc) => {
-          list.push({ id: doc.id, ...doc.data() });
+          list.push({ id: doc.id, ...doc.data()});
         });
         setData(list);
+        console.log("========================");
         console.log(list);
-        // ------------
-        let reft = ref(rtdb,"/Institutes/e18068@eng/users/10");
-        reft.on("value", snapshot => {
-        const datat = snapshot.val()
-        console.log(datat);
-        });
-        // ------------
-        // get(child(rtdb,"/Institutes/e18068@eng/users/10")).then((snapshot) => {
-        //   if (snapshot.exists()) {
-        //     console.log(snapshot.val());
-        //   } else {
-        //     console.log("No data available");
-        //   }
-        // }).catch((error) => {
-        //   console.error(error);
-        // });
       },
       (error) => {
         console.log(error);
       }
     );
-    // var sleep = ref(rtdb,'/Institutes/e18068@eng/users/');
-    // sleep.on('value', function(snapshot) {
-    //   snapshot.forEach((childSnapshot) => {
-    //   console.log(childSnapshot.val().sleep);
-    //   });
-    // });
+
     getEmail();
     unsub();
     
@@ -123,8 +69,6 @@ const AttendanceDatatable = () => {
     return () => {
         getEmail();
         unsub();
-      // fetchData();
-    //   getEmail();
       
     };
   }, [email,params.rid , params.tid]);

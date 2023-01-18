@@ -35,10 +35,11 @@ db = firestore.client()
 #               level 1 -------- Low water warning
 #               level 0 -------- Do not turn on pump!!
 
-ridl = ['45', '56', '67']
-tidl = ['55', '66', '77', '88']
-uidl = ['3', '2', '6', '6']
-email="govinnachiran@gmail.com"
+uidl = ['456', '745', '67']
+tidl = ['20230117', '20230118']
+ridl = ['321', '323', '323', ]
+# email="govinnachiran@gmail.com"
+email="e18068@eng.pdn.ac.lk"
 # Print
 print("Sending data to firestore database")
 
@@ -60,10 +61,10 @@ while True:
     print(DateTime, rid , tid , uid)
 
     # doc_ref = db.collection('Plants_Data').document(DEVICE_ID)
-    doc_ref = db.collection("Institutes",email ,"rooms",rid,"Instance",tid,"Attend").document(uid)
+    doc_ref = db.collection("Institutes",email ,"rooms","323","Instance","20230117","Attend").document(uid)
 
     #Multi-location update data
-    doc_ref.set({"DateTime":DateTime})
+    doc_ref.set({"currenttime":DateTime})
     # print(Temperature)
     # Sleep time
     time.sleep(SLEEP_TIME * 30)
