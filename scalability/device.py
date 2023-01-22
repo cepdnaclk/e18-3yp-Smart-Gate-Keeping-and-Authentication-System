@@ -35,8 +35,8 @@ db = firestore.client()
 #               level 1 -------- Low water warning
 #               level 0 -------- Do not turn on pump!!
 
-uidl = ['456', '745', '67','70' ,'45','37']
-tidl = ['20230117'] # '20230118'
+uidl = ['456', '745', '68','70' ,'45','37']
+tidl = ['20230118'] # '20230118'
 ridl = [ '321', '323','322' ]#'321', '323',
 email="govinnachiran@gmail.com"
 # email="e18068@eng.pdn.ac.lk"
@@ -67,6 +67,6 @@ while True:
     doc_ref.set({"currenttime":DateTime,"verificationmode": "Fingerprint","uid":uid})
     # print(Temperature)
     # Sleep time
-    time.sleep(SLEEP_TIME * 30)
+    time.sleep(SLEEP_TIME * 20)
 
 # ---------------------------
